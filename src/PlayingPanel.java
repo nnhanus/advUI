@@ -7,8 +7,9 @@ public class PlayingPanel extends JPanel {
 
     public PlayingPanel(){
         super();
-        setBackground(Color.BLUE);
-        setSize(new Dimension(View.Width/2, View.Height));
+        Color bgColor = new Color(0xD6EAF8);
+        setBackground(bgColor);
+        //setSize(new Dimension(View.Width/2, View.Height));
 
         buttonGrid = new JPanel();
         buttonGrid.setLayout(new GridLayout(3, 3));

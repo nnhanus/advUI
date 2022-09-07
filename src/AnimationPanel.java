@@ -5,8 +5,9 @@ public class AnimationPanel extends JPanel {
 
     public AnimationPanel (){
         super ();
-        setBackground(Color.PINK);
-        setSize(new Dimension(View.Width/2, View.Height));
+        Color bgColor = new Color(0xFED1FF);
+        setBackground(bgColor);
+       // setSize(new Dimension(View.Width/2, View.Height));
     }
 
 }
