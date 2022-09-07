@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class View extends JFrame {
-    public int Height = 400;
-    public int Width = 600;
+    public static int Height = 400;
+    public static int Width = 600;
     public View (){
         super("Ice Cream Test");
 
@@ -11,24 +11,14 @@ public class View extends JFrame {
         setVisible(true);
         setLayout(new GridLayout(1, 2));
 
-        JPanel animation = new JPanel();
+        AnimationPanel animation = new AnimationPanel();
         this.add(animation, BorderLayout.WEST);
-        animation.setBackground(Color.PINK);
-        animation.setSize(new Dimension(Width/2, Height));
 
-        JPanel playingZone = new JPanel();
+        PlayingPanel playingZone = new PlayingPanel();
         this.add(playingZone, BorderLayout.EAST);
-        playingZone.setBackground(Color.BLUE);
-        playingZone.setSize(new Dimension(Width/2, Height));
 
         pack();
 
-
-
-
-
     }
-
-
 
 }
