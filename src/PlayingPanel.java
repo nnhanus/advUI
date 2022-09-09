@@ -23,18 +23,11 @@ public class PlayingPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
         //could create array of all button types. for i in 0 to level-1 create button
-        Move moveBtn = new Move();
-        panel.add(moveBtn, gbc);
-        moveBtn.setTransferHandler(new ValueExportTransferHandler("test"));
+        for (int i=1;i<=BlockModel.getLevel();i++) {
+            BlockControl controlBtn = new BlockControl(i);
+            panel.add(controlBtn, gbc);
 
-        moveBtn.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                JButton button = (JButton) e.getSource();
-                TransferHandler handle = button.getTransferHandler();
-                handle.exportAsDrag(button, e, TransferHandler.COPY);
-            }
-        });
+        }
 
         return panel;
     }

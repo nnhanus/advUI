@@ -10,6 +10,7 @@ public class View extends JFrame {
         setPreferredSize(new Dimension(Width, Height));
         setVisible(true);
         setLayout(new GridLayout(1, 2));
+        BlockModel.setLevel(1);
 
         AnimationPanel animation = new AnimationPanel();
         this.add(animation, BorderLayout.EAST);
