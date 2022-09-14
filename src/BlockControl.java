@@ -1,21 +1,22 @@
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BlockControl extends Block {
 
+public class BlockControl extends JLabel {
+    BlockModel model;
+    private BlockPresentation view;
     public BlockControl (int controlNum){
+        super();
+        model = new BlockModel(controlNum);
+        view = new BlockPresentation(this);
 
-        super(BlockModel.getType(controlNum));
         //use a switch to match action to button type
-         this.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                JButton button = (JButton) e.getSource();
-                TransferHandler handle = button.getTransferHandler();
-                handle.exportAsDrag(button, e, TransferHandler.COPY);
-            }
-        });
-        this.setTransferHandler(new ValueExportTransferHandler("test"));
+       // this.setTransferHandler(new ValueExportTransferHandler(controlNum));
+
+    }
+    public int getIndex (){
+        return model.index;
     }
 }

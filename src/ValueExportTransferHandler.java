@@ -1,18 +1,17 @@
 //code borrowed from https://stackoverflow.com/questions/28844574/drag-and-drop-from-jbutton-to-jcomponent-in-java
 import javax.swing.*;
-import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 public class ValueExportTransferHandler extends TransferHandler {
 
-    private String value;
+    private int value;
 
-    public ValueExportTransferHandler(String value) {
+    public ValueExportTransferHandler(int value) {
         this.value = value;
     }
 
     public String getValue() {
-        return value;
+        return Integer.toString(value);
     }
 
     @Override
