@@ -23,7 +23,7 @@ public class ValueImportTransferHandler extends TransferHandler {
                 Transferable t = support.getTransferable();
                 Object value = t.getTransferData(SUPPORTED_DATE_FLAVOR);
                 if (value instanceof String) {
-                    PlayingPanel.addActionToField(Integer.parseInt((String) value));
+                  //  PlayingPanel.addActionToField(Integer.parseInt((String) value));
                /*     Component component = support.getComponent();
                     if (component instanceof JLabel) {
                         ((JLabel) component).setText(value.toString());
