@@ -18,7 +18,6 @@ public class Grid {
         for (int i = 0; i < 4; i++){
             g.drawLine(cellWidth*i, 0, cellWidth*i, height);
         }
-
     }
 
 
