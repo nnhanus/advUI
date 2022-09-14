@@ -1,10 +1,12 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Grid {
     public int height = GameWindow.Height;
     public int width = GameWindow.Width/2;
     public int cellHeight;
     public int cellWidth;
+    public static ArrayList<Scoop> scoops = new ArrayList<>();
 
     public Grid(){
         cellHeight = height/3;
