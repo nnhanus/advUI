@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class View extends JFrame {
+public class GameWindow extends JFrame {
     public static int Height = 400;
     public static int Width = 600;
-    public View (){
+    public GameWindow(){
         super("Ice Cream Test");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         setPreferredSize(new Dimension(Width, Height));
