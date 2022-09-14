@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public class Grid {
-    public int height = View.Height;
-    public int width = View.Width/2;
+    public int height = GameWindow.Height;
+    public int width = GameWindow.Width/2;
     public int cellHeight;
     public int cellWidth;
 
