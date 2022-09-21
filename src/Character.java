@@ -8,14 +8,14 @@ public class Character {
         WEST
     }
 
-    public Direction orientation = Direction.NORTH;
-    public int x = 1;
-    public int y = 1;
+    public static Direction orientation = Direction.NORTH;
+    public static int x = 1;
+    public static int y = 1;
     public ArrayList<Scoop> scoops = new ArrayList<>();
 
     public Character(){}
 
-    public void move(){
+    public static void move(){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
         } else if (orientation == Direction.SOUTH && y < 2){
@@ -27,7 +27,7 @@ public class Character {
         }
     }
 
-    public void turn(){
+    public static void turn(){
         if (orientation == Direction.NORTH){
             orientation = Direction.WEST;
         } else if (orientation == Direction.WEST){
@@ -37,6 +37,7 @@ public class Character {
         } else if (orientation == Direction.EAST){
             orientation = Direction.NORTH;
         }
+        System.out.println(orientation);
     }
 
     public void forLoop (int repetition){
