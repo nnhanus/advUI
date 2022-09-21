@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -10,12 +11,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.concurrent.TimeUnit;
 
 // create small zones with drop listeners that know where they are
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     public static dropPanelModel model;
     public dropPanelPresentation view;
+    public AnimationPanel animation = GameWindow.animation;
 
     public boolean drag = false;
 
@@ -24,7 +27,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         this.view= new dropPanelPresentation(this);
 
     }
-public dropPanelModel getModel(){
+    public dropPanelModel getModel(){
         return model;
 }
 
@@ -35,11 +38,29 @@ public dropPanelModel getModel(){
         model.clearList();
     }
 
+    public void readList(){
+        for (String action : model.actionList){
+            readAction(action);
+            animation.revalidate();
+            animation.repaint();
+        }
+    }
+
+    private void readAction(String action){
+        System.out.println(action);
+        if (action.equalsIgnoreCase("Move")) {
+            Character.move();
+        } else if (action.equalsIgnoreCase("Turn")) {
+            Character.turn();
+        }
+    }
+
     void makeBtnClick() {
         model.play.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                readList();
                 //add function to pass list to character for actions
             }
         });

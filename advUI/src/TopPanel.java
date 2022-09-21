@@ -12,6 +12,7 @@ public class TopPanel extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
+        BlockModel.setLevel(2);
         //could create array of all button types. for i in 0 to level-1 create button
         for (int i = 1; i <= BlockModel.getLevel(); i++) {
             BlockControl controlBtn = new BlockControl(i);

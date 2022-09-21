@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Character {
     enum Direction{
@@ -14,6 +16,7 @@ public class Character {
     public static int size = 80;
     public ArrayList<Scoop> scoops = new ArrayList<>();
     public static CharacterPresentation presentation = new CharacterPresentation();
+    public AnimationPanel animation = GameWindow.animation;
 
     public Character(){}
 
@@ -83,7 +86,5 @@ public class Character {
             }
         }
     }
-
-
 
 }

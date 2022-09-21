@@ -12,7 +12,6 @@ public class dropPanelModel {
 
     public dropPanelModel(){
         actionList = new ArrayList<String>() {};
-
     }
 
     public void addAction(String action) {

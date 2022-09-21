@@ -4,7 +4,7 @@ import java.awt.*;
 public class GameWindow extends JFrame {
     public static int Height = 600;
     public static int Width = 1000;
-    public AnimationPanel animation;
+    public static AnimationPanel animation;
 
     public GameWindow(){
         super("Ice Cream Test");

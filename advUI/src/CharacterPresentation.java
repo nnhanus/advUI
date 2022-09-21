@@ -27,21 +27,17 @@ public class CharacterPresentation {
 
     public void updateCharacterNorth(){
         currentY = currentY - Grid.getCellHeight();
-        System.out.println(currentX + "    " + currentY);
     }
 
     public void updateCharacterSouth(){
         currentY = currentY + Grid.getCellHeight();
-        System.out.println(currentX + "    " + currentY);
     }
 
     public void updateCharacterEast(){
         currentX = currentX - Grid.getCellWidth();
-        System.out.println(currentX + "    " + currentY);
     }
 
     public void updateCharacterWest(){
         currentX = currentX + Grid.getCellWidth();
-        System.out.println(currentX + "    " + currentY);
     }
 }

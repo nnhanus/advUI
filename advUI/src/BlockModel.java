@@ -22,7 +22,7 @@ public class BlockModel {
             icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
         }
     }
-    static String [] blockType= new String[]{"Move","For Loop", "While loop", "If ___ then "};
+    static String [] blockType= new String[]{"Move", "Turn", "For Loop", "While loop", "If ___ then "};
     public static int getLevel(){
         return level;
     }

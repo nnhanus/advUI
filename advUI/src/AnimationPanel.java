@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,8 +15,9 @@ public class AnimationPanel extends JPanel {
     }
 
     @Override
-    public void paint(Graphics g){
-        super.paint(g);
+    public void paintComponent(Graphics g){
+        System.out.println("Repaint");
+        super.paintComponent(g);
         grid.paintGrid(g);
         character.presentation.paintCharacter(g);
     }
