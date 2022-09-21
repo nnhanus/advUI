@@ -4,6 +4,8 @@ import java.awt.*;
 public class GameWindow extends JFrame {
     public static int Height = 600;
     public static int Width = 1000;
+    public AnimationPanel animation;
+
     public GameWindow(){
         super("Ice Cream Test");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -16,7 +18,7 @@ public class GameWindow extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(1, 2));
 
-        AnimationPanel animation = new AnimationPanel();
+        animation = new AnimationPanel();
         mainPanel.add(animation);
 
         PlayingPanel playingZone = new PlayingPanel();
