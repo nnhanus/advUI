@@ -10,16 +10,16 @@ public class BlockModel {
     public BlockModel(int type){
         setIndex(type);
         if ( type==1){
-            icon= new ImageIcon(new ImageIcon("Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
+            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
         }
         else if (type==2){
-            icon= new ImageIcon(new ImageIcon("Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
+            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
         }
         else if (type==3){
-            icon= new ImageIcon(new ImageIcon("Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
+            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
         }
         else if (type==4){
-            icon= new ImageIcon(new ImageIcon("Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
+            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
         }
     }
     static String [] blockType= new String[]{"Move","For Loop", "While loop", "If ___ then "};
