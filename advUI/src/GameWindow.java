@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameWindow extends JFrame {
-    public static int Height = 400;
-    public static int Width = 600;
+    public static int Height = 600;
+    public static int Width = 1000;
     public GameWindow(){
         super("Ice Cream Test");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

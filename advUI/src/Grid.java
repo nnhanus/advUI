@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Grid {
     public int height = GameWindow.Height;
     public int width = GameWindow.Width/2;
-    public int cellHeight;
-    public int cellWidth;
+    public static int cellHeight;
+    public static int cellWidth;
     public static ArrayList<Scoop> scoops = new ArrayList<>();
 
     public Grid(){
@@ -20,6 +20,14 @@ public class Grid {
         for (int i = 0; i < 4; i++){
             g.drawLine(cellWidth*i, 0, cellWidth*i, height);
         }
+    }
+
+    public static int getCellHeight(){
+        return cellHeight;
+    }
+
+    public static int getCellWidth(){
+        return cellWidth;
     }
 
 

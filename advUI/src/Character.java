@@ -11,19 +11,25 @@ public class Character {
     public static Direction orientation = Direction.NORTH;
     public static int x = 1;
     public static int y = 1;
+    public static int size = 80;
     public ArrayList<Scoop> scoops = new ArrayList<>();
+    public static CharacterPresentation presentation = new CharacterPresentation();
 
     public Character(){}
 
     public static void move(){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
+            presentation.updateCharacterNorth();
         } else if (orientation == Direction.SOUTH && y < 2){
             y++;
+            presentation.updateCharacterSouth();
         } else if (orientation == Direction.WEST && x > 0){
             x--;
+            presentation.updateCharacterWest();
         } else if (orientation == Direction.EAST && x < 2){
             x++;
+            presentation.updateCharacterEast();
         }
     }
 
