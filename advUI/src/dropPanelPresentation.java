@@ -1,32 +1,39 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 
 public class dropPanelPresentation {
-    public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    public JPanel dropField;
+
     public dropPanel control;
+    private static dropPanelModel model;
 
     public dropPanelPresentation(dropPanel controller){
         control=controller;
+        model=control.getModel();
         createUI();
     }
 
     public void createUI(){
+        //make play and redo clickable
+        //when redo is clicked, clear panel and repaint, call clearList
+        control.makeBtnClick();
         control.setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(2,1));
-        buttonPanel.add(play);
-        buttonPanel.add(redo);
+        buttonPanel.add(model.play);
+        buttonPanel.add(model.redo);
         control.add(buttonPanel, BorderLayout.EAST);
-        dropField=new JPanel();
-        dropField.setBorder(new TitledBorder("Drag block onto this panel"));
-        TransferHandler DND= control.createTransferHandle(dropField);
-        dropField.setTransferHandler(DND);
+        model.dropField=new JPanel();
+        model.dropField.setBorder(new TitledBorder("Drag block onto this panel"));
+        TransferHandler DND= control.createTransferHandle(model.dropField);
+        model.dropField.setTransferHandler(DND);
         // dropField.setTransferHandler(new ValueImportTransferHandler());
-        new MyDropTargetListener(dropField, control);
-        control.add(dropField, BorderLayout.CENTER);
+        new MyDropTargetListener(model.dropField, control);
+        control.add(model.dropField, BorderLayout.CENTER);
 
 
     }
+
+
 }

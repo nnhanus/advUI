@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+// create small zones with dro
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     public static dropPanelModel model;
@@ -23,9 +24,36 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         this.view= new dropPanelPresentation(this);
 
     }
+public dropPanelModel getModel(){
+        return model;
+}
 
     public static void addAction(String action){
         model.addAction(action);
+    }
+    public static void clearList(){
+        model.clearList();
+    }
+
+    void makeBtnClick() {
+        model.play.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                //add function to pass list to character for actions
+            }
+        });
+
+        model.redo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // super.mouseClicked(e);
+                model.dropField.removeAll();
+                repaint();
+                clearList();
+            }
+        });
+
     }
 
     TransferHandler createTransferHandle(JPanel panel) {
