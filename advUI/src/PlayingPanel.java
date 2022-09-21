@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class PlayingPanel extends JPanel {
 
     public static TopPanel topPanel;
-    public static BottomPanel bottomPanel;
+    public static dropPanel bottomPanel;
 
 
     public PlayingPanel() {
@@ -16,7 +16,7 @@ public class PlayingPanel extends JPanel {
         setBackground(bgColor);
         //setSize(new Dimension(View.Width/2, View.Height));
         setLayout(new GridLayout(2, 1));
-        bottomPanel= new BottomPanel();
+        bottomPanel= new dropPanel();
         TransferHandler dnd = new TransferHandler() {
             @Override
             public boolean canImport(TransferSupport support) {
