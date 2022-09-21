@@ -8,10 +8,12 @@ import java.io.IOException;
 class MyDropTargetListener extends DropTargetAdapter {
 
     private DropTarget dropTarget;
-    private JPanel p;
+    private JPanel child;
+    private dropPanel parent;
 
-    public MyDropTargetListener(JPanel panel) {
-        p = panel;
+    public MyDropTargetListener(JPanel panel, dropPanel container) {
+        child = panel;
+        parent=container;
         dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
 
     }
@@ -28,10 +30,11 @@ class MyDropTargetListener extends DropTargetAdapter {
                 String index = (String) tr.getTransferData(DataFlavor.stringFlavor);
 
                 if (index != null) {
-
-                    p.add(new JLabel(index));
-                    p.revalidate();
-                    p.repaint();
+                    //add action to list
+                    parent.addAction(index);
+                    child.add(new JLabel(index));
+                    child.revalidate();
+                    child.repaint();
                     event.dropComplete(true);
                 }
             } else {

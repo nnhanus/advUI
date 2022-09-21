@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-// create small zones with dro
+// create small zones with drop listeners that know where they are
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     public static dropPanelModel model;
