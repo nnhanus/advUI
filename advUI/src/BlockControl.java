@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 
 public class BlockControl extends JLabel implements MouseListener {
-    static BlockModel model;
+    BlockModel model;
     int typeNum;
     public TopPanel container;
     private BlockPresentation view;
@@ -32,6 +32,10 @@ public class BlockControl extends JLabel implements MouseListener {
     }
     public String getType(){return model.getType();}
     public ImageIcon getIcon(){return model.getIcon();}
+
+    public BlockModel getModel() {
+        return model;
+    }
 
     @Override
     public Dimension getPreferredSize(){

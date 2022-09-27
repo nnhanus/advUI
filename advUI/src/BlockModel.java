@@ -7,10 +7,10 @@ import java.util.List;
 
 public class BlockModel {
     static int level = GameWindow.getLevel();
-    static int index;
+    int index;
     static List<String> blockType= new ArrayList<String>();
 
-    static ImageIcon icon;
+    ImageIcon icon;
 
     public BlockModel(int type){
         blockType.add("Move");
@@ -37,9 +37,10 @@ public class BlockModel {
     public static String checkType(int indexCheck){
         return blockType.get(indexCheck);
     }
-    public static void setIndex(int newIndex){
+    public void setIndex(int newIndex){
         index = newIndex;
     }
+
     public static int getIndex(String action){
         return blockType.indexOf(action);
     }

@@ -16,7 +16,6 @@ public class AnimationPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g){
-       // System.out.println("Repaint");
         super.paintComponent(g);
         grid.paintGrid(g);
         character.presentation.paintCharacter(g);
