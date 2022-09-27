@@ -1,44 +1,51 @@
 import javax.sound.midi.Soundbank;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.*;
 
-import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
-// create small zones with drop listeners that know where they are
+// create small zones with drop listeners that know where they are and then insert in list
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     public static dropPanelModel model;
     public dropPanelPresentation view;
-    public AnimationPanel animation = GameWindow.animation;
+    public AnimationPanel animation;
+    public PlayingPanel container;
 
-    public boolean drag = false;
+    //public boolean drag = false;
 
-    public dropPanel(){
-        this.model= new dropPanelModel();
+    public dropPanel(PlayingPanel parent){
+        container=parent;
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        this.model= new dropPanelModel(this);
         this.view= new dropPanelPresentation(this);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        view.paint(g);
     }
     public dropPanelModel getModel(){
         return model;
 }
-
-    public static void addAction(String action){
-        model.addAction(action);
-    }
     public static void clearList(){
         model.clearList();
     }
 
     public void readList(){
+        animation = GameWindow.getAnimation();
         for (String action : model.actionList){
             readAction(action);
             animation.revalidate();
@@ -47,7 +54,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     private void readAction(String action){
-        System.out.println(action);
+        //System.out.println(action);
         if (action.equalsIgnoreCase("Move")) {
             Character.move();
         } else if (action.equalsIgnoreCase("Turn")) {
@@ -69,75 +76,39 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
             @Override
             public void mouseClicked(MouseEvent e) {
                 // super.mouseClicked(e);
-                model.dropField.removeAll();
-                repaint();
                 clearList();
+                repaint();
+
             }
         });
 
-    }
-
-    TransferHandler createTransferHandle(JPanel panel) {
-        TransferHandler dnd = new TransferHandler() {
-            @Override
-            public boolean canImport(TransferSupport support) {
-                if (!support.isDrop()) {
-                    return false;
-                }
-                //only Strings
-                if (!support.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public boolean importData(TransferSupport support) {
-                if (!canImport(support)) {
-                    return false;
-                }
-
-                Transferable transferable = support.getTransferable();
-                String index;
-                try {
-                    index = (String) transferable.getTransferData(DataFlavor.stringFlavor);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return false;
-                }
-                panel.add(new BlockControl(Integer.parseInt(index)));
-                return true;
-            }
-        };
-        return dnd;
     }
 
     public void mouseClicked(MouseEvent e) { }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        drag=true;
-        BlockControl block = (BlockControl) e.getSource();
-        TransferHandler handler = block.getTransferHandler();
-        handler.exportAsDrag(block, e, TransferHandler.COPY);
+        System.out.println("Mouse pressed drop panel");
+//        BlockControl block = (BlockControl) e.getSource();
+//        TransferHandler handler = block.getTransferHandler();
+//        handler.exportAsDrag(block, e, TransferHandler.COPY);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        drag=false;
-        PlayingPanel.topPanel.resetBtns();
+        container.setCursor (Cursor.getDefaultCursor());
+        if (container.selectedBlock!=null) {
+            model.setCell(e, container.selectedBlock);
+            container.selectedBlock = null;
+            repaint();
+        }
     }
 
     public void mouseEntered(MouseEvent e) {}
 
     public void mouseExited(MouseEvent e) {}
     @Override
-    public void mouseDragged(MouseEvent e) {
-        if (drag == true) {
-            JComponent jc = (JComponent)e.getSource();
-            jc.setLocation(jc.getX()+e.getX(), jc.getY()+e.getY());
-        }
-    }
+    public void mouseDragged(MouseEvent e) { }
 
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) { }
 }

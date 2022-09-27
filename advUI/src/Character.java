@@ -17,9 +17,11 @@ public class Character {
     public static int height = 80;
     public static ArrayList<Scoop> scoops = new ArrayList<>();
     public static CharacterPresentation presentation = new CharacterPresentation();
-    public AnimationPanel animation = GameWindow.animation;
+    public AnimationPanel animation;
 
-    public Character(){}
+    public Character(AnimationPanel parent){
+        animation=parent;
+    }
 
     //moves the character from 1 cell according to the orientation
     public static void move(){

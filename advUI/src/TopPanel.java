@@ -1,28 +1,29 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragSource;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TopPanel extends JPanel {
-
-    protected GridBagConstraints gbc;
-    public TopPanel() {
+protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
+    public PlayingPanel container;
+    public TopPanel(PlayingPanel parent) {
+        container=parent;
+        this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
         this.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        BlockModel.setLevel(2);
+        GridBagConstraints gbc = new GridBagConstraints();
+        GameWindow.setLevel(2);
+        int level=GameWindow.getLevel();
+        int colCount= Math.min(level,5);
         //could create array of all button types. for i in 0 to level-1 create button
-        for (int i = 1; i <= BlockModel.getLevel(); i++) {
-            BlockControl controlBtn = new BlockControl(i);
-            MyDragGestureListener dlistener = new MyDragGestureListener();
-            DragSource ds = new DragSource();
-            ds.createDefaultDragGestureRecognizer(controlBtn, DnDConstants.ACTION_COPY, dlistener);
-            this.add(controlBtn, gbc);
-
+        for (int i = 0; i < level ; i++) {
+            gbc.gridx = i%colCount;
+            gbc.gridy = Math.floorDiv(i,colCount);
+            BlockControl controlBtn = new BlockControl(i,this);
+            buttonList.add(controlBtn);
+            this.add(controlBtn);
         }
     }
+
 
     public void resetBtns() {
         repaint();

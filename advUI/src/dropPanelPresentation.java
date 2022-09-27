@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.border.TitledBorder;
 
 public class dropPanelPresentation {
@@ -24,16 +26,54 @@ public class dropPanelPresentation {
         buttonPanel.add(model.play);
         buttonPanel.add(model.redo);
         control.add(buttonPanel, BorderLayout.EAST);
-        model.dropField=new JPanel();
-        model.dropField.setBorder(new TitledBorder("Drag block onto this panel"));
-        TransferHandler DND= control.createTransferHandle(model.dropField);
-        model.dropField.setTransferHandler(DND);
-        // dropField.setTransferHandler(new ValueImportTransferHandler());
-        new MyDropTargetListener(model.dropField, control);
-        control.add(model.dropField, BorderLayout.CENTER);
 
 
     }
 
 
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+        clear();
+        int width = control.getWidth()-80;
+        int height = control.getHeight();
+        int cellWidth = width / model.columnCount;
+        int cellHeight = Math.min(Math.round((float)(cellWidth*(0.6))),height / model.rowCount);
+        int xOffset = 20;
+        int yOffset = (height - (model.rowCount * cellHeight)) / 2;
+        model.width=width;
+        model.height = height;
+        model.cellWidth = cellWidth;
+        model.cellHeight = cellHeight;
+        model.xOffset=xOffset;
+        model.yOffset=yOffset;
+            for (int row = 0; row < model.rowCount; row++) {
+                for (int col = 0; col < model.columnCount; col++) {
+                    Rectangle cell = new Rectangle(
+                            xOffset + (col * cellWidth),
+                            yOffset + (row * cellHeight),
+                            cellWidth,
+                            cellHeight);
+                    model.cells.add(cell);
+                }
+            }
+
+        for (int index=0;index<model.blocksPlayed.size();index++) {
+            BlockControl block=model.blocksPlayed.get(index);
+            Rectangle cell = model.cells.get(index);
+            g2d.setPaint(new TexturePaint(block.getIconAsImage(),cell));
+            g2d.fill(cell);
+
+        }
+
+        g2d.setColor(Color.GRAY);
+        for (Rectangle cell : model.cells) {
+            g2d.draw(cell);
+        }
+
+        g2d.dispose();
+    }
+
+    private void clear() {
+        model.cells=new ArrayList<>();
+    }
 }
