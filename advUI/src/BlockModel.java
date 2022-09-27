@@ -3,46 +3,45 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BlockModel {
-    static int level = GameWindow.getLevel();
+    int level = GameWindow.getLevel();
     int index;
-    static List<String> blockType= new ArrayList<String>();
+    String name;
+    List<String> blockType= new ArrayList<String>();
+    public Map<Integer,String> nameMap=new HashMap();
+    public Map<Integer,ImageIcon> iconMap=new HashMap();
 
-    ImageIcon icon;
+    public ImageIcon icon;
 
     public BlockModel(int type){
-        blockType.add("Move");
-        blockType.add("Turn");
-        blockType.add("For Loop") ;
-        blockType.add("While");
-        blockType.add("If ___ then ");
+        nameMap.put(0,"Move");
+        nameMap.put(1,"Turn");
+        nameMap.put(2,"For Loop");
+        nameMap.put(3,"If");
+        nameMap.put(4,"While Loop");
+
+        iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(4,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         setIndex(type);
+        this.name=nameMap.get(type);
+        this.icon= iconMap.get(type);
         System.out.println(type);
-        if ( type==0){
-            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
-        }
-        else if (type==1){
-            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
-        }
-        else if (type==2){
-            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
-        }
-        else if (type==3){
-            icon= new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT));
-        }
+        //giving all blocks the last icon of the group?
+
     }
 
-    public static String checkType(int indexCheck){
-        return blockType.get(indexCheck);
+    public String checkType(int indexCheck){
+        return nameMap.get(indexCheck);
     }
     public void setIndex(int newIndex){
-        index = newIndex;
-    }
-
-    public static int getIndex(String action){
-        return blockType.indexOf(action);
+        this.index = newIndex;
     }
 
     public ImageIcon getIcon( ){

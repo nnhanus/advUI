@@ -11,31 +11,28 @@ import java.awt.image.BufferedImage;
 
 
 public class BlockControl extends JLabel implements MouseListener {
-    BlockModel model;
+    public BlockModel model;
     int typeNum;
     public TopPanel container;
     private BlockPresentation view;
-    public BlockControl (int controlNum, TopPanel parent){
-        super();
-        container=parent;
-        typeNum=controlNum;
+    public BlockControl (int controlNum, TopPanel parent) {
+        container = parent;
+        typeNum = controlNum;
         model = new BlockModel(controlNum);
         view = new BlockPresentation(this);
+        this.setIcon(getIcon());
+        this.setText(model.name);
+        this.setHorizontalTextPosition(JLabel.CENTER);
         this.addMouseListener(this);
         //use a switch to match action to button type
-       // this.setTransferHandler(new ValueExportTransferHandler(controlNum));
+        // this.setTransferHandler(new ValueExportTransferHandler(controlNum));
 
     }
-    static final TransferHandler BLOCK_TRANSFER = new TransferHandler( "typeNum" ) {    };
     public int getIndex (){
         return model.index;
     }
     public String getType(){return model.getType();}
     public ImageIcon getIcon(){return model.getIcon();}
-
-    public BlockModel getModel() {
-        return model;
-    }
 
     @Override
     public Dimension getPreferredSize(){
