@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class BlockModel {
-    static int level = GameWindow.getLevel();
-    static int index;
-    static String name;
-    static List<String> blockType= new ArrayList<String>();
+    int level = GameWindow.getLevel();
+    int index;
+    String name;
+    List<String> blockType= new ArrayList<String>();
     public Map<Integer,String> nameMap=new HashMap();
     public Map<Integer,ImageIcon> iconMap=new HashMap();
 
@@ -40,8 +40,8 @@ public class BlockModel {
     public String checkType(int indexCheck){
         return nameMap.get(indexCheck);
     }
-    public static void setIndex(int newIndex){
-        index = newIndex;
+    public void setIndex(int newIndex){
+        this.index = newIndex;
     }
 
     public ImageIcon getIcon( ){
