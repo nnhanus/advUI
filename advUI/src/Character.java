@@ -16,9 +16,11 @@ public class Character {
     public static int size = 80;
     public ArrayList<Scoop> scoops = new ArrayList<>();
     public static CharacterPresentation presentation = new CharacterPresentation();
-    public AnimationPanel animation = GameWindow.animation;
+    public AnimationPanel animation;
 
-    public Character(){}
+    public Character(AnimationPanel parent){
+        animation=parent;
+    }
 
     public static void move(){
         if (orientation == Direction.NORTH && y > 0) {

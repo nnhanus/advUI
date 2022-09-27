@@ -2,8 +2,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Grid {
-    public int height = GameWindow.Height;
-    public int width = GameWindow.Width/2;
+    public int height = GameWindow.getDefaultHeight();
+    public int width = GameWindow.getDefaultWidth()/2;
     public static int cellHeight;
     public static int cellWidth;
     public static ArrayList<Scoop> scoops = new ArrayList<>();

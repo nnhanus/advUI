@@ -11,12 +11,12 @@ public class AnimationPanel extends JPanel {
         Color bgColor = new Color(0xFED1FF);
         setBackground(bgColor);
         grid = new Grid();
-        character = new Character();
+        character = new Character(this);
     }
 
     @Override
     public void paintComponent(Graphics g){
-        System.out.println("Repaint");
+       // System.out.println("Repaint");
         super.paintComponent(g);
         grid.paintGrid(g);
         character.presentation.paintCharacter(g);
