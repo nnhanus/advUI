@@ -10,7 +10,7 @@ public class GameWindow  extends JFrame {
         super("Scoop Recoup");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.model = new GameWindowModel();
-        setLevel(2);
+        setLevel(3);
         this.view = new GameWindowPresentation(this);
 
         setPreferredSize(new Dimension(model.Width, model.Height));

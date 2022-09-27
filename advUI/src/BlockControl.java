@@ -16,11 +16,13 @@ public class BlockControl extends JLabel implements MouseListener {
     public TopPanel container;
     private BlockPresentation view;
     public BlockControl (int controlNum, TopPanel parent){
-        super();
         container=parent;
         typeNum=controlNum;
         model = new BlockModel(controlNum);
         view = new BlockPresentation(this);
+        this.setIcon(getIcon());
+        this.setText(model.name);
+        this.setHorizontalTextPosition(JLabel.CENTER);
         this.addMouseListener(this);
         //use a switch to match action to button type
        // this.setTransferHandler(new ValueExportTransferHandler(controlNum));

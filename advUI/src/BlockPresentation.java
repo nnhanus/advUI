@@ -9,9 +9,6 @@ public class BlockPresentation  {
 
     public BlockPresentation(BlockControl parent) {
         control=parent;
-        control.setIcon(control.getIcon());
-        control.setText(BlockModel.checkType(control.getIndex()));
-        control.setHorizontalTextPosition(JLabel.CENTER);
     }
 
     public Dimension getPreferredSize() {
