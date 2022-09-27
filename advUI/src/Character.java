@@ -13,13 +13,15 @@ public class Character {
     public static Direction orientation = Direction.NORTH;
     public static int x = 1;
     public static int y = 1;
-    public static int size = 80;
-    public ArrayList<Scoop> scoops = new ArrayList<>();
+    public static int width = 80;
+    public static int height = 80;
+    public static ArrayList<Scoop> scoops = new ArrayList<>();
     public static CharacterPresentation presentation = new CharacterPresentation();
     public AnimationPanel animation = GameWindow.animation;
 
     public Character(){}
 
+    //moves the character from 1 cell according to the orientation
     public static void move(){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
@@ -27,15 +29,17 @@ public class Character {
         } else if (orientation == Direction.SOUTH && y < 2){
             y++;
             presentation.updateCharacterSouth();
-        } else if (orientation == Direction.WEST && x > 0){
-            x--;
-            presentation.updateCharacterWest();
         } else if (orientation == Direction.EAST && x < 2){
             x++;
+            presentation.updateCharacterWest();
+        } else if (orientation == Direction.WEST && x > 0){
+            x--;
             presentation.updateCharacterEast();
         }
+        pickScoop();
     }
 
+    //rotates the character 90° left
     public static void turn(){
         if (orientation == Direction.NORTH){
             orientation = Direction.WEST;
@@ -46,7 +50,6 @@ public class Character {
         } else if (orientation == Direction.EAST){
             orientation = Direction.NORTH;
         }
-        System.out.println(orientation);
     }
 
     public void forLoop (int repetition){
@@ -69,9 +72,9 @@ public class Character {
     }
 
     //Picks up a scoop if in the same position as character and smaller than the last scoop on the cone
-    public void pickScoop(){
+    public static void pickScoop(){
         for (Scoop s : Grid.scoops){
-            if (s.x == this.x && s.y == this.y){
+            if (s.x == x && s.y == y){
                 if (scoops.size() > 0){
                     if (scoops.get(scoops.size()-1).size < s.size){
                         scoops.add(s);

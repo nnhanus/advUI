@@ -11,6 +11,8 @@ public class Grid {
     public Grid(){
         cellHeight = height/3;
         cellWidth = width/3;
+        scoops.add(new Scoop(2, 0, 40));
+
     }
 
     public void paintGrid(Graphics g){
@@ -19,6 +21,9 @@ public class Grid {
         }
         for (int i = 0; i < 4; i++){
             g.drawLine(cellWidth*i, 0, cellWidth*i, height);
+        }
+        for (Scoop scoop : scoops){
+            g.drawImage(scoop.getImage(), Grid.getCellWidth()*scoop.getX()+Grid.getCellWidth()/4,Grid.getCellHeight()*scoop.getY()+Grid.getCellHeight()/4, scoop.getSize(), scoop.getSize(), null );
         }
     }
 
