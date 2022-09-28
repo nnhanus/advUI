@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameWindowModel {
+    public int unlockedLevel;
+    private static int levelnum;
     //private static int level;
     private static Level level;
     public static int Height;
@@ -12,13 +14,17 @@ public class GameWindowModel {
     private final List<ChangeListener> changeListeners = new ArrayList<>();
 
     public GameWindowModel() {
-        Height = 600;
-        Width = 1200;
+        Height = 500;
+        Width = 1000;
+        levelnum = 1;
+        unlockedLevel=1;
         level = new Level(1);
     }
 
     public void setLevel(int newLevel) {
         triggerChangeListeners();
+        levelnum = newLevel;
+        unlockedLevel=Math.max(levelnum,unlockedLevel);
         level = new Level(newLevel);
     }
 
@@ -27,7 +33,7 @@ public class GameWindowModel {
     }
 
     public static int getLevelNumber(){
-        return level.getNumber();
+        return levelnum;
     }
 
     public void addChangeListener(ChangeListener listener) {

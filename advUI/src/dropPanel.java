@@ -30,7 +30,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         this.model= new dropPanelModel(this);
         this.view= new dropPanelPresentation(this);
 
-
     }
 
     @Override

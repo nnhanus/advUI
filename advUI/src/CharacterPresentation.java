@@ -10,19 +10,18 @@ public class CharacterPresentation {
     private BufferedImage cone = null;
     private int currentX;
     private int currentY;
+    public Character control;
 
-    private Character control;
-
-    public CharacterPresentation(Character parent){
-        control = parent;
+    public CharacterPresentation(Character controller){
+        control=controller;
         try {
             character = ImageIO.read(new File("advUI/Icons/elephant.png"));
             cone = ImageIO.read(new File("advUI/Icons/cone.png"));
         } catch (IOException ex) {
             System.out.println("Missing file");
         }
-        currentX = Grid.getCellWidth()*control.x+Grid.getCellWidth()/4;
-        currentY = Grid.getCellHeight()*control.y+Grid.getCellHeight()/4;
+        currentX = Grid.getCellWidth()*control.getX()+Grid.getCellWidth()/4;
+        currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/4;
     }
 
 
@@ -44,8 +43,8 @@ public class CharacterPresentation {
             pen.fillOval(currentX+control.width/2, currentY + control.height +10, 10, 10);
         } else if (control.orientation == Character.Direction.WEST){
             pen.fillOval(currentX - 20, currentY + control.height/2, 10, 10);
-        } else if (control.orientation == Character.Direction.EAST){
-            pen.fillOval(currentX + control.width + 10, currentY + control.height/2, 10, 10);
+        } else if (control.orientation == Character.Direction.EAST) {
+            pen.fillOval(currentX + control.width + 10, currentY + control.height / 2, 10, 10);
         }
     }
 

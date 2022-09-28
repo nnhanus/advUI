@@ -11,7 +11,7 @@ public class GameWindowPresentation{
 
     public GameWindowPresentation(GameWindow controller){
         control=controller;
-        animation = new AnimationPanel();
+        animation = new AnimationPanel(control);
         menuBar();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(1, 2));
