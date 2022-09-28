@@ -1,4 +1,3 @@
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +11,9 @@ public class AnimationPanel extends JPanel {
         parent=controller;
         Color bgColor = new Color(0xFED1FF);
         setBackground(bgColor);
-        chargeLevel(GameWindow.getLevel());
+        changeLevel(parent.getLevel());
+        parent.repaint();
+
     }
 
     @Override
@@ -30,7 +31,7 @@ public class AnimationPanel extends JPanel {
         character = new Character(this, level.getOrientation(), level.getPosX(), level.getPosY() );
     }
 
-    public void chargeLevel(Level level){
+    public void changeLevel(Level level){
         setGrid(level);
         setCharacter(level);
     }
@@ -52,8 +53,7 @@ public class AnimationPanel extends JPanel {
     public void endOfLevelMessage() {
         //need to reset character and scoops at end "repaint" from beginning of level
         if(isLevelComplete()){
-            parent.setLevel(parent.getLevelNumber()+1);
-            parent.chargeLevel(parent.getLevelNumber());
+            parent.changeLevel(parent.getLevelNumber()+1);
             //create a congratulation pop up with next level button (JOption)
             int winChoice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
             if(winChoice==0){parent.repaint();}

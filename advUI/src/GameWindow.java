@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class GameWindow  extends JFrame {
 
@@ -53,9 +52,17 @@ public class GameWindow  extends JFrame {
         return view.animation;
     }
 
-    public void chargeLevel(int levelNumber){
+    public void changeLevel(int levelNumber){
+        if( levelNumber>model.unlockedLevel){
+            JDialog lockedLevel = new JDialog(this, "Locked Level");
+            lockedLevel.add(new JTextArea("You do not have access to this level.\nPlay all the levels before to unlock it."));
+            lockedLevel.setSize(250,100);
+            lockedLevel.setLocation(this.getWidth()/2,this.getHeight()/2);
+            lockedLevel.setVisible(true);
+            levelNumber=getLevelNumber();
+        }
         setLevel(levelNumber);
-        getAnimation().chargeLevel(getLevel());
+        getAnimation().changeLevel(getLevel());
         repaint();
     }
 
