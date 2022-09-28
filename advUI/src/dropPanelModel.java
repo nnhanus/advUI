@@ -23,8 +23,6 @@ public class dropPanelModel {
     public List<Rectangle> cells;
     public Point selectedCell;
 
-    public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
     public dropPanel control;
 
     public dropPanelModel(dropPanel parent){

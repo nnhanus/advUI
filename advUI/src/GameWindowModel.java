@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameWindowModel {
+    public int unlockedLevel;
     private static int level;
     public static int Height;
     public static int Width;
@@ -14,11 +15,13 @@ public class GameWindowModel {
         Height = 500;
         Width = 1000;
         level = 1;
+        unlockedLevel=1;
     }
 
     public void setLevel(int newLevel) {
         triggerChangeListeners();
         level = newLevel;
+        unlockedLevel=Math.max(level,unlockedLevel);
     }
 
     public static int getLevel() {

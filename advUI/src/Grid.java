@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Grid {
     public int height = GameWindow.getDefaultHeight();
     public int width = GameWindow.getDefaultWidth()/2;
     public static int cellHeight;
     public static int cellWidth;
-    public static ArrayList<Scoop> scoops = new ArrayList<>();
+    public static List<Scoop> scoops = new ArrayList<Scoop>();
 
     public Grid(){
         cellHeight = height/3;

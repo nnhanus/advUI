@@ -10,37 +10,39 @@ public class CharacterPresentation {
     private BufferedImage cone = null;
     private int currentX;
     private int currentY;
+    public Character control;
 
-    public CharacterPresentation(){
+    public CharacterPresentation(Character controller){
+        control=controller;
         try {
             character = ImageIO.read(new File("advUI/Icons/elephant.png"));
             cone = ImageIO.read(new File("advUI/Icons/cone.png"));
         } catch (IOException ex) {
             System.out.println("Missing file");
         }
-        currentX = Grid.getCellWidth()*Character.x+Grid.getCellWidth()/4;
-        currentY = Grid.getCellHeight()*Character.y+Grid.getCellHeight()/4;
+        currentX = Grid.getCellWidth()*control.getX()+Grid.getCellWidth()/4;
+        currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/4;
     }
 
 
     public void paintCharacter(Graphics pen){
-        pen.drawImage(character, currentX, currentY, Character.width, Character.height, null);
-        pen.drawImage(cone, currentX, currentY+Character.height/2, Character.width/3, Character.height/2, null);
-        for (Scoop scoop : Character.scoops){
+        pen.drawImage(character, currentX, currentY, control.getWidth(), control.getHeight(), null);
+        pen.drawImage(cone, currentX, currentY+control.getHeight()/2, control.getWidth()/3, control.getHeight()/2, null);
+        for (Scoop scoop : control.getScoops()){
             pen.drawImage(scoop.getImage(), currentX,currentY, scoop.getSize(), scoop.getSize(), null );
         }
         drawOrientation(pen);
     }
 
     private void drawOrientation(Graphics pen) {
-        if (Character.orientation == Character.Direction.NORTH){
-            pen.fillOval(currentX+Character.width/2, currentY - 20, 10, 10);
-        } else if (Character.orientation == Character.Direction.SOUTH){
-            pen.fillOval(currentX+Character.width/2, currentY + Character.height +10, 10, 10);
-        } else if (Character.orientation == Character.Direction.WEST){
-            pen.fillOval(currentX - 20, currentY + Character.height/2, 10, 10);
-        } else if (Character.orientation == Character.Direction.EAST){
-            pen.fillOval(currentX + Character.width + 10, currentY + Character.height/2, 10, 10);
+        if (control.getOrientation() == CharacterModel.Direction.NORTH){
+            pen.fillOval(currentX+control.getWidth()/2, currentY - 20, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
+            pen.fillOval(currentX+control.getWidth()/2, currentY + control.getHeight() +10, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.WEST){
+            pen.fillOval(currentX - 20, currentY + control.getHeight()/2, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.EAST){
+            pen.fillOval(currentX + control.getWidth() + 10, currentY + control.getHeight()/2, 10, 10);
         }
     }
 

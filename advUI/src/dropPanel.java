@@ -62,27 +62,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-    void makeBtnClick() {
-        model.play.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                readList();
-                //add function to pass list to character for actions
-            }
-        });
-
-        model.redo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // super.mouseClicked(e);
-                clearList();
-                repaint();
-
-            }
-        });
-
-    }
 
     public void mouseClicked(MouseEvent e) { }
 

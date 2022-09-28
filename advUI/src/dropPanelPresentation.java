@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.border.TitledBorder;
 
 public class dropPanelPresentation {
+    public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 
     public dropPanel control;
     private static dropPanelModel model;
@@ -20,14 +22,34 @@ public class dropPanelPresentation {
     public void createUI(){
         //make play and redo clickable
         //when redo is clicked, clear panel and repaint, call clearList
-        control.makeBtnClick();
         control.setLayout(new BorderLayout());
+        control.add(createButtons(), BorderLayout.EAST);
+
+
+    }
+
+    private JPanel createButtons() {
+        play.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                control.readList();
+                control.animation.endOfLevelMessage();
+            }
+        });
+        redo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                model.blocksPlayed.clear();
+                clear();
+                control.repaint();
+            }
+        });
         JPanel buttonPanel = new JPanel(new GridLayout(2,1));
-        buttonPanel.add(model.play);
-        buttonPanel.add(model.redo);
-        control.add(buttonPanel, BorderLayout.EAST);
+        buttonPanel.add(play);
+        buttonPanel.add(redo);
 
-
+        return  buttonPanel;
     }
 
 
