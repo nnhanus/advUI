@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BlockModel {
-    int level = GameWindow.getLevel();
+    int level = GameWindow.getLevelNumber();
     int index;
     String name;
     List<String> blockType= new ArrayList<String>();

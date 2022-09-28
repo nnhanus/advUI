@@ -30,6 +30,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         this.model= new dropPanelModel(this);
         this.view= new dropPanelPresentation(this);
 
+
     }
 
     @Override
@@ -46,19 +47,20 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void readList(){
         animation = GameWindow.getAnimation();
+        Character character = animation.character;
         for (String action : model.actionList){
-            readAction(action);
+            readAction(action, character);
             animation.revalidate();
             animation.repaint();
         }
     }
 
-    private void readAction(String action){
+    private void readAction(String action, Character character){
         //System.out.println(action);
         if (action.equalsIgnoreCase("Move")) {
-            Character.move();
+            character.move();
         } else if (action.equalsIgnoreCase("Turn")) {
-            Character.turn();
+            character.turn();
         }
     }
 
@@ -75,9 +77,10 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         model.redo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // super.mouseClicked(e);
+                super.mouseClicked(e);
                 clearList();
                 repaint();
+                System.out.println("reset");
 
             }
         });

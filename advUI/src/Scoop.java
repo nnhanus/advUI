@@ -7,22 +7,16 @@ public class Scoop {
     public int x;
     public int y;
     public int size;
-    public BufferedImage image = null;
+    public BufferedImage image;
 
-    public Scoop(int x, int y, int size){
-        try {
-            image = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-        } catch (IOException ex) {
-            System.out.println("Missing file");
-        }
+    public Scoop(int x, int y, int size, BufferedImage image){
+        this.image = image;
         this.x = x;
         this.y = y;
         this.size = size;
     }
 
-    public BufferedImage getImage(){
-        return image;
-    }
+    public BufferedImage getImage(){ return image;}
 
     public int getX(){
         return x;

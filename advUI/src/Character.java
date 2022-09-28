@@ -10,21 +10,24 @@ public class Character {
         WEST
     }
 
-    public static Direction orientation = Direction.NORTH;
-    public static int x = 1;
-    public static int y = 1;
-    public static int width = 80;
-    public static int height = 80;
-    public static ArrayList<Scoop> scoops = new ArrayList<>();
-    public static CharacterPresentation presentation = new CharacterPresentation();
+    public static Direction orientation;
+    public int x;
+    public int y;
+    public int width = 80;
+    public int height = 80;
+    public ArrayList<Scoop> scoops = new ArrayList<>();
+    public CharacterPresentation presentation = new CharacterPresentation(this);
     public AnimationPanel animation;
 
-    public Character(AnimationPanel parent){
+    public Character(AnimationPanel parent, int posX, int posY, Direction dir){
         animation=parent;
+        x = posX;
+        y = posY;
+        orientation = dir;
     }
 
     //moves the character from 1 cell according to the orientation
-    public static void move(){
+    public void move(){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
             presentation.updateCharacterNorth();
@@ -42,7 +45,7 @@ public class Character {
     }
 
     //rotates the character 90° left
-    public static void turn(){
+    public void turn(){
         if (orientation == Direction.NORTH){
             orientation = Direction.WEST;
         } else if (orientation == Direction.WEST){
@@ -74,11 +77,11 @@ public class Character {
     }
 
     //Picks up a scoop if in the same position as character and smaller than the last scoop on the cone
-    public static void pickScoop(){
+    public void pickScoop(){
         for (Scoop s : Grid.scoops){
-            if (s.x == x && s.y == y){
+            if (s.getX() == x && s.getY() == y){
                 if (scoops.size() > 0){
-                    if (scoops.get(scoops.size()-1).size < s.size){
+                    if (scoops.get(scoops.size()-1).size > s.size){
                         scoops.add(s);
                         Grid.scoops.remove(s);
                         break;

@@ -10,8 +10,7 @@ public class AnimationPanel extends JPanel {
         super ();
         Color bgColor = new Color(0xFED1FF);
         setBackground(bgColor);
-        grid = new Grid();
-        character = new Character(this);
+        chargeLevel(GameWindow.getLevel());
     }
 
     @Override
@@ -19,5 +18,18 @@ public class AnimationPanel extends JPanel {
         super.paintComponent(g);
         grid.paintGrid(g);
         character.presentation.paintCharacter(g);
+    }
+
+    public void setGrid(Level level){
+        grid = new Grid(level.getNumRows(), level.getNumCols(), level.getScoops());
+    }
+
+    public void setCharacter(Level level){
+        character = new Character(this, level.getPosX(), level.getPosY(), level.getOrientation());
+    }
+
+    public void chargeLevel(Level level){
+        setGrid(level);
+        setCharacter(level);
     }
 }

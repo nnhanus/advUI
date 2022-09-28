@@ -5,24 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameWindowModel {
-    private static int level;
+    //private static int level;
+    private static Level level;
     public static int Height;
     public static int Width;
     private final List<ChangeListener> changeListeners = new ArrayList<>();
 
     public GameWindowModel() {
-        Height = 500;
-        Width = 1000;
-        level = 1;
+        Height = 600;
+        Width = 1200;
+        level = new Level(1);
     }
 
     public void setLevel(int newLevel) {
         triggerChangeListeners();
-        level = newLevel;
+        level = new Level(newLevel);
     }
 
-    public static int getLevel() {
+    public static Level getLevel() {
         return level;
+    }
+
+    public static int getLevelNumber(){
+        return level.getNumber();
     }
 
     public void addChangeListener(ChangeListener listener) {

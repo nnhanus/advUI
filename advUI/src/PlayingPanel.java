@@ -6,7 +6,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
 public class PlayingPanel extends JPanel{
 
-    public static TopPanel topPanel;
+    public TopPanel topPanel;
     public static dropPanel bottomPanel;
     public BlockControl selectedBlock;
 

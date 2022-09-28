@@ -11,7 +11,7 @@ protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        int level=GameWindow.getLevel();
+        int level=GameWindow.getLevelNumber();
         int colCount= Math.min(level,5);
         //could create array of all button types. for i in 0 to level-1 create button
         for (int i = 0; i < level ; i++) {
