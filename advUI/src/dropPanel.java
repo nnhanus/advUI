@@ -63,7 +63,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-    void makeBtnClick() {
+    /**void makeBtnClick() {
         model.play.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,7 +84,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
             }
         });
 
-    }
+    }**/
 
     public void mouseClicked(MouseEvent e) { }
 

@@ -6,8 +6,8 @@ public class Character {
     public static CharacterModel model;
     public AnimationPanel animation;
 
-    public Character(AnimationPanel parent){
-        model= new CharacterModel(this);
+    public Character(AnimationPanel parent, CharacterModel.Direction dir, int posX, int posY){
+        model= new CharacterModel(this, dir, posX, posY);
         presentation= new CharacterPresentation(this);
         animation=parent;
     }

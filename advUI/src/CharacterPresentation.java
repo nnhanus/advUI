@@ -26,25 +26,25 @@ public class CharacterPresentation {
 
 
     public void paintCharacter(Graphics pen){
-        currentX = Grid.getCellWidth()*control.x+Grid.getCellWidth()/4;
-        currentY = Grid.getCellHeight()*control.y+Grid.getCellHeight()/2;
-        pen.drawImage(character, currentX, currentY, control.width, control.height, null);
-        pen.drawImage(cone, currentX, currentY+control.height/2, control.width/3, control.height/2, null);
-        for (Scoop scoop : control.scoops){
+        currentX = Grid.getCellWidth()*control.getX()+Grid.getCellWidth()/4;
+        currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/2;
+        pen.drawImage(character, currentX, currentY, control.getWidth(), control.getHeight(), null);
+        pen.drawImage(cone, currentX, currentY+control.getHeight()/2, control.getWidth()/3, control.getHeight()/2, null);
+        for (Scoop scoop : control.getScoops()){
             pen.drawImage(scoop.getImage(), currentX,currentY, scoop.getSize(), scoop.getSize(), null );
         }
         drawOrientation(pen);
     }
 
     private void drawOrientation(Graphics pen) {
-        if (control.orientation == Character.Direction.NORTH){
-            pen.fillOval(currentX+control.width/2, currentY - 20, 10, 10);
-        } else if (control.orientation == Character.Direction.SOUTH){
-            pen.fillOval(currentX+control.width/2, currentY + control.height +10, 10, 10);
-        } else if (control.orientation == Character.Direction.WEST){
-            pen.fillOval(currentX - 20, currentY + control.height/2, 10, 10);
-        } else if (control.orientation == Character.Direction.EAST) {
-            pen.fillOval(currentX + control.width + 10, currentY + control.height / 2, 10, 10);
+        if (control.getOrientation() == CharacterModel.Direction.NORTH){
+            pen.fillOval(currentX+control.getWidth()/2, currentY - 20, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
+            pen.fillOval(currentX+control.getWidth()/2, currentY + control.getHeight() +10, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.WEST){
+            pen.fillOval(currentX - 20, currentY + control.getHeight()/2, 10, 10);
+        } else if (control.getOrientation() == CharacterModel.Direction.EAST) {
+            pen.fillOval(currentX + control.getWidth() + 10, currentY + control.getHeight() / 2, 10, 10);
         }
     }
 

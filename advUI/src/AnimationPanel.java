@@ -27,7 +27,7 @@ public class AnimationPanel extends JPanel {
     }
 
     public void setCharacter(Level level){
-        character = new Character(this, level.getPosX(), level.getPosY(), level.getOrientation());
+        character = new Character(this, level.getOrientation(), level.getPosX(), level.getPosY() );
     }
 
     public void chargeLevel(Level level){
@@ -36,18 +36,22 @@ public class AnimationPanel extends JPanel {
     }
 
     public boolean isLevelComplete(){
-        for ( Scoop scoop : Grid.scoops){
+        /**for ( Scoop scoop : Grid.scoops){
             if (character.getScoops().contains(scoop)){continue;}
             return false;
 
         }
-         return true;
+         return true;**/
+        if (Grid.scoops.size() == 0){
+            return true;
+        }
+        return false;
     }
 
     public void endOfLevelMessage() {
         //need to reset character and scoops at end "repaint" from beginning of level
         if(isLevelComplete()){
-            parent.setLevel(parent.getLevel()+1);
+            parent.setLevel(parent.getLevelNumber()+1);
             //create a congratulation pop up with next level button (JOption)
             int winChoice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
             if(winChoice==0){parent.repaint();}

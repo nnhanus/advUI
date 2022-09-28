@@ -11,7 +11,7 @@ public class Level {
     static ArrayList<Scoop> scoops = new ArrayList<>();
     int posX;
     int posY;
-    Character.Direction orientation;
+    CharacterModel.Direction orientation;
 
     public Level(int number){
         BufferedImage mintChoco = null;
@@ -28,7 +28,7 @@ public class Level {
             numCols = 3;
             posX = 0;
             posY = 0;
-            orientation = Character.Direction.EAST;
+            orientation = CharacterModel.Direction.EAST;
             scoops.add(new Scoop(2, 0, 40, mintChoco));
         }
         if (number==2){
@@ -36,7 +36,7 @@ public class Level {
             numCols = 3;
             posX = 1;
             posY = 1;
-            orientation = Character.Direction.NORTH;
+            orientation = CharacterModel.Direction.NORTH;
             scoops.add(new Scoop(2,0,40, mintChoco));
             scoops.add(new Scoop(0,2, 30, funfetti));
         }
@@ -63,7 +63,7 @@ public class Level {
         return posY;
     }
 
-    public Character.Direction getOrientation() {
+    public CharacterModel.Direction getOrientation() {
         return orientation;
     }
 

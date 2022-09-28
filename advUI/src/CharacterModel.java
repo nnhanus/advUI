@@ -8,17 +8,19 @@ public class CharacterModel {
         EAST,
         WEST
     }
-    public static Direction orientation = Direction.NORTH;
-    public static int x = 1;
-    public static int y = 1;
+    public static Direction orientation;
+    public static int x;
+    public static int y;
     public static int width = 80;
     public static int height = 80;
     public static List<Scoop> scoops = new ArrayList<>();
 
     public static Character parent;
-    public CharacterModel(Character control){
+    public CharacterModel(Character control, Direction dir, int posX, int posY){
         parent=control;
-        
+        orientation = dir;
+        x = posX;
+        y = posY;
     }
 
     //moves the character from 1 cell according to the orientation
@@ -76,7 +78,7 @@ public class CharacterModel {
         for (Scoop s : Grid.scoops){
             if (s.x == x && s.y == y){
                 if (scoops.size() > 0){
-                    if (scoops.get(scoops.size()-1).size < s.size){
+                    if (scoops.get(scoops.size()-1).size > s.size){
                         scoops.add(s);
                         Grid.scoops.remove(s);
                         break;
