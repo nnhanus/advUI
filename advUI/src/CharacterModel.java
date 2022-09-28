@@ -14,6 +14,7 @@ public class CharacterModel {
     public static int width = 80;
     public static int height = 80;
     public static List<Scoop> scoops = new ArrayList<>();
+    public static Grid grid;
 
     public static Character parent;
     public CharacterModel(Character control, Direction dir, int posX, int posY){
@@ -75,17 +76,18 @@ public class CharacterModel {
 
     //Picks up a scoop if in the same position as character and smaller than the last scoop on the cone
     public static void pickScoop(){
-        for (Scoop s : Grid.scoops){
+        grid = parent.animation.grid;
+        for (Scoop s : grid.scoops){
             if (s.x == x && s.y == y){
                 if (scoops.size() > 0){
                     if (scoops.get(scoops.size()-1).size > s.size){
                         scoops.add(s);
-                        Grid.scoops.remove(s);
+                        grid.scoops.remove(s);
                         break;
                     }
                 } else {
                     scoops.add(s);
-                    Grid.scoops.remove(s);
+                    grid.scoops.remove(s);
                     break;
                 }
             }

@@ -42,7 +42,8 @@ public class AnimationPanel extends JPanel {
 
         }
          return true;**/
-        if (Grid.scoops.size() == 0){
+        System.out.println(grid.scoops.size());
+        if (grid.scoops.size() == 0){
             return true;
         }
         return false;
@@ -52,6 +53,7 @@ public class AnimationPanel extends JPanel {
         //need to reset character and scoops at end "repaint" from beginning of level
         if(isLevelComplete()){
             parent.setLevel(parent.getLevelNumber()+1);
+            parent.chargeLevel(parent.getLevelNumber());
             //create a congratulation pop up with next level button (JOption)
             int winChoice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
             if(winChoice==0){parent.repaint();}

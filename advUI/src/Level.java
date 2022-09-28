@@ -8,7 +8,7 @@ public class Level {
     int number;
     int numRows;
     int numCols;
-    static ArrayList<Scoop> scoops = new ArrayList<>();
+    ArrayList<Scoop> scoops = new ArrayList<>();
     int posX;
     int posY;
     CharacterModel.Direction orientation;
@@ -40,7 +40,6 @@ public class Level {
             scoops.add(new Scoop(2,0,40, mintChoco));
             scoops.add(new Scoop(0,2, 30, funfetti));
         }
-
     }
 
     public int getNumber(){
