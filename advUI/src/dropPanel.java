@@ -43,17 +43,17 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
         boolean loopFlag=false;
-        for (String action : model.actionList){
-            if (action.split(" ")[0].equalsIgnoreCase("For")) {
+        for (String actionCall : model.actionList){
+            String action=actionCall.split(" ")[0];
+            if (action.equalsIgnoreCase("For")) {
                 loopFlag=true;
-                loop.add(action.split(" ")[1]);
+                loop.add(actionCall.split(" ")[1]);
             }else if(loopFlag){
                 loopFlag=false;
                 loop.add(action);
                 readAction(loop,character);
             }else {
                 readAction(action, character);
-                System.out.println("should move");
             }
         }
     }
@@ -70,7 +70,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     private void readAction(List<String> loop, Character character){
         int iter=Integer.parseInt(loop.get(0));
         String action=loop.get(1);
-        System.out.println("loop "+iter);
         if (action.equalsIgnoreCase("Move")) {
             for(int i =0;i<iter;i++){
                 character.move();
