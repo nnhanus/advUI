@@ -60,11 +60,11 @@ public class AnimationPanel extends JPanel {
             choice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
 
         }
-        else{
+        /**else{
             //create try again pop up
             choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
-        }
-        if(choice==0){parent.changeLevel(parent.getLevelNumber());}
-        else{parent.levelSelect();}
+        }**/
+        //if(choice==0){parent.changeLevel(parent.getLevelNumber());}
+        //else{parent.levelSelect();}
     }
 }

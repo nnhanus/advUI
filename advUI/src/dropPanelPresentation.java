@@ -9,6 +9,7 @@ import javax.swing.border.TitledBorder;
 public class dropPanelPresentation {
     public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
     public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    public JLabel clear = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/close.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 
     public dropPanel control;
     private static dropPanelModel model;
@@ -40,13 +41,24 @@ public class dropPanelPresentation {
         redo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                model.clearList();
                 model.blocksPlayed.clear();
                 clear();
                 control.container.container.changeLevel(control.container.container.getLevelNumber());
             }
         });
-        JPanel buttonPanel = new JPanel(new GridLayout(2,1));
+        clear.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                model.clearList();
+                model.blocksPlayed.clear();
+                clear();
+                control.repaint();
+            }
+        });
+        JPanel buttonPanel = new JPanel(new GridLayout(3,1));
         buttonPanel.add(play);
+        buttonPanel.add(clear);
         buttonPanel.add(redo);
 
         return  buttonPanel;

@@ -13,7 +13,7 @@ public class CharacterModel {
     public static int y;
     public static int width = 80;
     public static int height = 80;
-    public static List<Scoop> scoops = new ArrayList<>();
+    public List<Scoop> scoops = new ArrayList<>();
     public static Grid grid;
 
     public static Character parent;
@@ -25,7 +25,7 @@ public class CharacterModel {
     }
 
     //moves the character from 1 cell according to the orientation
-    public static void move(){
+    public void move(){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
             parent.presentation.updateCharacterNorth();
@@ -75,7 +75,7 @@ public class CharacterModel {
     }
 
     //Picks up a scoop if in the same position as character and smaller than the last scoop on the cone
-    public static void pickScoop(){
+    public void pickScoop(){
         grid = parent.animation.grid;
         for (Scoop s : grid.scoops){
             if (s.x == x && s.y == y){
