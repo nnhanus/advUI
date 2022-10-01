@@ -40,12 +40,26 @@ public class AnimationPanel extends JPanel {
         /**for ( Scoop scoop : Grid.scoops){
             if (character.getScoops().contains(scoop)){continue;}
             return false;
-
         }
          return true;**/
-       // System.out.println(grid.scoops.size());
         if (grid.scoops.size() == 0){
             return true;
+        }
+        return false;
+    }
+
+    public boolean isFailed(){
+        if (Grid.scoops.isEmpty()){
+            return false;
+        } else {
+            if (character.getScoops().isEmpty()){
+                return false;
+            }
+            for (Scoop scoop : Grid.scoops){
+                if (character.getScoops().get(character.getScoops().size()-1).size < scoop.size){
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -58,12 +72,19 @@ public class AnimationPanel extends JPanel {
             parent.setLevel(parent.getLevelNumber()+1);
             //create a congratulation pop up with next level button (JOption)
             choice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
-
+            if(choice==0){parent.changeLevel(parent.getLevelNumber());}
+            else{parent.levelSelect();}
+        } else if (isFailed()){
+            //create try again pop up
+            choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
+            if(choice==0){parent.changeLevel(parent.getLevelNumber());}
+            else{parent.levelSelect();}
         }
         /**else{
             //create try again pop up
             choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
         }**/
+
         //if(choice==0){parent.changeLevel(parent.getLevelNumber());}
         //else{parent.levelSelect();}
     }
