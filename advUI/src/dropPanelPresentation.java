@@ -42,7 +42,7 @@ public class dropPanelPresentation {
             public void mouseClicked(MouseEvent e) {
                 model.blocksPlayed.clear();
                 clear();
-                control.repaint();
+                control.container.container.changeLevel(control.container.container.getLevelNumber());
             }
         });
         JPanel buttonPanel = new JPanel(new GridLayout(2,1));

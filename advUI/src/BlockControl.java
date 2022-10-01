@@ -33,7 +33,9 @@ public class BlockControl extends JLabel implements MouseListener {
     }
     public String getType(){return model.getType();}
     public ImageIcon getIcon(){return model.getIcon();}
-
+    public void setForLoopIter(int iterNum){
+        model.setForLoopIter(Integer.toString(iterNum));
+    }
     @Override
     public Dimension getPreferredSize(){
         return view.getPreferredSize();
@@ -71,5 +73,9 @@ public class BlockControl extends JLabel implements MouseListener {
 
     public BufferedImage getIconAsImage() {
         return model.getIconAsImage();
+    }
+
+    public String getForLoopIter() {
+        return model.forLoopIter;
     }
 }

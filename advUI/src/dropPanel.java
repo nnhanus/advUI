@@ -44,45 +44,47 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         List<String> loop = new ArrayList<>();
         boolean loopFlag=false;
         for (String action : model.actionList){
-            if (action.equalsIgnoreCase("For")) {
+            if (action.split(" ")[0].equalsIgnoreCase("For")) {
                 loopFlag=true;
-                loop.add(container.container.getLevel().forLoopIter);
+                loop.add(action.split(" ")[1]);
             }else if(loopFlag){
+                loopFlag=false;
                 loop.add(action);
                 readAction(loop,character);
-                loopFlag=false;
-                animation.revalidate();
-                animation.repaint();
-                continue;
+            }else {
+                readAction(action, character);
+                System.out.println("should move");
             }
-
-            readAction(action, character);
-            animation.revalidate();
-            animation.repaint();
         }
     }
 
     private void readAction(String action, Character character){
-        //System.out.println(action);
         if (action.equalsIgnoreCase("Move")) {
             character.move();
         } else if (action.equalsIgnoreCase("Turn")) {
             character.turn();
         }
+        animation.revalidate();
+        animation.repaint();
     }
     private void readAction(List<String> loop, Character character){
         int iter=Integer.parseInt(loop.get(0));
         String action=loop.get(1);
-
+        System.out.println("loop "+iter);
         if (action.equalsIgnoreCase("Move")) {
             for(int i =0;i<iter;i++){
                 character.move();
+                animation.revalidate();
+                animation.repaint();
             }
         } else if (action.equalsIgnoreCase("Turn")) {
             for(int i =0;i<iter;i++){
                 character.turn();
+                animation.revalidate();
+                animation.repaint();
             }
         }
+
     }
 
     /**void makeBtnClick() {
@@ -112,10 +114,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse pressed drop panel");
-//        BlockControl block = (BlockControl) e.getSource();
-//        TransferHandler handler = block.getTransferHandler();
-//        handler.exportAsDrag(block, e, TransferHandler.COPY);
+
     }
 
     @Override

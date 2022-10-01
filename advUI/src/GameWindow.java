@@ -39,8 +39,7 @@ public class GameWindow  extends JFrame {
         Arrays.setAll(availableLevels, i -> i + 1);
         int choice=JOptionPane.showOptionDialog(this,"Select a level","Menu",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null,availableLevels,0);
-        setLevel(choice+1);
-        this.repaint();
+        changeLevel(choice+1);
     }
 
     public void setLevel(int newLevel) {
@@ -68,4 +67,6 @@ public class GameWindow  extends JFrame {
     public void setLevelUnlocked(int levelUnlocked) {
         model.unlockedLevel=levelUnlocked;
     }
+
+
 }

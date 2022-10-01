@@ -11,7 +11,6 @@ public class Level {
     ArrayList<Scoop> scoops = new ArrayList<>();
     int posX;
     int posY;
-    String forLoopIter;
     CharacterModel.Direction orientation;
 
     public Level(int number){
@@ -46,7 +45,6 @@ public class Level {
             numCols = 3;
             posX = 1;
             posY = 1;
-            forLoopIter="2";
             orientation = CharacterModel.Direction.NORTH;
             scoops.add(new Scoop(2,0,40, mintChoco));
             scoops.add(new Scoop(0,2, 30, funfetti));

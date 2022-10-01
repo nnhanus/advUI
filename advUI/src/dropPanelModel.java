@@ -36,9 +36,14 @@ public class dropPanelModel {
     }
 
     public void addActionBlock(BlockControl block) {
+        String type=block.getType();
+        if(type.equalsIgnoreCase("For")){
+           Integer options[] = {  2, 3, 4 };
+            block.setForLoopIter(2+JOptionPane.showOptionDialog(control.container,"Select how many times to repeat action:","For Loop",JOptionPane.DEFAULT_OPTION,JOptionPane.OK_CANCEL_OPTION,null,options,0));
+        }
         int index=selectedCell.x+selectedCell.y*columnCount;
         if(index>blocksPlayed.size()-1){index=blocksPlayed.size();}
-        actionList.add(index,block.getType());
+        actionList.add(index,type+" "+block.getForLoopIter());
         blocksPlayed.add(index,block);
     }
 

@@ -43,7 +43,7 @@ public class AnimationPanel extends JPanel {
 
         }
          return true;**/
-        System.out.println(grid.scoops.size());
+       // System.out.println(grid.scoops.size());
         if (grid.scoops.size() == 0){
             return true;
         }

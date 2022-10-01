@@ -14,7 +14,7 @@ public class BlockModel {
     List<String> blockType= new ArrayList<String>();
     public Map<Integer,String> nameMap=new HashMap();
     public Map<Integer,ImageIcon> iconMap=new HashMap();
-
+    String forLoopIter="";
     public ImageIcon icon;
     public BlockControl control;
 
@@ -32,8 +32,7 @@ public class BlockModel {
         iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(4,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         setIndex(type);
-        if(type==2 || type==4){this.name=nameMap.get(type)+" "+control.container.container.container.getLevel().forLoopIter;}
-        else{this.name=nameMap.get(type);}
+        this.name=nameMap.get(type);
         this.icon= iconMap.get(type);
         //giving all blocks the last icon of the group?
 
@@ -48,6 +47,10 @@ public class BlockModel {
 
     public ImageIcon getIcon( ){
             return icon;
+    }
+
+    public void setForLoopIter(String forLoopIter) {
+        this.forLoopIter = forLoopIter;
     }
 
     public BufferedImage getIconAsImage(){

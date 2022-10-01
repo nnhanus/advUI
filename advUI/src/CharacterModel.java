@@ -42,16 +42,16 @@ public class CharacterModel {
         pickScoop();
     }
 
-    //rotates the character 90° left
+    //rotates the character 90° clockwise
     public static void turn(){
         if (orientation == Direction.NORTH){
-            orientation = Direction.WEST;
-        } else if (orientation == Direction.WEST){
-            orientation = Direction.SOUTH;
-        } else if (orientation == Direction.SOUTH){
             orientation = Direction.EAST;
-        } else if (orientation == Direction.EAST){
+        } else if (orientation == Direction.WEST){
             orientation = Direction.NORTH;
+        } else if (orientation == Direction.SOUTH){
+            orientation = Direction.WEST;
+        } else if (orientation == Direction.EAST){
+            orientation = Direction.SOUTH;
         }
     }
 
