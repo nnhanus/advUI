@@ -14,7 +14,7 @@ public class Grid {
     public Grid(int numRows, int numCol, ArrayList<Scoop> scoopsToAdd){
         this.numCols = numCol;
         this.numRows = numRows;
-        cellHeight = height/numRows;
+        cellHeight = height/numRows; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
         cellWidth = width/numCol;
         chargeScoops(scoopsToAdd);
     }

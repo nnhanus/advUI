@@ -14,7 +14,6 @@ public class GameWindow  extends JFrame {
         this.view = new GameWindowPresentation(this);
 
         setPreferredSize(new Dimension(model.Width, model.Height));
-
         setVisible(true);
         pack();
     }
@@ -66,4 +65,7 @@ public class GameWindow  extends JFrame {
         repaint();
     }
 
+    public void setLevelUnlocked(int levelUnlocked) {
+        model.unlockedLevel=levelUnlocked;
+    }
 }

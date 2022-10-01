@@ -18,7 +18,7 @@ public class BlockControl extends JLabel implements MouseListener {
     public BlockControl (int controlNum, TopPanel parent) {
         container = parent;
         typeNum = controlNum;
-        model = new BlockModel(controlNum);
+        model = new BlockModel(controlNum, this);
         view = new BlockPresentation(this);
         this.setIcon(getIcon());
         this.setText(model.name);

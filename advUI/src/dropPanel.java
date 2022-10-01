@@ -1,17 +1,11 @@
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 // create small zones with drop listeners that know where they are and then insert in list
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
@@ -47,7 +41,21 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     public void readList(){
         animation = GameWindow.getAnimation();
         Character character = animation.character;
+        List<String> loop = new ArrayList<>();
+        boolean loopFlag=false;
         for (String action : model.actionList){
+            if (action.equalsIgnoreCase("For")) {
+                loopFlag=true;
+                loop.add(container.container.getLevel().forLoopIter);
+            }else if(loopFlag){
+                loop.add(action);
+                readAction(loop,character);
+                loopFlag=false;
+                animation.revalidate();
+                animation.repaint();
+                continue;
+            }
+
             readAction(action, character);
             animation.revalidate();
             animation.repaint();
@@ -60,6 +68,20 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
             character.move();
         } else if (action.equalsIgnoreCase("Turn")) {
             character.turn();
+        }
+    }
+    private void readAction(List<String> loop, Character character){
+        int iter=Integer.parseInt(loop.get(0));
+        String action=loop.get(1);
+
+        if (action.equalsIgnoreCase("Move")) {
+            for(int i =0;i<iter;i++){
+                character.move();
+            }
+        } else if (action.equalsIgnoreCase("Turn")) {
+            for(int i =0;i<iter;i++){
+                character.turn();
+            }
         }
     }
 

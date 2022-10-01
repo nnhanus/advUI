@@ -19,7 +19,7 @@ public class GameWindowPresentation{
         mainPanel.setLayout(new GridLayout(1, 2));
         mainPanel.add(animation);
 
-        playingZone = new PlayingPanel();
+        playingZone = new PlayingPanel(control);
         mainPanel.add(playingZone);
 
         control.add(mainPanel, BorderLayout.CENTER);
