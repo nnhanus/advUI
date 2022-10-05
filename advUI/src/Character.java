@@ -12,8 +12,8 @@ public class Character {
         animation=parent;
     }
 
-    public static void move() {
-        model.move();
+    public static void move(boolean isNextIf) {
+        model.move(isNextIf);
     }
 
     public static void turn() {

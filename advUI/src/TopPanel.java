@@ -26,7 +26,6 @@ protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
         level=GameWindow.getLevelNumber();
         colCount= Math.min(level,5);
         for (int i = 0; i < level ; i++) {
-            System.out.println(i);
             gbc.gridx = i%colCount;
             gbc.gridy = Math.floorDiv(i,colCount);
             BlockControl controlBtn = new BlockControl(i,this);
