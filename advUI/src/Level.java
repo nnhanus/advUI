@@ -23,7 +23,7 @@ public class Level {
             System.out.println("Missing file");
         }
         this.number = number;
-        if (number==1){
+        if (number==1){ //Move
             numRows = 1;
             numCols = 3;
             posX = 0;
@@ -31,7 +31,15 @@ public class Level {
             orientation = CharacterModel.Direction.EAST;
             scoops.add(new Scoop(2, 0, 40, mintChoco));
         }
-        if (number==2){
+        if (number==2){ //Move + Turn
+            numRows = 3;
+            numCols = 3;
+            posX = 1;
+            posY = 1;
+            orientation = CharacterModel.Direction.NORTH;
+            scoops.add(new Scoop(2,2,40, mintChoco));
+        }
+        if (number==3){ //For loop + 2nd scoop introduced
             numRows = 3;
             numCols = 3;
             posX = 1;
@@ -40,15 +48,19 @@ public class Level {
             scoops.add(new Scoop(2,0,40, mintChoco));
             scoops.add(new Scoop(0,2, 30, funfetti));
         }
-        if (number==3){
-            numRows = 3;
-            numCols = 3;
-            posX = 1;
-            posY = 1;
-            orientation = CharacterModel.Direction.NORTH;
-            scoops.add(new Scoop(2,0,40, mintChoco));
-            scoops.add(new Scoop(0,2, 30, funfetti));
-        }
+
+        if (number==4){
+            numRows = 1;
+            numCols = 4;
+            posX = 0;
+            posY = 0;
+            orientation = CharacterModel.Direction.EAST;
+            scoops.add(new Scoop(3, 0, 40, mintChoco));
+            scoops.add(new Scoop(2, 0, 30, funfetti));
+        } //If loop
+        if (number==5){} //While loop
+        if (number==6){} //Obstacle course
+        if (number==7){} //Final Challenge, maybe
     }
 
     public int getNumber(){
