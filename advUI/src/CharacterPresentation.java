@@ -27,7 +27,7 @@ public class CharacterPresentation {
 
     public void paintCharacter(Graphics pen){
         currentX = Grid.getCellWidth()*control.getX()+Grid.getCellWidth()/4;
-        currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/2;
+        currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/3;
         pen.drawImage(character, currentX, currentY, control.getWidth(), control.getHeight(), null);
         pen.drawImage(cone, currentX, currentY+control.getHeight()/2, control.getWidth()/3, control.getHeight()/2, null);
         for (int i = 0; i < control.getScoops().size(); i++){

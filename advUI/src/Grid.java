@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Grid {
-    public int height = GameWindow.getDefaultHeight();
+    public int height = GameWindow.getDefaultHeight()-70;
     public int width = GameWindow.getDefaultWidth()/2;
     public static int cellHeight;
     public static int cellWidth;
@@ -24,6 +24,8 @@ public class Grid {
     }
 
     public void paintGrid(Graphics g){
+        height = GameWindow.getDefaultHeight()-70;
+        width = GameWindow.getDefaultWidth()/2;
         for (int i = 0; i < numRows; i++){
             g.drawLine(0, cellHeight*i, width, cellHeight*i);
         }
