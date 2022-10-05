@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Grid {
-    public int height = GameWindow.getDefaultHeight()-70;
+    public int height = GameWindow.getDefaultHeight();
     public int width = GameWindow.getDefaultWidth()/2;
     public static int cellHeight;
     public static int cellWidth;
