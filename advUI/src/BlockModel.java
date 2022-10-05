@@ -29,7 +29,7 @@ public class BlockModel {
         iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
-        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle grey.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(4,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         setIndex(type);
         this.name=nameMap.get(type);
