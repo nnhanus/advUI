@@ -58,9 +58,18 @@ public class Level {
             scoops.add(new Scoop(3, 0, 40, mintChoco));
             scoops.add(new Scoop(2, 0, 30, funfetti));
         } //If loop
-        if (number==5){} //While loop
-        if (number==6){} //Obstacle course
-        if (number==7){} //Final Challenge, maybe
+        if (number==5){
+            numRows = 1;
+            numCols = 1;
+        } //While loop
+        if (number==6){
+            numRows = 1;
+            numCols = 1;
+        } //Obstacle course
+        if (number==7){
+            numRows = 1;
+            numCols = 1;
+        } //Final Challenge, maybe
     }
 
     public int getNumber(){
