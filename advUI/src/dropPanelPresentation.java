@@ -35,6 +35,9 @@ public class dropPanelPresentation {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 control.readList();
+                model.clearList();
+                model.blocksPlayed.clear();
+                control.repaint();
                 control.animation.endOfLevelMessage();
             }
         });
@@ -45,6 +48,7 @@ public class dropPanelPresentation {
                 model.blocksPlayed.clear();
                 clear();
                 control.container.container.changeLevel(control.container.container.getLevelNumber());
+
             }
         });
         clear.addMouseListener(new MouseAdapter() {
@@ -95,6 +99,7 @@ public class dropPanelPresentation {
             BlockControl block=model.blocksPlayed.get(index);
             Rectangle cell = model.cells.get(index);
             g2d.setPaint(new TexturePaint(block.getIconAsImage(),cell));
+            //make this prettier
             g2d.fill(cell);
 
         }

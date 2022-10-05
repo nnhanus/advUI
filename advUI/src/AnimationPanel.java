@@ -87,5 +87,6 @@ public class AnimationPanel extends JPanel {
 
         //if(choice==0){parent.changeLevel(parent.getLevelNumber());}
         //else{parent.levelSelect();}
+
     }
 }
