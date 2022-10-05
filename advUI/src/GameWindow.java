@@ -63,6 +63,7 @@ public class GameWindow  extends JFrame {
         getAnimation().changeLevel(getLevel());
         view.playingZone.topPanel.resetBtns();
         revalidate();
+        repaint();
     }
 
     public void setLevelUnlocked(int levelUnlocked) {

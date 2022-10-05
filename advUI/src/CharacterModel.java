@@ -25,7 +25,7 @@ public class CharacterModel {
     }
 
     //moves the character from 1 cell according to the orientation
-    public void move(){
+    public void move(boolean isNextIf){
         if (orientation == Direction.NORTH && y > 0) {
             y--;
             parent.presentation.updateCharacterNorth();
@@ -39,7 +39,7 @@ public class CharacterModel {
             x--;
             parent.presentation.updateCharacterEast();
         }
-        pickScoop();
+        if(!isNextIf)pickScoop();
     }
 
     //rotates the character 90° clockwise
@@ -52,18 +52,6 @@ public class CharacterModel {
             orientation = Direction.WEST;
         } else if (orientation == Direction.EAST){
             orientation = Direction.SOUTH;
-        }
-    }
-
-    public void forLoop (int repetition){
-        for (int i = 0; i < repetition; i++){
-            move();
-        }
-    }
-
-    public void whileLoop (boolean condition){
-        while (condition){
-            move();
         }
     }
 
