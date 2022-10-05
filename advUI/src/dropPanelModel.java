@@ -20,7 +20,7 @@ public class dropPanelModel {
     int rowCount = 4;
     int xOffset;
     int yOffset;
-    public List<Rectangle> cells;
+    public List<cellRectangle> cells;
     public Point selectedCell;
 
     public dropPanel control;
