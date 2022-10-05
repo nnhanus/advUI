@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Grid {
-    public int height = GameWindow.getDefaultHeight();
+    public int height = GameWindow.getDefaultHeight()-70;
     public int width = GameWindow.getDefaultWidth()/2;
     public static int cellHeight;
     public static int cellWidth;
@@ -14,8 +14,8 @@ public class Grid {
     public Grid(int numRows, int numCol, ArrayList<Scoop> scoopsToAdd){
         this.numCols = numCol;
         this.numRows = numRows;
-        cellHeight = height/3; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
-        cellWidth = width/3;
+        cellHeight = height/4; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
+        cellWidth = width/4;
         chargeScoops(scoopsToAdd);
     }
 
@@ -24,8 +24,8 @@ public class Grid {
     }
 
     public void paintGrid(Graphics g){
-        height = GameWindow.getDefaultHeight()-70;
-        width = GameWindow.getDefaultWidth()/2;
+        //height = GameWindow.getDefaultHeight()-70;
+        //width = GameWindow.getDefaultWidth()/2;
         for (int i = 0; i < numRows; i++){
             g.drawLine(0, cellHeight*i, width, cellHeight*i);
         }
