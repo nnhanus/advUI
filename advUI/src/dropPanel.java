@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 // create small zones with drop listeners that know where they are and then insert in list
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
@@ -112,7 +113,17 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     }**/
 
-    public void mouseClicked(MouseEvent e) { }
+    public void mouseClicked(MouseEvent e) {
+        Point clicked= e.getPoint();
+        for (Rectangle cell : model.cells){
+            if(cell.contains(clicked)){
+                int toDelete = model.cells.indexOf(cell);
+                model.actionList.remove(toDelete);
+                model.blocksPlayed.remove(toDelete);
+                this.repaint();
+            }
+        }
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
