@@ -22,10 +22,10 @@ public class BlockControl extends JLabel implements MouseListener {
         view = new BlockPresentation(this);
         this.setIcon(getIcon());
         this.setText(model.name);
+        this.setFont(new Font("Ariel", Font.BOLD, 14));
+        this.setForeground(Color.white);
         this.setHorizontalTextPosition(JLabel.CENTER);
         this.addMouseListener(this);
-        //use a switch to match action to button type
-        // this.setTransferHandler(new ValueExportTransferHandler(controlNum));
 
     }
     public int getIndex (){
