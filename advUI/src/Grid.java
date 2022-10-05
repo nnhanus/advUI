@@ -1,19 +1,22 @@
-import javax.sound.midi.Soundbank;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Grid {
-    public int height = GameWindow.getDefaultHeight();
-    public int width = GameWindow.getDefaultWidth()/2;
+    public int height ;
+    public int width;
     public static int cellHeight;
     public static int cellWidth;
     public static ArrayList<Scoop> scoops = new ArrayList<>();
     public int numRows;
     public int numCols;
+    public GameWindow frame;
 
-    public Grid(int numRows, int numCol, ArrayList<Scoop> scoopsToAdd){
+    public Grid(int numRows, int numCol, ArrayList<Scoop> scoopsToAdd, GameWindow parent){
+        frame=parent;
         this.numCols = numCol;
         this.numRows = numRows;
+        height = frame.getHeight();
+        width= frame.getWidth()/2;
         cellHeight = height/3; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
         cellWidth = width/3;
         chargeScoops(scoopsToAdd);
@@ -24,8 +27,10 @@ public class Grid {
     }
 
     public void paintGrid(Graphics g){
-        height = GameWindow.getDefaultHeight()-70;
-        width = GameWindow.getDefaultWidth()/2;
+        height = frame.getHeight()-70;
+        width= frame.getWidth()/2;
+        cellHeight = height/3; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
+        cellWidth = width/3;
         for (int i = 0; i < numRows; i++){
             g.drawLine(0, cellHeight*i, width, cellHeight*i);
         }
