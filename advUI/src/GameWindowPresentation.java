@@ -14,7 +14,7 @@ public class GameWindowPresentation{
     public GameWindowPresentation(GameWindow controller){
         control=controller;
         animation = new AnimationPanel(control);
-        menuBar();
+        //menuBar();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(1, 2));
         mainPanel.add(animation);
@@ -27,7 +27,7 @@ public class GameWindowPresentation{
 
     }
 
-    private void menuBar() {
+    /**private void menuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         JMenuItem restart = new JMenuItem("Restart");
@@ -42,9 +42,9 @@ public class GameWindowPresentation{
 
         menuBar.add(menu);
         control.add(menuBar, BorderLayout.NORTH);
-    }
+    }**/
 
-    private void levelMenu(JMenu menu) {
+    /**private void levelMenu(JMenu menu) {
 
         List<JRadioButton> levelOptions=new ArrayList<>();
         JRadioButton levelOne = new JRadioButton("Level 1");
@@ -76,6 +76,6 @@ public class GameWindowPresentation{
         }
 
         menu.add(levels);
-    }
+    }**/
 
 }

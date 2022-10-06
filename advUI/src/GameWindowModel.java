@@ -17,7 +17,7 @@ public class GameWindowModel {
         Height = 500;
         Width = 1000;
         levelnum = 1;
-        unlockedLevel=levelnum;
+        unlockedLevel=5;
         level = new Level(levelnum);
     }
 

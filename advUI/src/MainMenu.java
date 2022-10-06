@@ -7,7 +7,7 @@ public class MainMenu extends JFrame {
     public MainMenu(){
         super("Sccop Recoup");
         Color BGColor = new Color(0xFED1FF);
-        setPreferredSize(new Dimension(1000, 500));
+        setPreferredSize(new Dimension(500, 600));
         setVisible(true);
         setBackground(BGColor);
         setLayout(new BorderLayout());
@@ -23,41 +23,32 @@ public class MainMenu extends JFrame {
         mainPane.setBackground(BGColor);
         mainPane.setLayout(new BorderLayout());
 
-        JButton play = new JButton("PLAY!");
-        play.addActionListener( e -> new GameWindow() );
-        mainPane.add(play, BorderLayout.SOUTH);
-
         JPanel levelSelect = new JPanel();
-        levelSelect.setLayout(new GridLayout(7, 1));
-        levelSelect.setPreferredSize(new Dimension(100, 400));
+        levelSelect.setLayout(new BorderLayout());
+        /**levelSelect.setPreferredSize(new Dimension(500, 400));
+        levelSelect.setMinimumSize(new Dimension(500, 400));
+        levelSelect.setMaximumSize(new Dimension(500, 400));**/
 
-        JButton level1 = new JButton("Level 1");
-        level1.addActionListener( e -> new PopUpMenu(this));
-        levelSelect.add(level1);
-        JButton level2 = new JButton("Level 2");
-        level2.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level2);
-        JButton level3 = new JButton("Level 3");
-        level3.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level3);
-        JButton level4 = new JButton("Level 4");
-        level4.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level4);
-        JButton level5 = new JButton("Level 5");
-        level5.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level5);
-        JButton level6 = new JButton("Level 6");
-        level6.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level6);
-        JButton level7 = new JButton("Level 7");
-        level7.addActionListener( e -> new GameWindow() );
-        levelSelect.add(level7);
+        SRSlider slider = new SRSlider(1);
+        levelSelect.add(slider, BorderLayout.CENTER);
 
-       // ImageIcon = new ImageIcon("Icons/mintChoco.png");
+        JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
+        level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
+        level.setBackground(BGColor);
+        level.setOpaque(true);
+        levelSelect.add(level, BorderLayout.NORTH);
+
+        JPanel playPanel = new JPanel();
+        playPanel.setBackground(BGColor);
+        JButton play = new JButton("Play");
+        play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        play.setBackground(BGColor);
+        playPanel.add(play);
+        levelSelect.add(playPanel, BorderLayout.SOUTH);
+
+        add(levelSelect, BorderLayout.CENTER);
 
         mainPane.add(levelSelect, BorderLayout.CENTER);
-
-        //add(levelSelect);
 
         add(mainPane, BorderLayout.CENTER);
 

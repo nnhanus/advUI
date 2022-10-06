@@ -37,11 +37,6 @@ public class AnimationPanel extends JPanel {
     }
 
     public boolean isLevelComplete(){
-        /**for ( Scoop scoop : Grid.scoops){
-            if (character.getScoops().contains(scoop)){continue;}
-            return false;
-        }
-         return true;**/
         if (grid.scoops.size() == 0){
             return true;
         }

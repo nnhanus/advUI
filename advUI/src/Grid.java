@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Grid {
     public int height ;
@@ -15,7 +16,12 @@ public class Grid {
     public int numRows;
     public int numCols;
     public GameWindow frame;
-    public BufferedImage obstacle = null;
+    public BufferedImage table = null;
+    public BufferedImage cart = null;
+    public BufferedImage umbrella = null;
+    public BufferedImage flowers = null;
+
+    public ArrayList<BufferedImage> images = new ArrayList<>();
 
     public Grid(int numRows, int numCol, ArrayList<Scoop> scoopsToAdd, ArrayList<Point> obstaclesToAdd, GameWindow parent){
         frame=parent;
@@ -28,10 +34,17 @@ public class Grid {
         chargeScoops(scoopsToAdd);
         obstacles = obstaclesToAdd;
         try{
-            obstacle = ImageIO.read(new File("advUI/Icons/table.png"));
+            table = ImageIO.read(new File("advUI/Icons/table.png"));
+            cart = ImageIO.read(new File("advUI/Icons/iceCreamCart.png"));
+            umbrella = ImageIO.read(new File("advUI/Icons/umbrella.png"));
+            flowers = ImageIO.read(new File("advUI/Icons/flowers.png"));
         } catch (IOException ex) {
             System.out.println("Missing file");
         }
+        images.add(table);
+        images.add(flowers);
+        images.add(umbrella);
+        images.add(cart);
     }
 
     public void chargeScoops(ArrayList<Scoop> scoopsToAdd){
@@ -39,7 +52,8 @@ public class Grid {
     }
 
     public void paintGrid(Graphics g){
-        height = frame.getHeight()-70;
+        Random random = new Random();
+        height = frame.getHeight() - 25;
         width= frame.getWidth()/2;
         cellHeight = height/4; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
         cellWidth = width/4;
@@ -53,7 +67,7 @@ public class Grid {
             g.drawImage(scoop.getImage(), Grid.getCellWidth()*scoop.getX()+Grid.getCellWidth()/4,Grid.getCellHeight()*scoop.getY()/**+Grid.getCellHeight()/4**/, scoop.getSize(), scoop.getSize(), null );
         }
         for (Point point : obstacles){
-            g.drawImage(obstacle, Grid.getCellWidth()*point.x, Grid.getCellHeight()*point.y, Grid.getCellWidth(), Grid.getCellHeight(), null);
+            g.drawImage(images.get(random.nextInt(4)), Grid.getCellWidth()*point.x, Grid.getCellHeight()*point.y, Grid.getCellWidth(), Grid.getCellHeight(), null);
         }
     }
 

@@ -34,10 +34,12 @@ public class Level {
             blockedCells.add(new Point(1, 0));
             blockedCells.add(new Point(2, 0));
             blockedCells.add(new Point(3, 0));
+
             blockedCells.add(new Point(0, 2));
             blockedCells.add(new Point(1, 2));
             blockedCells.add(new Point(2, 2));
             blockedCells.add(new Point(3, 2));
+
             blockedCells.add(new Point(0, 3));
             blockedCells.add(new Point(1, 3));
             blockedCells.add(new Point(2, 3));
@@ -59,27 +61,50 @@ public class Level {
             blockedCells.add(new Point(3, 3));
         }
         if (number==3){ //For loop + 2nd scoop introduced
-           // numRows = 3;
-            //numCols = 3;
             posX = 1;
             posY = 1;
             orientation = CharacterModel.Direction.NORTH;
-            scoops.add(new Scoop(2,0,40, mintChoco));
-            scoops.add(new Scoop(0,2, 30, funfetti));
+            scoops.add(new Scoop(1,0,40, mintChoco));
+            scoops.add(new Scoop(3,0, 30, funfetti));
+            blockedCells.add(new Point(0, 0));
+            blockedCells.add(new Point(0, 1));
+            blockedCells.add(new Point(0, 2));
+            blockedCells.add(new Point(0, 3));
+            blockedCells.add(new Point(1, 3));
+            blockedCells.add(new Point(2, 3));
+            blockedCells.add(new Point(3, 3));
         }
 
         if (number==4){ //If loop
-            //numRows = 1;
-            //numCols = 4;
             posX = 0;
-            posY = 0;
+            posY = 1;
             orientation = CharacterModel.Direction.EAST;
-            scoops.add(new Scoop(3, 0, 40, mintChoco));
-            scoops.add(new Scoop(2, 0, 30, funfetti));
+            scoops.add(new Scoop(3, 1, 40, mintChoco));
+            scoops.add(new Scoop(2, 1, 30, funfetti));
+            blockedCells.add(new Point(0, 0));
+            blockedCells.add(new Point(1, 0));
+            blockedCells.add(new Point(2, 0));
+            blockedCells.add(new Point(3, 0));
+
+            blockedCells.add(new Point(0, 2));
+            blockedCells.add(new Point(1, 2));
+            blockedCells.add(new Point(2, 2));
+            blockedCells.add(new Point(3, 2));
+
+            blockedCells.add(new Point(0, 3));
+            blockedCells.add(new Point(1, 3));
+            blockedCells.add(new Point(2, 3));
+            blockedCells.add(new Point(3, 3));
         }
         if (number==5){
-           // numRows = 1;
-            //numCols = 1;
+           posX = 3;
+           posY = 0;
+           orientation = CharacterModel.Direction.NORTH;
+           scoops.add(new Scoop(1, 1, 40, mintChoco));
+           scoops.add(new Scoop(3, 3, 30, funfetti));
+           blockedCells.add(new Point(2, 1));
+           blockedCells.add(new Point(2, 2));
+           blockedCells.add(new Point(1, 2));
         }
     }
 
