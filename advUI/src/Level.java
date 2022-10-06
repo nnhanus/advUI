@@ -110,4 +110,8 @@ public class Level {
     public ArrayList<Scoop> getScoops() {
         return scoops;
     }
+
+    public ArrayList<Point> getBlockedCells(){
+        return blockedCells;
+    }
 }

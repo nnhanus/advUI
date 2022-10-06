@@ -11,8 +11,8 @@ public class CharacterModel {
     public static Direction orientation;
     public static int x;
     public static int y;
-    public static int width = 80;
-    public static int height = 80;
+    public static int width = 70;
+    public static int height = 70;
     public List<Scoop> scoops = new ArrayList<>();
     public static Grid grid;
 

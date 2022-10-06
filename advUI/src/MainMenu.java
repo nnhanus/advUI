@@ -32,7 +32,7 @@ public class MainMenu extends JFrame {
         levelSelect.setPreferredSize(new Dimension(100, 400));
 
         JButton level1 = new JButton("Level 1");
-        level1.addActionListener( e -> new GameWindow() );
+        level1.addActionListener( e -> new PopUpMenu(this));
         levelSelect.add(level1);
         JButton level2 = new JButton("Level 2");
         level2.addActionListener( e -> new GameWindow() );
