@@ -7,10 +7,10 @@ public class GameWindow  extends JFrame {
     public static GameWindowPresentation view;
     public static GameWindowModel model;
 
-    public GameWindow(){
+    public GameWindow(int level){
         super("Scoop Recoup");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        this.model = new GameWindowModel();
+        this.model = new GameWindowModel(level);
         this.view = new GameWindowPresentation(this);
 
         setPreferredSize(new Dimension(model.Width, model.Height));

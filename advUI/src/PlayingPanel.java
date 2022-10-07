@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
-public class PlayingPanel extends JPanel{
+public class PlayingPanel extends JPanel {
 
     public TopPanel topPanel;
     public static dropPanel bottomPanel;
@@ -27,13 +27,6 @@ public class PlayingPanel extends JPanel{
 
         this.add(bottomPanel, BorderLayout.CENTER);
 
-        JPanel menuPanel = new JPanel();
-        JButton menu = new JButton("Menu");
-        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-        menu.addActionListener( e -> new PopUpMenu(container));
-        menuPanel.add(menu);
-
-        this.add(menuPanel, BorderLayout.SOUTH);
     }
 
 }

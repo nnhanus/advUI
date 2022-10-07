@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopPanel extends JPanel {
-protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
+public class TopPanel extends JPanel{
+protected static List<BlockControl> buttonList=new ArrayList<>();
     public PlayingPanel container;
     int level;
     int colCount;
@@ -14,6 +16,7 @@ protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
+
         resetBtns();
         //could create array of all button types. for i in 0 to level-1 create button
 
@@ -33,4 +36,5 @@ protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
             this.add(controlBtn);
         }
     }
+
 }

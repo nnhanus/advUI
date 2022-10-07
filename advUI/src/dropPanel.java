@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static javax.swing.SwingUtilities.convertPoint;
+
 // create small zones with drop listeners that know where they are and then insert in list
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -17,6 +19,8 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     public AnimationPanel animation;
     public PlayingPanel container;
     public boolean mouseEvent;
+    public int draggedBlockIndex=-1;
+
 
     //public boolean drag = false;
 
@@ -118,36 +122,12 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     }**/
     }
 
-
-    /**
-     * void makeBtnClick() {
-     * model.play.addMouseListener(new MouseAdapter() {
-     *
-     * @Override public void mouseClicked(MouseEvent e) {
-     * super.mouseClicked(e);
-     * readList();
-     * //add function to pass list to character for actions
-     * }
-     * });
-     * <p>
-     * model.redo.addMouseListener(new MouseAdapter() {
-     * @Override public void mouseClicked(MouseEvent e) {
-     * super.mouseClicked(e);
-     * clearList();
-     * repaint();
-     * System.out.println("reset");
-     * <p>
-     * }
-     * });
-     * <p>
-     * }
-     **/
-
     public void mouseClicked(MouseEvent e) {
         Point clicked = e.getPoint();
         for (cellRectangle cell : model.cells) {
             if (cell.contains(clicked)) {
                 int toDelete = model.cells.indexOf(cell);
+                cell.hasBlock=false;
                 model.actionList.remove(toDelete);
                 model.blocksPlayed.remove(toDelete);
                 this.repaint();
@@ -158,30 +138,42 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        Point point = e.getPoint();
+        for(cellRectangle cell: model.cells){
+            if (cell.contains(point)&&cell.hasBlock){
+                draggedBlockIndex=model.cells.indexOf(cell);
+                container.selectedBlock=model.blocksPlayed.get(draggedBlockIndex);
+            }
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         container.setCursor(Cursor.getDefaultCursor());
         if (container.selectedBlock != null) {
+            if(draggedBlockIndex>=0){
+                model.blocksPlayed.remove(draggedBlockIndex);
+                model.cells.get(draggedBlockIndex).hasBlock=false;
+                model.actionList.remove(draggedBlockIndex);
+                draggedBlockIndex=-1;
+            }
             model.setCell(e, container.selectedBlock);
             container.selectedBlock = null;
             repaint();
         }
     }
 
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {}
 
-    }
+    public void mouseExited(MouseEvent e) {}
 
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
+@Override
     public void mouseDragged(MouseEvent e) {
-    }
+        //get blocks played from index that corresponds with location of cell clicked, on release add block to cell location and
+    //delete cell from previous index in blocks played and action list
 
+    }
+@Override
     public void mouseMoved(MouseEvent e) {
         mouseEvent=true;
         Point mouse = e.getPoint();
@@ -194,6 +186,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
                 cell.close =false;
                 this.repaint();
             }
+
         }
     }
 }
