@@ -130,6 +130,13 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mousePressed(MouseEvent e) {
+        Point point = e.getPoint();
+        for(cellRectangle cell: model.cells){
+            if (cell.contains(point)&&cell.hasBlock){
+                draggedBlockIndex=model.cells.indexOf(cell);
+                container.selectedBlock=model.blocksPlayed.get(draggedBlockIndex);
+            }
+        }
     }
 
     @Override
@@ -156,14 +163,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     public void mouseDragged(MouseEvent e) {
         //get blocks played from index that corresponds with location of cell clicked, on release add block to cell location and
     //delete cell from previous index in blocks played and action list
-        Point point = e.getPoint();
-        for(cellRectangle cell: model.cells){
-            if (cell.contains(point)&&cell.hasBlock){
-                draggedBlockIndex=model.cells.indexOf(cell);
-                container.selectedBlock=model.blocksPlayed.get(draggedBlockIndex);
-            }
-        }
-
 
     }
 @Override
