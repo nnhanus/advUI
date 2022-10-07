@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,12 @@ public class GameWindowPresentation{
         playingZone = new PlayingPanel(control);
         mainPanel.add(playingZone);
 
+        JPanel menuPanel = new JPanel(new BorderLayout());
+        JButton menu = new JButton("Menu");
+        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
+        menu.addActionListener( e -> new PopUpMenu(control));
+        menuPanel.add(menu, BorderLayout.EAST);
+        control.add(menuPanel, BorderLayout.NORTH);
         control.add(mainPanel, BorderLayout.CENTER);
 
 
