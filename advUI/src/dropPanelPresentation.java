@@ -106,8 +106,13 @@ public class dropPanelPresentation {
         }
 
         g2d.setColor(Color.GRAY);
-        for (Rectangle cell : model.cells) {
+        for (cellRectangle cell : model.cells) {
             g2d.draw(cell);
+            if(cell.highlight){
+                g2d.setColor(Color.GREEN);
+                g2d.draw(new Rectangle((int)cell.getX(),(int)cell.getY(),2,(int)cell.getHeight()));
+                g2d.setColor(Color.GRAY);
+            }
         }
 
         g2d.dispose();

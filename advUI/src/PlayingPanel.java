@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
-public class PlayingPanel extends JPanel{
+public class PlayingPanel extends JPanel {
 
     public TopPanel topPanel;
     public static dropPanel bottomPanel;

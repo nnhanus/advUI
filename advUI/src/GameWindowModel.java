@@ -13,10 +13,10 @@ public class GameWindowModel {
     public static int Width;
     private final List<ChangeListener> changeListeners = new ArrayList<>();
 
-    public GameWindowModel() {
+    public GameWindowModel(int levelFromMenu) {
         Height = 500;
         Width = 1000;
-        levelnum = 1;
+        levelnum = levelFromMenu;
         unlockedLevel=5;
         level = new Level(levelnum);
     }

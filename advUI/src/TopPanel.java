@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopPanel extends JPanel {
-protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
+public class TopPanel extends JPanel{
+protected static List<BlockControl> buttonList=new ArrayList<>();
     public PlayingPanel container;
     int level;
     int colCount;
@@ -33,4 +35,5 @@ protected static List<BlockControl> buttonList=new ArrayList<BlockControl>();
             this.add(controlBtn);
         }
     }
+
 }
