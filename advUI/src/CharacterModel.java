@@ -29,10 +29,10 @@ public class CharacterModel {
         if (orientation == Direction.NORTH && y > 0) {
             y--;
             parent.presentation.updateCharacterNorth();
-        } else if (orientation == Direction.SOUTH && y < 2){
+        } else if (orientation == Direction.SOUTH && y < 3){
             y++;
             parent.presentation.updateCharacterSouth();
-        } else if (orientation == Direction.EAST && x < 2){
+        } else if (orientation == Direction.EAST && x < 3){
             x++;
             parent.presentation.updateCharacterWest();
         } else if (orientation == Direction.WEST && x > 0){

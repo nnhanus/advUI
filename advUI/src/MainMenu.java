@@ -1,33 +1,34 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class MainMenu extends JFrame {
+public class MainMenu extends JDialog {
 
     public MainMenu(){
-        super("Sccop Recoup");
+        super();
         Color BGColor = new Color(0xFED1FF);
         setPreferredSize(new Dimension(500, 600));
         setVisible(true);
         setBackground(BGColor);
         setLayout(new BorderLayout());
 
-        JLabel title = new JLabel("SCOOP RECOUP", SwingConstants.CENTER);
-        title.setFont(new Font("Times", Font.PLAIN, 20));
-        title.setBackground(BGColor);
+        mainTitle(BGColor);
 
-        add(title, BorderLayout.NORTH);
+        mainPane(BGColor);
 
+        pack();
+    }
+
+    private void mainPane(Color BGColor) {
         JPanel mainPane = new JPanel();
         mainPane.setPreferredSize(new Dimension(GameWindowModel.Width, GameWindowModel.Height));
         mainPane.setBackground(BGColor);
         mainPane.setLayout(new BorderLayout());
+        mainPane.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
 
         JPanel levelSelect = new JPanel();
         levelSelect.setLayout(new BorderLayout());
-        /**levelSelect.setPreferredSize(new Dimension(500, 400));
-        levelSelect.setMinimumSize(new Dimension(500, 400));
-        levelSelect.setMaximumSize(new Dimension(500, 400));**/
 
         SRSlider slider = new SRSlider(1);
         levelSelect.add(slider, BorderLayout.CENTER);
@@ -43,16 +44,38 @@ public class MainMenu extends JFrame {
         JButton play = new JButton("Play");
         play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
         play.setBackground(BGColor);
+        play.addActionListener(
+                e -> {
+                    GameWindow game = new GameWindow();
+                    game.setLevel(slider.getValue());
+                    dispose();
+                }
+        );
         playPanel.add(play);
         levelSelect.add(playPanel, BorderLayout.SOUTH);
-
-        add(levelSelect, BorderLayout.CENTER);
 
         mainPane.add(levelSelect, BorderLayout.CENTER);
 
         add(mainPane, BorderLayout.CENTER);
+    }
 
-        pack();
+    private void mainTitle(Color BGColor) {
+        JPanel mainTitle = new JPanel();
+        mainTitle.setLayout(new BorderLayout());
+
+        JLabel welcome = new JLabel("WELCOME TO", SwingConstants.CENTER);
+        welcome.setFont(new Font("Bradley Hand", Font.PLAIN, 35));
+        welcome.setOpaque(true);
+        welcome.setBackground(BGColor);
+        mainTitle.add(welcome, BorderLayout.NORTH);
+
+        JLabel title = new JLabel("SCOOP RECOUP!", SwingConstants.CENTER);
+        title.setFont(new Font("Bradley Hand", Font.PLAIN, 50));
+        title.setBackground(BGColor);
+        title.setOpaque(true);
+        mainTitle.add(title, BorderLayout.CENTER);
+
+        add(mainTitle, BorderLayout.NORTH);
     }
 
 }

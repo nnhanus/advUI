@@ -6,6 +6,7 @@ import java.util.List;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 // create small zones with drop listeners that know where they are and then insert in list
@@ -46,11 +47,18 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     public void readList() {
+
         animation = GameWindow.getAnimation();
         Thread doActions = new Thread(new readActionThread(animation, this));
         Thread paintMove = new Thread(new paintMove(animation, this));
         paintMove.start();
         doActions.start();
+
+        /**try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }**/
 
         //System.out.println("end");
         /**try {

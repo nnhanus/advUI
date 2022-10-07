@@ -11,9 +11,10 @@ public class paintMove implements Runnable{
     }
     @Override
     public void run() {
+        System.out.println("hi paint");
         while(!parent.getModel().actionList.isEmpty() && !Thread.currentThread().isInterrupted()){
-            animation.repaint();
             synchronized (parent) {
+                animation.repaint();
                 parent.notify();
                 try {
                     parent.wait();

@@ -11,6 +11,7 @@ public class readActionThread implements Runnable{
     }
     @Override
     public void run() {
+        System.out.println("hi read");
 
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
@@ -18,50 +19,58 @@ public class readActionThread implements Runnable{
         boolean loopFlag = false;
         dropPanelModel model = this.parent.getModel();
 
-        while(!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                parent.notify();
-            }
+        while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
+            synchronized (parent) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                   // parent.notify();
+                }
 
-            String actionCall = model.actionList.get(0);
-            if (model.actionList.size()!=1) isNextIf = model.actionList.get(1) == "If";
-            String action = actionCall.split(" ")[0];
-            if (action.equalsIgnoreCase("For")) {
-                loopFlag = true;
-                loop.add(actionCall.split(" ")[1]);
-            } else if (loopFlag) {
-                loopFlag = false;
-                loop.add(action);
-                readAction(loop, character, isNextIf);
-                synchronized (parent) {
+                String actionCall = model.actionList.get(0);
+                if (model.actionList.size() != 1) isNextIf = model.actionList.get(1) == "If";
+                String action = actionCall.split(" ")[0];
+                if (action.equalsIgnoreCase("For")) {
+                    loopFlag = true;
+                    loop.add(actionCall.split(" ")[1]);
+                } else if (loopFlag) {
+                    loopFlag = false;
+                    loop.add(action);
+                    readAction(loop, character, isNextIf);
+
+                    System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
                     } catch (InterruptedException e) {
-                        parent.notify();
+
+                        //parent.notify();
                         throw new RuntimeException(e);
                     }
-                }
-            } else {
-                readAction(action, character, isNextIf);
-                synchronized (parent) {
+                } else {
+                    readAction(action, character, isNextIf);
+                    System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
                     } catch (InterruptedException e) {
-                        parent.notify();
+                        //parent.notify();
                         throw new RuntimeException(e);
                     }
+
                 }
+                model.actionList.remove(0);
             }
-            model.actionList.remove(0);
         }
-        synchronized (parent){
+        synchronized (parent) {
             parent.notify();
         }
+        model.blocksPlayed.clear();
+        parent.repaint();
+        parent.animation.endOfLevelMessage();
+
     }
+
 
     private void readAction(String action, Character character, boolean isNextIf){
             if (action.equalsIgnoreCase("Move")) {

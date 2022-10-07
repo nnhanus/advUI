@@ -8,13 +8,7 @@ import java.util.ArrayList;
 //Inspired by : https://www.youtube.com/watch?v=jH8PNTXsAC0
 
 public class SRSliderUI extends BasicSliderUI {
-    BufferedImage image = null;
-    //BufferedImage label = null;
-    /**JLabel level1;
-    JLabel level2;
-    JLabel level3;
-    JLabel level4;
-    JLabel level5;**/
+    Image image = null;
     Image level1;
     Image level2;
     Image level3;
@@ -32,7 +26,17 @@ public class SRSliderUI extends BasicSliderUI {
 
     @Override
     public void paintThumb(Graphics pen){
-        pen.drawImage(image, thumbRect.x, thumbRect.y, thumbRect.width, thumbRect.height, null);
+        int x = thumbRect.x;
+        if (slider.getValue()==1){
+            x += 20;
+        } else if (slider.getValue()==2){
+            x+=10;
+        } else if (slider.getValue()==4){
+            x-=10;
+        } else if (slider.getValue()==5){
+            x-=25;
+        }
+        pen.drawImage(image, x, thumbRect.y, thumbRect.width, thumbRect.height, null);
     }
 
     public Dimension getThumbSize(){
@@ -44,15 +48,15 @@ public class SRSliderUI extends BasicSliderUI {
         for (int i = 0; i < 5; i++){
             Image label = labels.get(i);
             int x = labelRect.x + i*(labelRect.width/5);
-            if (i == 0){
+            /*if (i == 0){
                 x -=20;
             } else if (i == 1) {
                 x -=10;
             } else  if (i == 3) {
                 x += 10;
             } else if (i == 4){
-                x +=20;
-            }
+                x +=25;
+            }*/
             int width = labelRect.width/5;
             int height = width - width/5;
             int y = labelRect.y - thumbRect.height*2 - 35;

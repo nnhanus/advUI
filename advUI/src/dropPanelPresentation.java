@@ -35,19 +35,10 @@ public class dropPanelPresentation {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 control.readList();
-                /**synchronized (control){
-                    try {
-                        control.wait();
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                }**/
-
-
                 //model.clearList();
-                model.blocksPlayed.clear();
+                /*model.blocksPlayed.clear();
                 control.repaint();
-                control.animation.endOfLevelMessage();
+                control.animation.endOfLevelMessage();*/
             }
         });
         redo.addMouseListener(new MouseAdapter() {
