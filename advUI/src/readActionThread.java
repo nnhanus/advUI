@@ -4,9 +4,10 @@ import java.util.List;
 public class readActionThread implements Runnable{
     public AnimationPanel animation;
     public dropPanel parent;
+
     public readActionThread(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
-        this.parent =parent;
+        this.parent=parent;
     }
     @Override
     public void run() {
@@ -16,7 +17,13 @@ public class readActionThread implements Runnable{
         boolean isNextIf = false;
         boolean loopFlag = false;
         dropPanelModel model = this.parent.getModel();
-        while(!model.actionList.isEmpty()){
+
+        while(!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                parent.notify();
+            }
 
             String actionCall = model.actionList.get(0);
             if (model.actionList.size()!=1) isNextIf = model.actionList.get(1) == "If";
@@ -28,25 +35,35 @@ public class readActionThread implements Runnable{
                 loopFlag = false;
                 loop.add(action);
                 readAction(loop, character, isNextIf);
-                this.notify();
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                synchronized (parent) {
+                    parent.notify();
+                    try {
+                        parent.wait();
+                    } catch (InterruptedException e) {
+                        parent.notify();
+                        throw new RuntimeException(e);
+                    }
                 }
             } else {
                 readAction(action, character, isNextIf);
-                this.notify();
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                synchronized (parent) {
+                    parent.notify();
+                    try {
+                        parent.wait();
+                    } catch (InterruptedException e) {
+                        parent.notify();
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             model.actionList.remove(0);
         }
+        synchronized (parent){
+            parent.notify();
+        }
     }
-        private void readAction(String action, Character character, boolean isNextIf){
+
+    private void readAction(String action, Character character, boolean isNextIf){
             if (action.equalsIgnoreCase("Move")) {
                 character.move(isNextIf);
             } else if (action.equalsIgnoreCase("Turn")) {
@@ -55,7 +72,7 @@ public class readActionThread implements Runnable{
             animation.revalidate();
             animation.repaint();
         }
-        private void readAction(List<String> loop, Character character, boolean isNextIf){
+    private void readAction(List<String> loop, Character character, boolean isNextIf){
             int iter=Integer.parseInt(loop.get(0));
             String action=loop.get(1);
             if (action.equalsIgnoreCase("Move")) {

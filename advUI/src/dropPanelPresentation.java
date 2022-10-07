@@ -35,7 +35,16 @@ public class dropPanelPresentation {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 control.readList();
-                model.clearList();
+                /**synchronized (control){
+                    try {
+                        control.wait();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }**/
+
+
+                //model.clearList();
                 model.blocksPlayed.clear();
                 control.repaint();
                 control.animation.endOfLevelMessage();

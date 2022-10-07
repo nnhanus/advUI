@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 
 public class Grid {
@@ -13,6 +14,7 @@ public class Grid {
     public static int cellWidth;
     public static ArrayList<Scoop> scoops = new ArrayList<>();
     public static ArrayList<Point> obstacles = new ArrayList<>();
+    public static Hashtable<Point, Integer> obs = new Hashtable<>();
     public int numRows;
     public int numCols;
     public GameWindow frame;
@@ -45,6 +47,10 @@ public class Grid {
         images.add(flowers);
         images.add(umbrella);
         images.add(cart);
+        Random rand = new Random();
+        for (int i = 0; i < obstacles.size(); i++) {
+            obs.put(obstacles.get(i), rand.nextInt(4));
+        }
     }
 
     public void chargeScoops(ArrayList<Scoop> scoopsToAdd){
@@ -67,7 +73,7 @@ public class Grid {
             g.drawImage(scoop.getImage(), Grid.getCellWidth()*scoop.getX()+Grid.getCellWidth()/4,Grid.getCellHeight()*scoop.getY()/**+Grid.getCellHeight()/4**/, scoop.getSize(), scoop.getSize(), null );
         }
         for (Point point : obstacles){
-            g.drawImage(images.get(random.nextInt(4)), Grid.getCellWidth()*point.x, Grid.getCellHeight()*point.y, Grid.getCellWidth(), Grid.getCellHeight(), null);
+            g.drawImage(images.get(obs.get(point)), Grid.getCellWidth()*point.x, Grid.getCellHeight()*point.y, Grid.getCellWidth(), Grid.getCellHeight(), null);
         }
     }
 

@@ -2,8 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 // create small zones with drop listeners that know where they are and then insert in list
 public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
@@ -36,6 +39,8 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         return model;
     }
 
+    public List<String> getActionList(){return model.actionList;}
+
     public static void clearList() {
         model.clearList();
     }
@@ -43,59 +48,68 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     public void readList() {
         animation = GameWindow.getAnimation();
         Thread doActions = new Thread(new readActionThread(animation, this));
-        Thread paintMove = new Thread(new readActionThread(animation, this));
+        Thread paintMove = new Thread(new paintMove(animation, this));
         paintMove.start();
         doActions.start();
 
-        //
-//        Character character = animation.character;
-//        List<String> loop = new ArrayList<>();
-//        boolean isNextIf =false;
-//        boolean loopFlag=false;
-//        for (int i =0; i<model.actionList.size();i++){
-//            String actionCall=model.actionList.get(i);
-//            if(i!=model.actionList.size()-1) isNextIf=model.actionList.get(i+1)=="If";
-//            String action=actionCall.split(" ")[0];
-//            if (action.equalsIgnoreCase("For")) {
-//                loopFlag=true;
-//                loop.add(actionCall.split(" ")[1]);
-//            }else if(loopFlag){
-//                loopFlag=false;
-//                loop.add(action);
-//                readAction(loop,character,isNextIf);
-//            }else {
-//                readAction(action,character,isNextIf);
-//            }
-//        }
+        //System.out.println("end");
+        /**try {
+            doActions.join();
+            //System.out.println("DoAction interrupted");
+            //paintMove.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }**/
+
+
+        /** Character character = animation.character;
+        ArrayList<String> loop = new ArrayList<>();
+        boolean isNextIf =false;
+        boolean loopFlag=false;
+        for (int i =0; i<model.actionList.size();i++){
+            String actionCall=model.actionList.get(i);
+            if(i!=model.actionList.size()-1) isNextIf=model.actionList.get(i+1)=="If";
+            String action=actionCall.split(" ")[0];
+            if (action.equalsIgnoreCase("For")) {
+                loopFlag=true;
+                loop.add(actionCall.split(" ")[1]);
+            }else if(loopFlag){
+                loopFlag=false;
+                loop.add(action);
+                readAction(loop,character,isNextIf);
+            }else {
+                readAction(action,character,isNextIf);
+            }
+        }
+    }
+    private void readAction(String action, Character character, boolean isNextIf){
+        if (action.equalsIgnoreCase("Move")) {
+            character.move(isNextIf);
+        } else if (action.equalsIgnoreCase("Turn")) {
+            character.turn();
+        }
+        animation.revalidate();
+        animation.repaint();
+    }
+    private void readAction(ArrayList<String> loop, Character character, boolean isNextIf) {
+        int iter = Integer.parseInt(loop.get(0));
+        String action = loop.get(1);
+        if (action.equalsIgnoreCase("Move")) {
+            for (int i = 0; i < iter; i++) {
+                character.move(isNextIf);
+                animation.revalidate();
+                animation.repaint();
+            }
+        } else if (action.equalsIgnoreCase("Turn")) {
+            for (int i = 0; i < iter; i++) {
+                character.turn();
+                animation.revalidate();
+                animation.repaint();
+            }
+        }
+    }**/
     }
 
-//    private void readAction(String action, Character character, boolean isNextIf){
-//        if (action.equalsIgnoreCase("Move")) {
-//            character.move(isNextIf);
-//        } else if (action.equalsIgnoreCase("Turn")) {
-//            character.turn();
-//        }
-//        animation.revalidate();
-//        animation.repaint();
-//    }
-//    private void readAction(List<String> loop, Character character, boolean isNextIf){
-//        int iter=Integer.parseInt(loop.get(0));
-//        String action=loop.get(1);
-//        if (action.equalsIgnoreCase("Move")) {
-//            for(int i =0;i<iter;i++){
-//                character.move(isNextIf);
-//                animation.revalidate();
-//                animation.repaint();
-//            }
-//        } else if (action.equalsIgnoreCase("Turn")) {
-//            for(int i =0;i<iter;i++){
-//                character.turn();
-//                animation.revalidate();
-//                animation.repaint();
-//            }
-//        }
-
-    // }
 
     /**
      * void makeBtnClick() {
@@ -132,6 +146,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
             }
         }
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class paintMove implements Runnable{
 
     public AnimationPanel animation;
@@ -5,19 +7,20 @@ public class paintMove implements Runnable{
 
     public paintMove(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
-        this.parent =parent;
+        this.parent=parent;
     }
     @Override
     public void run() {
-        dropPanelModel model = this.parent.getModel();
-        while(!model.actionList.isEmpty()){
-//            try {
-//                this.wait();
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+        while(!parent.getModel().actionList.isEmpty() && !Thread.currentThread().isInterrupted()){
             animation.repaint();
-            notify();
+            synchronized (parent) {
+                parent.notify();
+                try {
+                    parent.wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

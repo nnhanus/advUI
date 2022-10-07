@@ -19,6 +19,7 @@ public class AnimationPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        System.out.println("repaint");
         grid.paintGrid(g);
         character.presentation.paintCharacter(g);
     }
@@ -84,4 +85,6 @@ public class AnimationPanel extends JPanel {
         //else{parent.levelSelect();}
 
     }
+
+
 }
