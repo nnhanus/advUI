@@ -46,8 +46,7 @@ public class MainMenu extends JDialog {
         play.setBackground(BGColor);
         play.addActionListener(
                 e -> {
-                    GameWindow game = new GameWindow();
-                    game.setLevel(slider.getValue());
+                    GameWindow game = new GameWindow(slider.getValue());
                     dispose();
                 }
         );

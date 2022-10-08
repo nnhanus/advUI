@@ -30,7 +30,8 @@ public class dropPanelModel {
         actionList = new ArrayList<>() {};
         blocksPlayed= new ArrayList<>() {};
         cells = new ArrayList<>(columnCount*rowCount);
-       }
+    }
+
     public void clearList (){
         actionList=new ArrayList<String>();
     }
@@ -58,7 +59,6 @@ public class dropPanelModel {
                 selectedCell = new Point(column, row);
                 addActionBlock(block);
             }
-
         }
     }
 }

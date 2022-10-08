@@ -163,27 +163,51 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        Point mouse = e.getPoint();
+        for (cellRectangle cell : model.cells) {
+            if (cell.contains(mouse)) {
+                cell.highlight = true;
+            } else {
+                cell.highlight = false;
+            }
+        }
+        repaint();
+    }
 
     public void mouseExited(MouseEvent e) {}
 
 @Override
     public void mouseDragged(MouseEvent e) {
         //get blocks played from index that corresponds with location of cell clicked, on release add block to cell location and
-    //delete cell from previous index in blocks played and action list
-
+           //delete cell from previous index in blocks played and action list
+        Point mouse = e.getPoint();
+        for (cellRectangle cell : model.cells) {
+            if(cell.contains(mouse)) {
+                cell.highlight = true;
+                this.repaint();
+            }else{
+                cell.highlight = false;
+                this.repaint();
+            }
+        }
     }
+
 @Override
     public void mouseMoved(MouseEvent e) {
         mouseEvent=true;
         Point mouse = e.getPoint();
         for (cellRectangle cell : model.cells) {
-            if (cell.contains(mouse) && container.selectedBlock == null&& cell.hasBlock) {
+            if (cell.contains(mouse) && container.selectedBlock == null && cell.hasBlock) {
                 cell.close = true;
+                cell.highlight = true;
                 this.repaint();
-            }
-            else{
-                cell.close =false;
+            } else if(cell.contains(mouse)) {
+                cell.highlight = true;
+                this.repaint();
+            }else{
+                cell.close = false;
+                cell.highlight = false;
                 this.repaint();
             }
 

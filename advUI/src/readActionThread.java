@@ -87,14 +87,28 @@ public class readActionThread implements Runnable{
             if (action.equalsIgnoreCase("Move")) {
                 for(int i =0;i<iter;i++){
                     character.move(isNextIf);
-                    animation.revalidate();
-                    animation.repaint();
+                    //animation.revalidate();
+                   // animation.repaint();
+                    parent.notify();
+                    try {
+                        parent.wait();
+                    } catch (InterruptedException e) {
+                        //parent.notify();
+                        throw new RuntimeException(e);
+                    }
                 }
             } else if (action.equalsIgnoreCase("Turn")) {
                 for(int i =0;i<iter;i++){
                     character.turn();
-                    animation.revalidate();
-                    animation.repaint();
+                    //animation.revalidate();
+                    //animation.repaint();
+                    parent.notify();
+                    try {
+                        parent.wait();
+                    } catch (InterruptedException e) {
+                        //parent.notify();
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
