@@ -5,13 +5,15 @@ public class readActionThread implements Runnable{
     public AnimationPanel animation;
     public dropPanel parent;
 
+
     public readActionThread(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
         this.parent=parent;
+
     }
     @Override
     public void run() {
-        System.out.println("hi read");
+        //System.out.println("hi read");
 
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
@@ -20,6 +22,7 @@ public class readActionThread implements Runnable{
         dropPanelModel model = this.parent.getModel();
 
         while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
+
             synchronized (parent) {
                 try {
                     Thread.sleep(1000);
@@ -38,7 +41,7 @@ public class readActionThread implements Runnable{
                     loop.add(action);
                     readAction(loop, character, isNextIf);
 
-                    System.out.println("Notified to repaint");
+                    //System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
@@ -49,7 +52,7 @@ public class readActionThread implements Runnable{
                     }
                 } else {
                     readAction(action, character, isNextIf);
-                    System.out.println("Notified to repaint");
+//                    System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
@@ -61,11 +64,12 @@ public class readActionThread implements Runnable{
                 }
                 model.actionList.remove(0);
             }
+
         }
         synchronized (parent) {
             parent.notify();
         }
-        model.blocksPlayed.clear();
+        parent.clearAll();
         parent.repaint();
         parent.animation.endOfLevelMessage();
 
@@ -100,13 +104,10 @@ public class readActionThread implements Runnable{
             } else if (action.equalsIgnoreCase("Turn")) {
                 for(int i =0;i<iter;i++){
                     character.turn();
-                    //animation.revalidate();
-                    //animation.repaint();
                     parent.notify();
                     try {
                         parent.wait();
                     } catch (InterruptedException e) {
-                        //parent.notify();
                         throw new RuntimeException(e);
                     }
                 }

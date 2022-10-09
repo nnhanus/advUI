@@ -59,9 +59,9 @@ public class PopUpMenu extends JDialog {
         });
 
 
-        JButton menu = new JButton("Main Menu");
-        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-        menu.setBackground(BGColor);
+//        JButton menu = new JButton("Main Menu");
+//        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
+//        menu.setBackground(BGColor);
 
         JButton quit = new JButton("Quit");
         quit.setFont(new Font("Bradley Hand", Font.BOLD, 18));
@@ -69,7 +69,7 @@ public class PopUpMenu extends JDialog {
         quit.addActionListener( e -> System.exit(0) );
 
         buttonPanel.add(restart);
-        buttonPanel.add(menu);
+       // buttonPanel.add(menu);
         buttonPanel.add(quit);
 
         add(buttonPanel, BorderLayout.SOUTH);

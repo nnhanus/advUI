@@ -35,10 +35,7 @@ public class dropPanelPresentation {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 control.readList();
-                //model.clearList();
-                /*model.blocksPlayed.clear();
-                control.repaint();
-                control.animation.endOfLevelMessage();*/
+
             }
         });
         redo.addMouseListener(new MouseAdapter() {
@@ -76,6 +73,16 @@ public class dropPanelPresentation {
             clear();
             buildGrid();
         }
+        Stroke standard= g2d.getStroke();
+        for (cellRectangle cell : model.cells) {
+            g2d.setStroke(standard);
+            g2d.setColor(Color.GRAY);
+            if (cell.highlight) {
+                g2d.setStroke(new BasicStroke(3));
+                g2d.setColor(Color.GREEN);
+            }
+            g2d.draw(cell);
+        }
         for (int index=0;index<model.blocksPlayed.size();index++) {
             BlockControl block=model.blocksPlayed.get(index);
             cellRectangle cell = model.cells.get(index);
@@ -92,20 +99,6 @@ public class dropPanelPresentation {
                 g2d.drawString(block.getType(),cell.x+cell.width/3,cell.y+cell.height/2);
             }
             //make this prettier
-
-
-        }
-
-        g2d.setColor(Color.GRAY);
-        for (cellRectangle cell : model.cells) {
-            g2d.draw(cell);
-        }
-        g2d.setColor(Color.GREEN);
-        for (cellRectangle cell : model.cells) {
-            if (cell.highlight) {
-                g2d.setStroke(new BasicStroke(5f));
-                g2d.draw(new Rectangle((int) cell.getX(), (int) cell.getY(), (int) cell.getWidth(), (int) cell.getHeight()));
-            }
         }
 
         g2d.dispose();

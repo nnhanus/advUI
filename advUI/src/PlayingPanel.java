@@ -22,9 +22,7 @@ public class PlayingPanel extends JPanel {
         topPanel=new TopPanel(this);
         bottomPanel= new dropPanel(this);
 
-
         this.add(topPanel,BorderLayout.NORTH);
-
         this.add(bottomPanel, BorderLayout.CENTER);
 
     }

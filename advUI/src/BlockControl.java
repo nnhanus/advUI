@@ -48,7 +48,7 @@ public class BlockControl extends JLabel implements MouseListener {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = this.getIcon().getImage();
         Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "block img");
-        container.container.setCursor (c);
+        container.container.container.setCursor (c);
         container.container.selectedBlock=this;
     }
 
@@ -59,15 +59,10 @@ public class BlockControl extends JLabel implements MouseListener {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-        this.setBorder(new LineBorder(Color.YELLOW));
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-        this.setBorder(new EmptyBorder(0,0,0,0));
-
-    }
+    public void mouseExited(MouseEvent e) {}
 
     public BufferedImage getIconAsImage() {
         return model.getIconAsImage();

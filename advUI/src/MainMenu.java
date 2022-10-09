@@ -7,6 +7,7 @@ public class MainMenu extends JDialog {
 
     public MainMenu(){
         super();
+        this.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
         Color BGColor = new Color(0xFED1FF);
         setPreferredSize(new Dimension(500, 600));
         setVisible(true);

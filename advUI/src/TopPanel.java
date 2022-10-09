@@ -1,10 +1,15 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopPanel extends JPanel{
-protected static List<BlockControl> buttonList=new ArrayList<>();
+public class TopPanel extends JPanel implements MouseListener, MouseMotionListener {
+    protected static List<BlockControl> buttonList=new ArrayList<>();
     public PlayingPanel container;
     int level;
     int colCount;
@@ -17,7 +22,8 @@ protected static List<BlockControl> buttonList=new ArrayList<>();
 
         resetBtns();
         //could create array of all button types. for i in 0 to level-1 create button
-
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
     }
 
 
@@ -35,4 +41,47 @@ protected static List<BlockControl> buttonList=new ArrayList<>();
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        for (BlockControl block: buttonList){
+            if ( block.contains(SwingUtilities.convertPoint(this,e.getPoint(),block))){
+                block.dispatchEvent(e);
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Point point=e.getPoint();
+        for (BlockControl block: buttonList){
+            if (block.contains(SwingUtilities.convertPoint(this,point,block))){
+                block.setBorder(new LineBorder(Color.GREEN));
+            }
+            else{block.setBorder(new EmptyBorder(0,0,0,0));}
+        }
+    }
 }

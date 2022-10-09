@@ -39,7 +39,7 @@ public class dropPanelModel {
     public void addActionBlock(BlockControl block) {
         String type=block.getType();
         if(type.equalsIgnoreCase("For")){
-           Integer options[] = {  2, 3, 4 };
+            Integer options[] = {  2, 3, 4 };
             block.setForLoopIter(2+JOptionPane.showOptionDialog(control.container,"Select how many times to repeat action:","For Loop",JOptionPane.DEFAULT_OPTION,JOptionPane.OK_CANCEL_OPTION,null,options,0));
         }
         int index=selectedCell.x+selectedCell.y*columnCount;
