@@ -15,6 +15,16 @@ public class GlassPaneWrapper extends JPanel {
         this.setVisible(false);
         this.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseClicked(MouseEvent e){
+                Point point = e.getPoint();
+                if(wrappedPanel.bottomPanel.view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.play))){
+                wrappedPanel.bottomPanel.view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));}
+                if(wrappedPanel.bottomPanel.view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
+                wrappedPanel.bottomPanel.view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
+                if(wrappedPanel.bottomPanel.view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
+                wrappedPanel.bottomPanel.view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
+            }
+            @Override
             public void mousePressed(MouseEvent e) {
                 wrappedPanel.bottomPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel));
                 wrappedPanel.topPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.topPanel));

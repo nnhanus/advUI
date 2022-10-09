@@ -44,11 +44,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         return model;
     }
 
-    public List<String> getActionList(){return model.actionList;}
-
-    public static void clearList() {
-        model.clearList();
-    }
 
     public void readList() {
         animation = GameWindow.getAnimation();
@@ -81,6 +76,10 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
             if (cell.contains(point)&&cell.hasBlock){
                 draggedBlockIndex=model.cells.indexOf(cell);
                 container.selectedBlock=model.blocksPlayed.get(draggedBlockIndex);
+                Toolkit toolkit = Toolkit.getDefaultToolkit();
+                Image image = container.selectedBlock.getIcon().getImage();
+                Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "block img");
+                container.container.setCursor (c);
             }
         }
     }
