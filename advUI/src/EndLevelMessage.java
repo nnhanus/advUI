@@ -10,6 +10,7 @@ public class EndLevelMessage extends JDialog {
     ImageIcon icon = null;
     JLabel messageP1 = new JLabel();
     JLabel messageP2 = new JLabel();
+    Color BGColor = new Color(0xFED1FF);
 
 
     public EndLevelMessage(GameWindow owner, String type){
@@ -17,7 +18,7 @@ public class EndLevelMessage extends JDialog {
         parent = owner;
         setLayout(new BorderLayout());
         setVisible(true);
-        Color BGColor = new Color(0xFED1FF);
+
         if (type.equalsIgnoreCase("win")){
             makeWin();
         } else {
@@ -35,6 +36,7 @@ public class EndLevelMessage extends JDialog {
         JPanel buttonsPanel = buttonsPanel();
 
         JPanel rightPanel = new JPanel();
+        rightPanel.setBackground(BGColor);
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(messageP1, BorderLayout.NORTH);
         rightPanel.add(messageP2, BorderLayout.CENTER);
@@ -49,6 +51,8 @@ public class EndLevelMessage extends JDialog {
 
     private JPanel buttonsPanel() {
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBackground(BGColor);
+        buttonsPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
 
         JButton yes = new JButton("Yes");
         JButton no = new JButton("No");
@@ -74,13 +78,13 @@ public class EndLevelMessage extends JDialog {
     }
 
     private void makeWin(){
-        icon = new ImageIcon(new ImageIcon("advUI/Icons/winLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_DEFAULT));
+        icon = new ImageIcon(new ImageIcon("advUI/Icons/winLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
         messageP1.setText("Congratulations!");
         messageP2.setText("Ready for the next level?");
     }
 
     private void makeFail(){
-        icon = new ImageIcon(new ImageIcon("advUI/Icons/failLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_DEFAULT));
+        icon = new ImageIcon(new ImageIcon("advUI/Icons/failLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
         messageP1.setText("So close!");
         messageP2.setText("Want to try again?");
     }
