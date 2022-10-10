@@ -68,6 +68,12 @@ public class PopUpMenu extends JDialog {
         quit.setBackground(BGColor);
         quit.addActionListener( e -> System.exit(0) );
 
+        JButton close = new JButton("Close");
+        close.setFont(new Font("Bradley Hand", Font.BOLD, 18));
+        close.setBackground(BGColor);
+        close.addActionListener( e -> dispose());
+
+        buttonPanel.add(close);
         buttonPanel.add(restart);
        // buttonPanel.add(menu);
         buttonPanel.add(quit);
