@@ -17,9 +17,9 @@ public class PopUpMenu extends JDialog {
 
         JPanel levelSelect = new JPanel();
         levelSelect.setLayout(new BorderLayout());
-        levelSelect.setPreferredSize(new Dimension(500, 400));
-        levelSelect.setMinimumSize(new Dimension(500, 400));
-        levelSelect.setMaximumSize(new Dimension(500, 400));
+        levelSelect.setPreferredSize(new Dimension(500, 250));
+        levelSelect.setMinimumSize(new Dimension(500, 250));
+        levelSelect.setMaximumSize(new Dimension(500, 250));
 
         SRSlider slider = new SRSlider(parent.getLevelNumber());
         levelSelect.add(slider, BorderLayout.CENTER);
@@ -32,16 +32,27 @@ public class PopUpMenu extends JDialog {
 
         JPanel playPanel = new JPanel();
         playPanel.setBackground(BGColor);
-        JButton play = new JButton("Play");
-        play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        play.setBackground(BGColor);
-        play.addActionListener(
+        JButton go = new JButton("Go");
+        go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        go.setBackground(BGColor);
+        go.addActionListener(
                 e -> {
-                    owner.changeLevel(slider.getValue());
-                    dispose();
+                    int selectedLevel=slider.getValue();
+                    if(selectedLevel==0){
+                        MainMenu menu=new MainMenu();
+                        owner.dispose();
+                        dispose();
+                    }
+                    else if (selectedLevel==6) {
+                        owner.dispose();
+                        dispose();
+                    }else {
+                        owner.changeLevel(slider.getValue());
+                        dispose();
+                    }
+
                 }
         );
-        playPanel.add(play);
         levelSelect.add(playPanel, BorderLayout.SOUTH);
 
         add(levelSelect, BorderLayout.CENTER);
@@ -51,7 +62,7 @@ public class PopUpMenu extends JDialog {
         buttonPanel.setBackground(BGColor);
 
         JButton restart = new JButton("Restart");
-        restart.setFont(new Font("Bradley Hand", Font.BOLD, 18));
+        restart.setFont(new Font("Bradley Hand", Font.BOLD, 24));
         restart.setBackground(BGColor);
         restart.addActionListener( e -> {
                 parent.changeLevel(parent.getLevelNumber());
@@ -63,22 +74,9 @@ public class PopUpMenu extends JDialog {
 //        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
 //        menu.setBackground(BGColor);
 
-        JButton quit = new JButton("Quit");
-        quit.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-        quit.setBackground(BGColor);
-        quit.addActionListener( e -> System.exit(0) );
-
-        JButton close = new JButton("Close");
-        close.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-        close.setBackground(BGColor);
-        close.addActionListener( e -> dispose());
-
-        buttonPanel.add(close);
+        buttonPanel.add(go);
         buttonPanel.add(restart);
-       // buttonPanel.add(menu);
-        buttonPanel.add(quit);
-
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel,BorderLayout.SOUTH);
 
         JLabel title = new JLabel("Menu", SwingConstants.CENTER);
         title.setFont(new Font("Bradley Hand", Font.BOLD, 35));

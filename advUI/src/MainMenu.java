@@ -7,7 +7,7 @@ public class MainMenu extends JDialog {
 
     public MainMenu(){
         super();
-        this.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
         Color BGColor = new Color(0xFED1FF);
         setPreferredSize(new Dimension(500, 600));
         setVisible(true);
@@ -42,16 +42,22 @@ public class MainMenu extends JDialog {
 
         JPanel playPanel = new JPanel();
         playPanel.setBackground(BGColor);
-        JButton play = new JButton("Play");
-        play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        play.setBackground(BGColor);
-        play.addActionListener(
+        JButton go = new JButton("Go");
+        go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        go.setBackground(BGColor);
+        go.addActionListener(
                 e -> {
-                    GameWindow game = new GameWindow(slider.getValue());
-                    dispose();
+                    int selectedLevel=slider.getValue();
+                    if(selectedLevel==0){}
+                    else if (selectedLevel==6) {
+                        dispose();
+                    }else {
+                        GameWindow game = new GameWindow(slider.getValue());
+                        dispose();
+                    }
                 }
         );
-        playPanel.add(play);
+        playPanel.add(go);
         levelSelect.add(playPanel, BorderLayout.SOUTH);
 
         mainPane.add(levelSelect, BorderLayout.CENTER);
