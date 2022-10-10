@@ -67,4 +67,8 @@ public class BlockModel {
     public String getType() {
         return checkType(index);
     }
+
+    public String getForLoopIter() {
+        return forLoopIter;
+    }
 }

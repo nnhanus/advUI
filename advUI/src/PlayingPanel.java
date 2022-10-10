@@ -27,4 +27,14 @@ public class PlayingPanel extends JPanel {
 
     }
 
+    public GameWindow getContainer(){
+        return  container;
+    }
+
+    public dropPanel getBottomPanel() {
+        return bottomPanel;
+    }
+    public TopPanel getTopPanel() {
+        return topPanel;
+    }
 }

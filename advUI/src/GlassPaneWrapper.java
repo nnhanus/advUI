@@ -17,22 +17,22 @@ public class GlassPaneWrapper extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e){
                 Point point = e.getPoint();
-                if(wrappedPanel.bottomPanel.view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.play))){
-                wrappedPanel.bottomPanel.view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));}
-                if(wrappedPanel.bottomPanel.view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
-                wrappedPanel.bottomPanel.view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
-                if(wrappedPanel.bottomPanel.view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
-                wrappedPanel.bottomPanel.view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
+                if(wrappedPanel.getBottomPanel().view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.play))){
+                wrappedPanel.getBottomPanel().view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));}
+                if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
+                wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
+                if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
+                wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
             }
             @Override
             public void mousePressed(MouseEvent e) {
-                wrappedPanel.bottomPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel));
-                wrappedPanel.topPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.topPanel));
+                wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
+                wrappedPanel.getTopPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getTopPanel()));
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                wrappedPanel.bottomPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel));
+                wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
 
             }
 
@@ -48,22 +48,22 @@ public class GlassPaneWrapper extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 //get blocks played from index that corresponds with location of cell clicked, on release add block to cell location and
                 //delete cell from previous index in blocks played and action list
-                wrappedPanel.bottomPanel.mouseEvent=true;
-                Point mouse = SwingUtilities.convertPoint(e.getComponent(),e.getPoint(),wrappedPanel.bottomPanel);
-                for (cellRectangle cell : wrappedPanel.bottomPanel.getCells()) {
+                wrappedPanel.getBottomPanel().mouseEvent=true;
+                Point mouse = SwingUtilities.convertPoint(e.getComponent(),e.getPoint(),wrappedPanel.getBottomPanel());
+                for (cellRectangle cell : wrappedPanel.getBottomPanel().getCells()) {
                     if(cell.contains(mouse)) {
                         cell.highlight = true;
-                        wrappedPanel.bottomPanel.repaint();
+                        wrappedPanel.getBottomPanel().repaint();
                     }else{
                         cell.highlight = false;
-                        wrappedPanel.bottomPanel.repaint();
+                        wrappedPanel.getBottomPanel().repaint();
                     }
                 }
             }
             @Override
             public void mouseMoved(MouseEvent e) {
-                wrappedPanel.bottomPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel));
-                wrappedPanel.topPanel.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.topPanel));
+                wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
+                wrappedPanel.getTopPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getTopPanel()));
             }
 
 

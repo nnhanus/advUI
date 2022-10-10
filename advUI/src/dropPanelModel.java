@@ -16,8 +16,8 @@ public class dropPanelModel {
     public int height;
     public int cellWidth;
     public int cellHeight;
-    int columnCount = 4;
-    int rowCount = 4;
+    final int columnCount = 4;
+    final int rowCount = 3;
     int xOffset;
     int yOffset;
     public List<cellRectangle> cells;

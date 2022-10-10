@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,7 +25,7 @@ public class dropPanelPresentation {
         //make play and redo clickable
         //when redo is clicked, clear panel and repaint, call clearList
         control.setLayout(new BorderLayout());
-        control.add(createButtons(), BorderLayout.EAST);
+        control.add(createButtons(), BorderLayout.SOUTH);
 
 
     }
@@ -42,9 +43,9 @@ public class dropPanelPresentation {
             @Override
             public void mouseClicked(MouseEvent e) {
                 model.clearList();
-                model.blocksPlayed.clear();
+                control.getBlocksPlayed().clear();
                 clear();
-                control.container.container.changeLevel(control.container.container.getLevelNumber());
+                control.getContainer().getContainer().changeLevel(control.getContainer().getContainer().getLevelNumber());
 
             }
         });
@@ -52,16 +53,17 @@ public class dropPanelPresentation {
             @Override
             public void mouseClicked(MouseEvent e) {
                 model.clearList();
-                model.blocksPlayed.clear();
+                control.getBlocksPlayed().clear();
                 clear();
                 control.repaint();
             }
         });
-        JPanel buttonPanel = new JPanel(new GridLayout(3,1));
+        GridLayout layout = new GridLayout(1,3);
+        JPanel buttonPanel = new JPanel(layout);
         buttonPanel.add(play);
         buttonPanel.add(clear);
         buttonPanel.add(redo);
-
+        buttonPanel.setBorder(new EmptyBorder(-5,0,5,0));
         return  buttonPanel;
     }
 
@@ -74,18 +76,20 @@ public class dropPanelPresentation {
             buildGrid();
         }
         Stroke standard= g2d.getStroke();
-        for (cellRectangle cell : model.cells) {
+        for (cellRectangle cell : control.getCells()) {
+            g2d.setColor(Color.BLACK);
+            g2d.fill(cell);
             g2d.setStroke(standard);
-            g2d.setColor(Color.GRAY);
+            g2d.setColor(Color.LIGHT_GRAY);
             if (cell.highlight) {
                 g2d.setStroke(new BasicStroke(3));
                 g2d.setColor(Color.GREEN);
             }
             g2d.draw(cell);
         }
-        for (int index=0;index<model.blocksPlayed.size();index++) {
-            BlockControl block=model.blocksPlayed.get(index);
-            cellRectangle cell = model.cells.get(index);
+        for (int index=0;index<control.getBlocksPlayed().size();index++) {
+            BlockControl block=control.getBlocksPlayed().get(index);
+            cellRectangle cell = control.getCells().get(index);
             cell.hasBlock=true;
             if (cell.close){
                 g2d.setPaint(new TexturePaint(getIconAsImage(closeIcon),cell));
@@ -106,15 +110,15 @@ public class dropPanelPresentation {
     }
 
     private void clear() {
-        model.cells=new ArrayList<>();
+        control.clearCells();
     }
 
 
     private void buildGrid() {
-        int width = control.getWidth() - 80;
+        int width = control.getWidth() - 30;
         int height = control.getHeight();
         int cellWidth = width / model.columnCount;
-        int cellHeight = Math.min(Math.round((float) (cellWidth * (0.6))), height / model.rowCount);
+        int cellHeight = Math.min(Math.round((float) (cellWidth * (0.66))), height / model.rowCount);
         int xOffset = 20;
         int yOffset = (height - (model.rowCount * cellHeight)) / 2;
         model.width = width;
@@ -131,7 +135,7 @@ public class dropPanelPresentation {
                         cellWidth,
                         cellHeight,
                         control);
-                model.cells.add(cell);
+                control.getCells().add(cell);
             }
         }
     }
