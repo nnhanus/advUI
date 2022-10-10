@@ -7,7 +7,7 @@ public class MainMenu extends JDialog {
 
     public MainMenu(){
         super();
-        this.setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
         Color BGColor = new Color(0xFED1FF);
         setPreferredSize(new Dimension(500, 600));
         setVisible(true);
@@ -47,8 +47,14 @@ public class MainMenu extends JDialog {
         play.setBackground(BGColor);
         play.addActionListener(
                 e -> {
-                    GameWindow game = new GameWindow(slider.getValue());
-                    dispose();
+                    int selectedLevel=slider.getValue();
+                    if(selectedLevel==0){}
+                    else if (selectedLevel==6) {
+                        dispose();
+                    }else {
+                        GameWindow game = new GameWindow(slider.getValue());
+                        dispose();
+                    }
                 }
         );
         playPanel.add(play);

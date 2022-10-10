@@ -27,15 +27,15 @@ public class SRSliderUI extends BasicSliderUI {
     @Override
     public void paintThumb(Graphics pen){
         int x = thumbRect.x;
-        if (slider.getValue()==1){
-            x += 20;
-        } else if (slider.getValue()==2){
-            x+=10;
-        } else if (slider.getValue()==4){
-            x-=10;
-        } else if (slider.getValue()==5){
-            x-=25;
-        }
+//        if (slider.getValue()==1){
+//            x += 20;
+//        } else if (slider.getValue()==2){
+//            x+=10;
+//        } else if (slider.getValue()==4){
+//            x-=10;
+//        } else if (slider.getValue()==5){
+//            x-=25;
+//        }
         pen.drawImage(image, x, thumbRect.y, thumbRect.width, thumbRect.height, null);
     }
 
@@ -45,24 +45,35 @@ public class SRSliderUI extends BasicSliderUI {
 
     @Override
     public void paintLabels(Graphics pen){
-        for (int i = 0; i < 5; i++){
-            Image label = labels.get(i);
-            int x = labelRect.x + i*(labelRect.width/5);
-            /*if (i == 0){
-                x -=20;
-            } else if (i == 1) {
-                x -=10;
-            } else  if (i == 3) {
-                x += 10;
-            } else if (i == 4){
-                x +=25;
-            }*/
-            int width = labelRect.width/5;
-            int height = width - width/5;
-            int y = labelRect.y - thumbRect.height*2 - 35;
-            pen.drawImage(label, x , y , width, height, null);
+
+        for (int i = 0; i < 7; i++){
+            int x = labelRect.x + i*(labelRect.width/7);
+            int width = labelRect.width/7;
+            int height = width - width/7;
+            int y = labelRect.y - thumbRect.height*2-10 ;
+            if(i==0){
+                pen.setFont(new Font("Times", Font.BOLD, 14));
+                pen.drawString("Main",x+5, y + height/2 );
+                pen.drawString("Menu",x+5, y + (height/4)*3 );
+                continue;
+            }else if(i==6){
+                pen.setFont(new Font("Times", Font.BOLD, 14));
+                pen.drawString("Quit",x + width/2, y + height/2 );
+               continue;
+            }
+            Image label = labels.get(i-1);
+            if (i == 1){
+                x -=5;
+            } else if (i == 2) {
+                x -=5;
+            } else  if (i == 4) {
+                x += 5;
+            } else if (i == 5){
+                x +=15;
+            }
             pen.setFont(new Font("Times", Font.BOLD, 16));
-            pen.drawString(String.valueOf(i+1),x + width/2, y + height/2 );
+            pen.drawImage(label, x , y , width, height, null);
+            pen.drawString(String.valueOf(i),x + width/2-2, y + height/2 );
         }
     }
 
