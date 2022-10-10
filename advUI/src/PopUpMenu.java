@@ -32,10 +32,10 @@ public class PopUpMenu extends JDialog {
 
         JPanel playPanel = new JPanel();
         playPanel.setBackground(BGColor);
-        JButton play = new JButton("Play");
-        play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        play.setBackground(BGColor);
-        play.addActionListener(
+        JButton go = new JButton("Go");
+        go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        go.setBackground(BGColor);
+        go.addActionListener(
                 e -> {
                     int selectedLevel=slider.getValue();
                     if(selectedLevel==0){
@@ -74,7 +74,7 @@ public class PopUpMenu extends JDialog {
 //        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
 //        menu.setBackground(BGColor);
 
-        buttonPanel.add(play);
+        buttonPanel.add(go);
         buttonPanel.add(restart);
         add(buttonPanel,BorderLayout.SOUTH);
 

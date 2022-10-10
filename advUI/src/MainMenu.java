@@ -42,10 +42,10 @@ public class MainMenu extends JDialog {
 
         JPanel playPanel = new JPanel();
         playPanel.setBackground(BGColor);
-        JButton play = new JButton("Play");
-        play.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        play.setBackground(BGColor);
-        play.addActionListener(
+        JButton go = new JButton("Go");
+        go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        go.setBackground(BGColor);
+        go.addActionListener(
                 e -> {
                     int selectedLevel=slider.getValue();
                     if(selectedLevel==0){}
@@ -57,7 +57,7 @@ public class MainMenu extends JDialog {
                     }
                 }
         );
-        playPanel.add(play);
+        playPanel.add(go);
         levelSelect.add(playPanel, BorderLayout.SOUTH);
 
         mainPane.add(levelSelect, BorderLayout.CENTER);
