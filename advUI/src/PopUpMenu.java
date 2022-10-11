@@ -69,6 +69,11 @@ public class PopUpMenu extends JDialog {
                 dispose();
         });
 
+        JButton close = new JButton("Close");
+        close.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+        close.setBackground(BGColor);
+        close.addActionListener( e -> dispose());
+
 
 //        JButton menu = new JButton("Main Menu");
 //        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
@@ -76,6 +81,7 @@ public class PopUpMenu extends JDialog {
 
         buttonPanel.add(go);
         buttonPanel.add(restart);
+        buttonPanel.add(close);
         add(buttonPanel,BorderLayout.SOUTH);
 
         JLabel title = new JLabel("Menu", SwingConstants.CENTER);

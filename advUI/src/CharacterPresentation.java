@@ -32,7 +32,7 @@ public class CharacterPresentation {
         pen.drawImage(cone, currentX, currentY+control.getHeight()/2, control.getWidth()/3, control.getHeight()/2, null);
         for (int i = 0; i < control.getScoops().size(); i++){
             Scoop scoop = control.getScoops().get(i);
-            pen.drawImage(scoop.getImage(), currentX + 5*i, currentY + scoop.getSize()/2*(i+1), scoop.getSize(), scoop.getSize(), null );
+            pen.drawImage(scoop.getImage(), currentX - 5 + 5*i, currentY + scoop.getSize()/(3*(i+1)), scoop.getSize(), scoop.getSize(), null );
         }
         drawOrientation(pen);
     }
