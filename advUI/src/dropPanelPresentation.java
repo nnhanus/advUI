@@ -63,7 +63,7 @@ public class dropPanelPresentation {
         buttonPanel.add(play);
         buttonPanel.add(clear);
         buttonPanel.add(redo);
-        buttonPanel.setBorder(new EmptyBorder(-5,0,5,0));
+        buttonPanel.setBorder(new EmptyBorder(0,0,5,0));
         return  buttonPanel;
     }
 
