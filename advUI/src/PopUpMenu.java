@@ -1,10 +1,5 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Hashtable;
 
 public class PopUpMenu extends JDialog {
     GameWindow parent;
@@ -23,10 +18,13 @@ public class PopUpMenu extends JDialog {
 
     private class PopUpMenuPresentation {
         PopUpMenu control;
+        Color BGColor = new Color(0xFED1FF);
+        String fontFamily = "Bradley Hand";
+        Font buttonFont = new Font(fontFamily, Font.BOLD, 24);
+
         public PopUpMenuPresentation(PopUpMenu control) {
             this.control=control;
             this.control.setLayout(new BorderLayout());
-            Color BGColor = new Color(0xFED1FF);
 
             JPanel levelSelect = new JPanel();
             levelSelect.setLayout(new BorderLayout());
@@ -38,19 +36,29 @@ public class PopUpMenu extends JDialog {
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
-            level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
+            level.setFont(new Font(fontFamily, Font.BOLD, 30));
             level.setBackground(BGColor);
             level.setOpaque(true);
             levelSelect.add(level, BorderLayout.NORTH);
+            this.control.add(levelSelect, BorderLayout.CENTER);
 
-            JPanel playPanel = new JPanel();
-            playPanel.setBackground(BGColor);
+            buttonPanel(slider);
+
+            JLabel title = new JLabel("Menu", SwingConstants.CENTER);
+        title.setFont(new Font(fontFamily, Font.BOLD, 35));
+        title.setBackground(BGColor);
+        title.setOpaque(true);
+
+        this.control.add(title, BorderLayout.NORTH);
+        }
+
+        private void buttonPanel(SRSlider slider) {
             JButton go = new JButton("Go");
-            go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+            go.setFont(buttonFont);
             go.setBackground(BGColor);
             go.addActionListener(
                     e -> {
-                        int selectedLevel=slider.getValue();
+                        int selectedLevel= slider.getValue();
                         if(selectedLevel==0){
                             MainMenu menu=new MainMenu();
                             parent.dispose();
@@ -66,43 +74,28 @@ public class PopUpMenu extends JDialog {
 
                     }
             );
-            levelSelect.add(playPanel, BorderLayout.SOUTH);
-
-            this.control.add(levelSelect, BorderLayout.CENTER);
-
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new FlowLayout());
-            buttonPanel.setBackground(BGColor);
 
             JButton restart = new JButton("Restart");
-            restart.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+            restart.setFont(buttonFont);
             restart.setBackground(BGColor);
             restart.addActionListener( e -> {
                 parent.changeLevel(parent.getLevelNumber());
                 this.control.dispose();
             });
 
-        JButton close = new JButton("Close");
-        close.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        close.setBackground(BGColor);
-        close.addActionListener( e -> dispose());
+            JButton close = new JButton("Close");
+            close.setFont(buttonFont);
+            close.setBackground(BGColor);
+            close.addActionListener( e -> dispose());
 
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.setBackground(BGColor);
 
-//        JButton menu = new JButton("Main Menu");
-//        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-//        menu.setBackground(BGColor);
-
-        buttonPanel.add(go);
-        buttonPanel.add(restart);
-        buttonPanel.add(close);
-        add(buttonPanel,BorderLayout.SOUTH);
-
-            JLabel title = new JLabel("Menu", SwingConstants.CENTER);
-            title.setFont(new Font("Bradley Hand", Font.BOLD, 35));
-            title.setBackground(BGColor);
-            title.setOpaque(true);
-
-            this.control.add(title, BorderLayout.NORTH);
+            buttonPanel.add(go);
+            buttonPanel.add(restart);
+            buttonPanel.add(close);
+            add(buttonPanel,BorderLayout.SOUTH);
         }
     }
 }

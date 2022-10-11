@@ -60,18 +60,12 @@ public class AnimationPanel extends JPanel {
     }
 
     public void endOfLevelMessage() {
-        int choice;
         //need to reset character and scoops at end "repaint" from beginning of level
         if(isLevelComplete()){
             parent.setLevelUnlocked(parent.getLevelNumber()+1);
             parent.setLevel(parent.getLevelNumber()+1);
-            //create a congratulation pop up with next level button (JOption)
-            //choice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
-
             EndLevelMessage end = new EndLevelMessage(parent, "win");
         } else if (isFailed()){
-            //create try again pop up
-            //choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
             EndLevelMessage end = new EndLevelMessage(parent, "fail");
         }
 

@@ -37,6 +37,7 @@ public class CharacterPresentation {
         drawOrientation(pen);
     }
 
+    //draws a dot to indicate the orientation of the character
     private void drawOrientation(Graphics pen) {
         if (control.getOrientation() == CharacterModel.Direction.NORTH){
             pen.fillOval(currentX+control.getWidth()/2, currentY - 20, 10, 10);
