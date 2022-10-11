@@ -8,66 +8,79 @@ import java.util.Hashtable;
 
 public class PopUpMenu extends JDialog {
     GameWindow parent;
+    PopUpMenuPresentation view;
 
     public PopUpMenu(GameWindow owner){
         super(owner);
         parent = owner;
-        setLayout(new BorderLayout());
-        Color BGColor = new Color(0xFED1FF);
+        view= new PopUpMenuPresentation(this);
 
-        JPanel levelSelect = new JPanel();
-        levelSelect.setLayout(new BorderLayout());
-        levelSelect.setPreferredSize(new Dimension(500, 250));
-        levelSelect.setMinimumSize(new Dimension(500, 250));
-        levelSelect.setMaximumSize(new Dimension(500, 250));
 
-        SRSlider slider = new SRSlider(parent.getLevelNumber());
-        levelSelect.add(slider, BorderLayout.CENTER);
 
-        JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
-        level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
-        level.setBackground(BGColor);
-        level.setOpaque(true);
-        levelSelect.add(level, BorderLayout.NORTH);
+        setVisible(true);
+        pack();
+    }
 
-        JPanel playPanel = new JPanel();
-        playPanel.setBackground(BGColor);
-        JButton go = new JButton("Go");
-        go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        go.setBackground(BGColor);
-        go.addActionListener(
-                e -> {
-                    int selectedLevel=slider.getValue();
-                    if(selectedLevel==0){
-                        MainMenu menu=new MainMenu();
-                        owner.dispose();
-                        dispose();
+    private class PopUpMenuPresentation {
+        PopUpMenu control;
+        public PopUpMenuPresentation(PopUpMenu control) {
+            this.control=control;
+            this.control.setLayout(new BorderLayout());
+            Color BGColor = new Color(0xFED1FF);
+
+            JPanel levelSelect = new JPanel();
+            levelSelect.setLayout(new BorderLayout());
+            levelSelect.setPreferredSize(new Dimension(500, 250));
+            levelSelect.setMinimumSize(new Dimension(500, 250));
+            levelSelect.setMaximumSize(new Dimension(500, 250));
+
+            SRSlider slider = new SRSlider(parent.getLevelNumber());
+            levelSelect.add(slider, BorderLayout.CENTER);
+
+            JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
+            level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
+            level.setBackground(BGColor);
+            level.setOpaque(true);
+            levelSelect.add(level, BorderLayout.NORTH);
+
+            JPanel playPanel = new JPanel();
+            playPanel.setBackground(BGColor);
+            JButton go = new JButton("Go");
+            go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+            go.setBackground(BGColor);
+            go.addActionListener(
+                    e -> {
+                        int selectedLevel=slider.getValue();
+                        if(selectedLevel==0){
+                            MainMenu menu=new MainMenu();
+                            parent.dispose();
+                            this.control.dispose();
+                        }
+                        else if (selectedLevel==6) {
+                            parent.dispose();
+                            this.control.dispose();
+                        }else {
+                            parent.changeLevel(slider.getValue());
+                            this.control.dispose();
+                        }
+
                     }
-                    else if (selectedLevel==6) {
-                        owner.dispose();
-                        dispose();
-                    }else {
-                        owner.changeLevel(slider.getValue());
-                        dispose();
-                    }
+            );
+            levelSelect.add(playPanel, BorderLayout.SOUTH);
 
-                }
-        );
-        levelSelect.add(playPanel, BorderLayout.SOUTH);
+            this.control.add(levelSelect, BorderLayout.CENTER);
 
-        add(levelSelect, BorderLayout.CENTER);
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.setBackground(BGColor);
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout());
-        buttonPanel.setBackground(BGColor);
-
-        JButton restart = new JButton("Restart");
-        restart.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-        restart.setBackground(BGColor);
-        restart.addActionListener( e -> {
+            JButton restart = new JButton("Restart");
+            restart.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+            restart.setBackground(BGColor);
+            restart.addActionListener( e -> {
                 parent.changeLevel(parent.getLevelNumber());
-                dispose();
-        });
+                this.control.dispose();
+            });
 
         JButton close = new JButton("Close");
         close.setFont(new Font("Bradley Hand", Font.BOLD, 24));
@@ -84,16 +97,12 @@ public class PopUpMenu extends JDialog {
         buttonPanel.add(close);
         add(buttonPanel,BorderLayout.SOUTH);
 
-        JLabel title = new JLabel("Menu", SwingConstants.CENTER);
-        title.setFont(new Font("Bradley Hand", Font.BOLD, 35));
-        title.setBackground(BGColor);
-        title.setOpaque(true);
+            JLabel title = new JLabel("Menu", SwingConstants.CENTER);
+            title.setFont(new Font("Bradley Hand", Font.BOLD, 35));
+            title.setBackground(BGColor);
+            title.setOpaque(true);
 
-        add(title, BorderLayout.NORTH);
-
-
-        setVisible(true);
-        pack();
+            this.control.add(title, BorderLayout.NORTH);
+        }
     }
-
 }

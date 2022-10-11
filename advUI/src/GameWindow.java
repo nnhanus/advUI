@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 public class GameWindow  extends JFrame {
@@ -26,13 +27,6 @@ public class GameWindow  extends JFrame {
         return model.getLevel();
     }
 
-    public static int getDefaultHeight() {
-        return model.Height;
-    }
-
-    public static int getDefaultWidth() {
-        return model.Width;
-    }
 
     public void levelSelect() {
         Integer[] availableLevels = new Integer[model.unlockedLevel];
@@ -51,10 +45,18 @@ public class GameWindow  extends JFrame {
     }
 
     public void changeLevel(int levelNumber){
+        Color BGColor = new Color(0xFED1FF);
         if( levelNumber>model.unlockedLevel){
             JDialog lockedLevel = new JDialog(this, "Locked Level");
-            lockedLevel.add(new JTextArea("You do not have access to this level.\nPlay all the levels before to unlock it."));
-            lockedLevel.setSize(250,100);
+            lockedLevel.setLayout(new BorderLayout());
+            JLabel locked=new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/locked.png").getImage().getScaledInstance(350,300,Image.SCALE_DEFAULT)));
+            lockedLevel.add(locked);
+            JLabel message=new JLabel("<html>You need more training!\nComplete all previous levels to unlock.</html>");
+            message.setFont(new Font("Bradley Hand",Font.PLAIN,18));
+            message.setOpaque(true);
+            message.setBackground(BGColor);
+            lockedLevel.add(message,BorderLayout.SOUTH);
+            lockedLevel.setSize(350,350);
             lockedLevel.setLocation(this.getWidth()/2,this.getHeight()/2);
             lockedLevel.setVisible(true);
             levelNumber=getLevelNumber();
@@ -62,8 +64,7 @@ public class GameWindow  extends JFrame {
         setLevel(levelNumber);
         getAnimation().changeLevel(getLevel());
         view.playingZone.topPanel.resetBtns();
-        view.playingZone.
-        revalidate();
+        view.playingZone.revalidate();
         repaint();
     }
 

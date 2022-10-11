@@ -19,14 +19,14 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     public AnimationPanel animation;
     public PlayingPanel container;
     public boolean mouseEvent;
-    public int draggedBlockIndex=-1;
+    public int draggedBlockIndex = -1;
 
 
     //public boolean drag = false;
 
     public dropPanel(PlayingPanel parent) {
         container = parent;
-        mouseEvent=false;
+        mouseEvent = false;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.model = new dropPanelModel(this);
@@ -57,12 +57,12 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void mouseClicked(MouseEvent e) {
         Point clicked = e.getPoint();
-        for (cellRectangle cell : model.cells) {
+        for (cellRectangle cell : getCells()) {
             if (cell.contains(clicked)) {
-                int toDelete = model.cells.indexOf(cell);
-                cell.hasBlock=false;
-                model.actionList.remove(toDelete);
-                model.blocksPlayed.remove(toDelete);
+                int toDelete = getCells().indexOf(cell);
+                cell.hasBlock = false;
+                getActions().remove(toDelete);
+                getBlocksPlayed().remove(toDelete);
                 this.repaint();
             }
         }
@@ -72,40 +72,42 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     @Override
     public void mousePressed(MouseEvent e) {
         Point point = e.getPoint();
-        for(cellRectangle cell: model.cells){
-            if (cell.contains(point)&&cell.hasBlock){
-                draggedBlockIndex=model.cells.indexOf(cell);
-                container.selectedBlock=model.blocksPlayed.get(draggedBlockIndex);
+        for (cellRectangle cell : getCells()) {
+            if (cell.contains(point) && cell.hasBlock) {
+                draggedBlockIndex = getCells().indexOf(cell);
+                container.selectedBlock = getBlocksPlayed().get(draggedBlockIndex);
                 Toolkit toolkit = Toolkit.getDefaultToolkit();
                 Image image = container.selectedBlock.getIcon().getImage();
-                Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "block img");
-                container.container.setCursor (c);
+                Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "block img");
+                container.getContainer().setCursor(c);
             }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.mouseEvent=false;
-        container.container.setCursor(Cursor.getDefaultCursor());
+        this.mouseEvent = false;
+        container.getContainer().setCursor(Cursor.getDefaultCursor());
         if (container.selectedBlock != null) {
-            if(draggedBlockIndex>=0){
-                model.blocksPlayed.remove(draggedBlockIndex);
-                model.cells.get(draggedBlockIndex).hasBlock=false;
-                model.actionList.remove(draggedBlockIndex);
-                draggedBlockIndex=-1;
+            if (draggedBlockIndex >= 0) {
+                getBlocksPlayed().remove(draggedBlockIndex);
+                getCells().get(draggedBlockIndex).hasBlock = false;
+                getActions().remove(draggedBlockIndex);
+                draggedBlockIndex = -1;
             }
-            model.setCell(e, container.selectedBlock);
+            setCell(e, container.selectedBlock);
             container.selectedBlock = null;
             repaint();
         }
     }
 
+
     public void mouseEntered(MouseEvent e) {
 
     }
 
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -113,17 +115,17 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseEvent=true;
+        mouseEvent = true;
         Point mouse = e.getPoint();
         for (cellRectangle cell : model.cells) {
             if (cell.contains(mouse) && container.selectedBlock == null && cell.hasBlock) {
                 cell.close = true;
                 // cell.highlight = true;
                 this.repaint();
-            } else if(cell.contains(mouse)&& container.selectedBlock != null) {
+            } else if (cell.contains(mouse) && container.selectedBlock != null) {
                 cell.highlight = true;
                 this.repaint();
-            }else{
+            } else {
                 cell.close = false;
                 cell.highlight = false;
                 this.repaint();
@@ -138,7 +140,26 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         model.actionList.clear();
     }
 
-    public List<cellRectangle> getCells() {
+     List<cellRectangle> getCells() {
         return model.cells;
+    }
+
+    private void setCell(MouseEvent e, BlockControl selectedBlock) {
+        model.setCell(e, selectedBlock);
+    }
+
+    List<String> getActions() {
+        return model.actionList;
+    }
+
+    List<BlockControl> getBlocksPlayed() {
+        return model.blocksPlayed;
+    }
+    PlayingPanel getContainer(){
+        return container;
+    }
+
+    public void clearCells() {
+        model.cells=new ArrayList<>();
     }
 }

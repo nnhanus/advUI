@@ -40,6 +40,9 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
             this.add(controlBtn);
         }
     }
+    public PlayingPanel getContainer(){
+        return container;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {

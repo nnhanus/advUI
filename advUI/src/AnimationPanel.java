@@ -5,14 +5,13 @@ public class AnimationPanel extends JPanel {
     public Grid grid;
     public Character character;
     public GameWindow parent;
+    AnimationPanelPresentation view;
 
     public AnimationPanel (GameWindow controller){
         super ();
         parent=controller;
-        Color bgColor = new Color(0xFED1FF);
-        setBackground(bgColor);
+        view= new AnimationPanelPresentation(this);
         changeLevel(parent.getLevel());
-        parent.repaint();
 
     }
 
@@ -34,6 +33,7 @@ public class AnimationPanel extends JPanel {
     public void changeLevel(Level level){
         setGrid(level);
         setCharacter(level);
+        parent.repaint();
     }
 
     public boolean isLevelComplete(){
@@ -67,25 +67,24 @@ public class AnimationPanel extends JPanel {
             parent.setLevel(parent.getLevelNumber()+1);
             //create a congratulation pop up with next level button (JOption)
             //choice=JOptionPane.showConfirmDialog(this,"Ready for the next level?","Congratulations!",JOptionPane.YES_NO_OPTION);
-            /**if(choice==0){parent.changeLevel(parent.getLevelNumber());}
-            else{parent.levelSelect();}**/
+
             EndLevelMessage end = new EndLevelMessage(parent, "win");
         } else if (isFailed()){
             //create try again pop up
             //choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
-            /**if(choice==0){parent.changeLevel(parent.getLevelNumber());}
-            else{parent.levelSelect();}**/
             EndLevelMessage end = new EndLevelMessage(parent, "fail");
         }
-        /**else{
-            //create try again pop up
-            choice=JOptionPane.showConfirmDialog(this,"So close! Want to try again?","Try again",JOptionPane.YES_NO_OPTION);
-        }**/
 
-        //if(choice==0){parent.changeLevel(parent.getLevelNumber());}
-        //else{parent.levelSelect();}
 
     }
 
 
+    public static class AnimationPanelPresentation {
+        AnimationPanel control;
+        public AnimationPanelPresentation(AnimationPanel control){
+            this.control=control;
+            Color bgColor = new Color(0xFED1FF);
+            this.control.setBackground(bgColor);
+        }
+    }
 }
