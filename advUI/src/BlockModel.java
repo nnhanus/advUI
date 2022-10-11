@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +9,6 @@ public class BlockModel {
     int level = GameWindow.getLevelNumber();
     int index;
     String name;
-    List<String> blockType= new ArrayList<String>();
     public Map<Integer,String> nameMap=new HashMap();
     public Map<Integer,ImageIcon> iconMap=new HashMap();
     String forLoopIter="";
@@ -24,13 +21,11 @@ public class BlockModel {
         nameMap.put(1,"Turn");
         nameMap.put(2,"For");
         nameMap.put(3,"If");
-        nameMap.put(4,"While");
 
         iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
-        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle grey.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
-        iconMap.put(4,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
+        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(75, 60, Image.SCALE_DEFAULT)));
         setIndex(type);
         this.name=nameMap.get(type);
         this.icon= iconMap.get(type);

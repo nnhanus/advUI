@@ -13,14 +13,13 @@ public class readActionThread implements Runnable{
     }
     @Override
     public void run() {
-        //System.out.println("hi read");
 
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
         boolean isNextIf = false;
         boolean loopFlag = false;
         dropPanelModel model = this.parent.getModel();
-
+        //int cellIter=0;
         while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
 
             synchronized (parent) {
@@ -30,8 +29,9 @@ public class readActionThread implements Runnable{
                    // parent.notify();
                 }
 
-                String actionCall = model.actionList.get(0);
-                if (model.actionList.size() != 1) isNextIf = model.actionList.get(1) == "If";
+                String actionCall = parent.getActions().get(0);
+                //cellRectangle cell = parent.getCells().get(cellIter);
+                if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1) == "If";
                 String action = actionCall.split(" ")[0];
                 if (action.equalsIgnoreCase("For")) {
                     loopFlag = true;
@@ -41,7 +41,6 @@ public class readActionThread implements Runnable{
                     loop.add(action);
                     readAction(loop, character, isNextIf);
 
-                    //System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
@@ -63,6 +62,7 @@ public class readActionThread implements Runnable{
 
                 }
                 model.actionList.remove(0);
+                //cellIter++;
             }
 
         }
@@ -91,8 +91,6 @@ public class readActionThread implements Runnable{
             if (action.equalsIgnoreCase("Move")) {
                 for(int i =0;i<iter;i++){
                     character.move(isNextIf);
-                    //animation.revalidate();
-                   // animation.repaint();
                     parent.notify();
                     try {
                         parent.wait();

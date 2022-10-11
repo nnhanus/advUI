@@ -19,6 +19,10 @@ public class GameWindow  extends JFrame {
         pack();
     }
 
+    public GlassPaneWrapper getGlassPanel(){
+        return view.glassPanel;
+    }
+
     public static int getLevelNumber() {
         return model.getLevelNumber();
     }
@@ -28,13 +32,13 @@ public class GameWindow  extends JFrame {
     }
 
 
-    public void levelSelect() {
-        Integer[] availableLevels = new Integer[model.unlockedLevel];
-        Arrays.setAll(availableLevels, i -> i + 1);
-        int choice=JOptionPane.showOptionDialog(this,"Select a level","Menu",
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null,availableLevels,0);
-        changeLevel(choice+1);
-    }
+//    public void levelSelect() {
+//        Integer[] availableLevels = new Integer[model.unlockedLevel];
+//        Arrays.setAll(availableLevels, i -> i + 1);
+//        int choice=JOptionPane.showOptionDialog(this,"Select a level","Menu",
+//                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null,availableLevels,0);
+//        changeLevel(choice+1);
+//    }
 
     public void setLevel(int newLevel) {
         model.setLevel(newLevel);
