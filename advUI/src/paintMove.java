@@ -11,20 +11,16 @@ public class paintMove implements Runnable{
     }
     @Override
     public void run() {
-        while(!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()){
-
+        while(!parent.getActions().isEmpty()){
             synchronized (parent) {
-                parent.mouseEvent = true;
+                try {
+                    parent.wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 parent.repaint();
                 animation.repaint();
                 parent.notify();
-                try {
-                    parent.wait();
-                    parent.mouseEvent = false;
-                } catch (InterruptedException e) {
-                    parent.mouseEvent = false;
-                    throw new RuntimeException(e);
-                }
             }
         }
     }

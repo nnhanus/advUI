@@ -67,8 +67,8 @@ public class AnimationPanel extends JPanel {
     public void endOfLevelMessage() {
         //need to reset character and scoops at end "repaint" from beginning of level
         if(isLevelComplete()){
-            parent.setLevelUnlocked(parent.getLevelNumber()+1);
-            parent.setLevel(parent.getLevelNumber()+1);
+            /**parent.setLevelUnlocked(parent.getLevelNumber()+1);
+            parent.setLevel(parent.getLevelNumber()+1);**/
             EndLevelMessage end = new EndLevelMessage(parent, "win");
         } else if (isFailed()){
             EndLevelMessage end = new EndLevelMessage(parent, "fail");

@@ -55,6 +55,8 @@ public class GameWindow  extends JFrame {
     }
 
     public void changeLevel(int levelNumber){
+        view.playingZone.getBottomPanel().mouseEvent = false;
+        Color BGColor = new Color(0xFED1FF);
         if( levelNumber>model.unlockedLevel){
             levelNumber=getLevelNumber();
         }

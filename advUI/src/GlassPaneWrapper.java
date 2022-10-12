@@ -57,10 +57,10 @@ public class GlassPaneWrapper extends JPanel {
                 Point mouse = SwingUtilities.convertPoint(e.getComponent(),e.getPoint(),wrappedPanel.getBottomPanel());
                 for (cellRectangle cell : wrappedPanel.getBottomPanel().getCells()) {
                     if(cell.contains(mouse)) {
-                        cell.highlight = true;
+                        cell.setHighlight(true);
                         wrappedPanel.getBottomPanel().repaint();
                     }else{
-                        cell.highlight = false;
+                        cell.setHighlight(false);
                         wrappedPanel.getBottomPanel().repaint();
                     }
                 }

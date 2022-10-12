@@ -58,8 +58,7 @@ public class Grid {
     }
 
     public void paintGrid(Graphics g){
-        Random random = new Random();
-        height = frame.getHeight() - 40;
+        height = frame.getHeight() - 15;
         width= frame.getWidth()/2;
         cellHeight = height/4; //We might want to make the cells a uniform size and just have the grid fill up less of the panel space
         cellWidth = width/4;

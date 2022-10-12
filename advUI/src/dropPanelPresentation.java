@@ -72,6 +72,7 @@ public class dropPanelPresentation {
         //need to not clear and repaint for the delete button
         Graphics2D g2d = (Graphics2D) g.create();
         if(!control.mouseEvent) {
+            System.out.println("hi");
             clear();
             buildGrid();
         }
@@ -96,17 +97,22 @@ public class dropPanelPresentation {
                 g2d.drawImage(getIconAsImage(closeIcon),cell.x+3*cell.width/4,cell.y+3,cell.width/4,cell.height/4,null);
             }
         }
-            for (cellRectangle cell : control.getCells()) {
-                if (cell.highlight) {
-                    g2d.setStroke(new BasicStroke(3));
-                    g2d.setColor(Color.GREEN);
-                    g2d.draw(cell);
-                }
+        for (cellRectangle cell : control.getCells()) {
+            if (cell.highlight) {
+                g2d.setStroke(new BasicStroke(3));
+                g2d.setColor(Color.GREEN);
+                g2d.draw(cell);
+            }
+            if (cell.isReadHighlight){
+                g2d.setStroke(new BasicStroke(3));
+                g2d.setColor(Color.GREEN);
+                g2d.draw(cell);
+            }
             //make this prettier
         }
 
         g2d.dispose();
-        control.mouseEvent=false;
+        //control.mouseEvent=false;
     }
 
     private void clear() {

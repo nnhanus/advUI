@@ -8,18 +8,25 @@ import java.awt.event.MouseMotionListener;
 public class cellRectangle extends Rectangle {
     public boolean close;
     public boolean highlight;
+    public boolean isReadHighlight;
 
     dropPanel control;
     boolean hasBlock;
+
     public cellRectangle(int x, int y, int width, int height, dropPanel control) {
         super(x,y,width,height);
         this.control=control;
         close=false;
         highlight=false;
         hasBlock=false;
+        isReadHighlight=false;
     }
 
     public void setHighlight(boolean bool){
         highlight = bool;
+    }
+
+    public void setReadHighlight(boolean bool){
+        isReadHighlight = bool;
     }
 }
