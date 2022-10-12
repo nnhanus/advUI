@@ -30,7 +30,7 @@ public class SRSlider extends JSlider {
         });
         this.addChangeListener(
                 ce -> {
-                    if (this.getValue() > unlocked) {
+                    if (this.getValue() > unlocked&&this.getValue()<6) {
                         this.setValue(unlocked);
                     }
                     this.repaint();
