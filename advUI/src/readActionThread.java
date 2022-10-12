@@ -79,8 +79,9 @@ public class readActionThread implements Runnable{
             } catch (Exception e) {
             }
         }
-        parent.clearAll();
         parent.mouseEvent = false;
+        parent.clearAll();
+        parent.repaint();
         parent.animation.endOfLevelMessage();
     }
 

@@ -72,7 +72,6 @@ public class dropPanelPresentation {
         //need to not clear and repaint for the delete button
         Graphics2D g2d = (Graphics2D) g.create();
         if(!control.mouseEvent) {
-            System.out.println("hi");
             clear();
             buildGrid();
         }
