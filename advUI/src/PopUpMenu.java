@@ -30,7 +30,7 @@ public class PopUpMenu extends JDialog {
             levelSelect.setMinimumSize(new Dimension(500, 250));
             levelSelect.setMaximumSize(new Dimension(500, 250));
 
-            SRSlider slider = new SRSlider(parent.getLevelNumber());
+            SRSlider slider = new SRSlider(parent.getLevelNumber(), parent.getUnlocked());
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
@@ -81,18 +81,21 @@ public class PopUpMenu extends JDialog {
                 this.control.dispose();
             });
 
-            JButton close = new JButton("Close");
-            close.setFont(buttonFont);
-            close.setBackground(BGColor);
-            close.addActionListener( e -> dispose());
+//            JButton close = new JButton("Close");
+//            close.setFont(buttonFont);
+//            close.setBackground(BGColor);
+//            close.addActionListener( e -> dispose());
+
+            JCheckBox tutorial = new JCheckBox("Tutorials On",parent.tutorialOn);
+            tutorial.addActionListener(e->{parent.toggleTutorial();});
 
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new FlowLayout());
             buttonPanel.setBackground(BGColor);
-
+            buttonPanel.add(tutorial);
             buttonPanel.add(go);
             buttonPanel.add(restart);
-            buttonPanel.add(close);
+            //buttonPanel.add(close);
             add(buttonPanel,BorderLayout.SOUTH);
         }
     }

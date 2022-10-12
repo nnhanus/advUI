@@ -40,8 +40,10 @@ public class MainMenu extends JDialog {
             JPanel levelSelect = new JPanel();
             levelSelect.setLayout(new BorderLayout());
 
-            SRSlider slider = new SRSlider(1);
+            SRSlider slider = new SRSlider(1, 1);
             levelSelect.add(slider, BorderLayout.CENTER);
+
+            JCheckBox tutorial = new JCheckBox("Tutorials On",true);
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
             level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
@@ -61,18 +63,20 @@ public class MainMenu extends JDialog {
                         else if (selectedLevel==6) {
                             dispose();
                         }else {
-                            GameWindow game = new GameWindow(slider.getValue());
+                            GameWindow game = new GameWindow(slider.getValue(),tutorial.isSelected());
                             dispose();
                         }
                     }
             );
             playPanel.add(go);
+            playPanel.add(tutorial);
             levelSelect.add(playPanel, BorderLayout.SOUTH);
 
             mainPane.add(levelSelect, BorderLayout.CENTER);
 
             control.add(mainPane, BorderLayout.CENTER);
         }
+
 
         private void mainTitle(Color BGColor) {
             JPanel mainTitle = new JPanel();

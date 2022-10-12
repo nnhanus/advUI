@@ -9,17 +9,15 @@ import java.util.ArrayList;
 
 public class SRSliderUI extends BasicSliderUI {
     Image image = null;
-    Image level1;
-    Image level2;
-    Image level3;
-    Image level4;
-    Image level5;
+    Image locked, level1,level2,level3,level4,level5;
 
     ArrayList<Image> labels = new ArrayList<>();
 
+    SRSlider slider;
 
     public SRSliderUI(SRSlider slider) {
         super(slider);
+        this.slider=slider;
         chargeImage();
     }
 
@@ -27,15 +25,7 @@ public class SRSliderUI extends BasicSliderUI {
     @Override
     public void paintThumb(Graphics pen){
         int x = thumbRect.x;
-//        if (slider.getValue()==1){
-//            x += 20;
-//        } else if (slider.getValue()==2){
-//            x+=10;
-//        } else if (slider.getValue()==4){
-//            x-=10;
-//        } else if (slider.getValue()==5){
-//            x-=25;
-//        }
+//
         pen.drawImage(image, x, thumbRect.y, thumbRect.width, thumbRect.height, null);
     }
 
@@ -45,7 +35,7 @@ public class SRSliderUI extends BasicSliderUI {
 
     @Override
     public void paintLabels(Graphics pen){
-
+        int unlocked = slider.unlocked;
         for (int i = 0; i < 7; i++){
             int x = labelRect.x + i*(labelRect.width/7);
             int width = labelRect.width/7;
@@ -61,7 +51,9 @@ public class SRSliderUI extends BasicSliderUI {
                 pen.drawString("Quit",x + width/2, y + height/2 );
                continue;
             }
-            Image label = labels.get(i-1);
+            Image label;
+            if(i>unlocked){label=labels.get(0);}
+            else{label = labels.get(i);}
             if (i == 1){
                 x -=5;
             } else if (i == 2) {
@@ -80,6 +72,7 @@ public class SRSliderUI extends BasicSliderUI {
     private void chargeImage(){
         try {
             image = ImageIO.read(new File("advUI/Icons/cone.png"));
+            locked = ImageIO.read(new File("advUI/Icons/lock.png"));
             level1 = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
             level2 = ImageIO.read(new File("advUI/Icons/funfetti.png"));
             level3 = ImageIO.read(new File("advUI/Icons/choco.png"));
@@ -88,6 +81,7 @@ public class SRSliderUI extends BasicSliderUI {
         } catch (Exception e){
             System.out.println("Missing File");
         }
+        labels.add(locked);
         labels.add(level1);
         labels.add(level2);
         labels.add(level3);

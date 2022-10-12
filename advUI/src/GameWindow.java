@@ -7,17 +7,18 @@ public class GameWindow  extends JFrame {
 
     public static GameWindowPresentation view;
     public static GameWindowModel model;
+    boolean tutorialOn;
 
-    public GameWindow(int level){
+    public GameWindow(int level, boolean tutorialOn){
         super("Scoop Recoup");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.model = new GameWindowModel(level);
         this.view = new GameWindowPresentation(this);
-
+        this.tutorialOn=tutorialOn;
         setPreferredSize(new Dimension(model.Width, model.Height));
         setVisible(true);
         pack();
-        instructionWindow tutorial= new instructionWindow(this);
+        if(tutorialOn){ instructionWindow tutorial= new instructionWindow(this);}
     }
 
     public GlassPaneWrapper getGlassPanel(){
@@ -30,6 +31,10 @@ public class GameWindow  extends JFrame {
 
     public static Level getLevel(){
         return model.getLevel();
+    }
+
+    public static int getUnlocked(){
+        return model.unlockedLevel;
     }
 
 
@@ -50,20 +55,7 @@ public class GameWindow  extends JFrame {
     }
 
     public void changeLevel(int levelNumber){
-        Color BGColor = new Color(0xFED1FF);
         if( levelNumber>model.unlockedLevel){
-            JDialog lockedLevel = new JDialog(this, "Locked Level");
-            lockedLevel.setLayout(new BorderLayout());
-            JLabel locked=new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/locked.png").getImage().getScaledInstance(350,300,Image.SCALE_DEFAULT)));
-            lockedLevel.add(locked);
-            JLabel message=new JLabel("<html>You need more training!\nComplete all previous levels to unlock.</html>");
-            message.setFont(new Font("Bradley Hand",Font.PLAIN,18));
-            message.setOpaque(true);
-            message.setBackground(BGColor);
-            lockedLevel.add(message,BorderLayout.SOUTH);
-            lockedLevel.setSize(350,350);
-            lockedLevel.setLocation(this.getWidth()/2,this.getHeight()/2);
-            lockedLevel.setVisible(true);
             levelNumber=getLevelNumber();
         }
         setLevel(levelNumber);
@@ -71,11 +63,15 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
-        instructionWindow tutorial = new instructionWindow(this);
+        if(tutorialOn){ instructionWindow tutorial = new instructionWindow(this);}
     }
 
     public void setLevelUnlocked(int levelUnlocked) {
         model.unlockedLevel=levelUnlocked;
+    }
+
+    public void toggleTutorial(){
+        tutorialOn=!tutorialOn;
     }
 
 

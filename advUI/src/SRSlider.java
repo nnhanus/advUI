@@ -1,10 +1,17 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SRSlider extends JSlider {
-
-    public SRSlider(int level){
+    int level;
+    int unlocked;
+    public SRSlider(int level, int unlocked){
         super();
+        this.level=level;
+        this.unlocked=unlocked;
         setUI(new SRSliderUI(this));
         setMinimum(0);
         setMaximum(6);
@@ -15,6 +22,28 @@ public class SRSlider extends JSlider {
         setBackground(BGColor);
         setForeground(BGColor);
         setPreferredSize(new Dimension(480, 300));
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                clickToLevel(e.getPoint());
+            }
+        });
+        this.addChangeListener(
+                ce -> {
+                    if (this.getValue() > unlocked) {
+                        this.setValue(unlocked);
+                    }
+                    this.repaint();
+                }
+        );
+    }
+
+    private void clickToLevel(Point point) {
+        double percent = point.x / ((double) getWidth());
+        int range = getMaximum() - getMinimum();
+        double newVal = range * percent;
+        int result = (int)(getMinimum() + newVal);
+        setValue(result);
     }
 
 }
