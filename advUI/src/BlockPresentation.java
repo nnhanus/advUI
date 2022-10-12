@@ -12,6 +12,6 @@ public class BlockPresentation  {
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(75,60);
+        return new Dimension(100,90);
     }
 }

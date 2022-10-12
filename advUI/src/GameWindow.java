@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 public class GameWindow  extends JFrame {
 
@@ -65,7 +63,7 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
-        if(tutorialOn){ instructionWindow tutorial = new instructionWindow(this);}
+        //if(tutorialOn){ instructionWindow tutorial = new instructionWindow(this);}
     }
 
     public void setLevelUnlocked(int levelUnlocked) {

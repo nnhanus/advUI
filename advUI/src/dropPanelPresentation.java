@@ -121,11 +121,11 @@ public class dropPanelPresentation {
 
 
     private void buildGrid() {
-        int width = control.getWidth() - 30;
-        int height = control.getHeight();
+        int width = control.getWidth()-20;
+        int height = control.getHeight()-30;
         int cellWidth = width / model.columnCount;
-        int cellHeight = Math.min(Math.round((float) (cellWidth * (0.66))), height / model.rowCount);
-        int xOffset = 20;
+        int cellHeight = Math.min(Math.round((float) 9*cellWidth/10 ), height / model.rowCount);
+        int xOffset = 10;
         int yOffset = (height - (model.rowCount * cellHeight)) / 2;
         model.width = width;
         model.height = height;

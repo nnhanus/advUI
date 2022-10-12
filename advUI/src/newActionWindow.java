@@ -5,34 +5,34 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-public class instructionWindow extends JDialog {
+public class newActionWindow extends JDialog {
     GameWindow parent;
-    instructionWindowPresentation view;
-    instructionWindowModel model;
+    newActionWindowPresentation view;
+    newActionWindowModel model;
 
     int level;
-    public instructionWindow(GameWindow owner){
+    public newActionWindow(GameWindow owner){
         super(owner);
         parent = owner;
         level=parent.getLevelNumber();
-        model= new instructionWindowModel();
-        view= new instructionWindowPresentation(this);
+        model= new newActionWindowModel();
+        view= new newActionWindowPresentation(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         pack();
     }
     private String getInstructions() {
-        return model.getInstructions();
+        return model.getInstructions(level);
     }
 
-    private class instructionWindowPresentation {
-        instructionWindow control;
+    private class newActionWindowPresentation {
+        newActionWindow control;
         JButton next;
         JTextArea instructionLabel= new JTextArea();
         JLabel imagePanel = new JLabel();
         List<String> instructionText;
         List<ImageIcon> instructionImages;
-        public instructionWindowPresentation(instructionWindow instructionWindow) {
+        public newActionWindowPresentation(newActionWindow instructionWindow) {
             //embed video or animate small pieces
             control= instructionWindow;
             control.setLayout(new BorderLayout());
@@ -70,28 +70,28 @@ public class instructionWindow extends JDialog {
     }
 
     private List<ImageIcon> getImages() {
-        return model.getImages();
+        return model.getImages(level);
     }
 
 
-    private class instructionWindowModel {
-        String instructions;
-        List<ImageIcon> images ;
-        public instructionWindowModel(){
-            images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
-                    new ImageIcon(new ImageIcon("advUI/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/2scoop.png").getImage().getScaledInstance(80,150,Image.SCALE_DEFAULT)),
-                    new ImageIcon(new ImageIcon("advUI/Icons/playing.jpg").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT))));
-            instructions="Oh no! You've dropped your ice cream. Well...5 second rule applies, right? Move your character to the scoop to add it to your cone." +
-                    "@Drag and drop action blocks into the grid below to move.@When you're ready, press Play! If you want to retry the level, press the Redo button. If you want to empty the grid, but keep your current level progress, press the Clear button.@"
-                    +"Collect the scoops from largest to smallest to succeed. You cannot place a large scoop on top of a small scoop.@You can complete the challenge in one go, or in a combination of smaller movements. Keep in mind, to move to the next level, your last movement must end on the smallest scoop.";
-
+    private class newActionWindowModel {
+        Map<Integer, String> instructions=new HashMap<>();
+        Map<Integer, List<ImageIcon>> images = new HashMap<>();
+        public newActionWindowModel(){
+            instructions.put(1,"Oh no! You've dropped your ice cream. Well...5 second rule applies, right? Move your character to the scoop to add it to your cone.@Drag and drop action blocks into the grid below to move. End movement on the last scoop to move to the next level.@When you're ready, press Play! If you want to retry the level, press the Redo button. If you want to empty the grid, but keep your current level progress, press the Clear button.@");
+            instructions.put(2,"Collect the scoops from largest to smallest to succeed.@You can complete the challenge in one go, or in a combination of smaller movements. Keep in mind, to move to the next level, your last movement must end on the smallest scoop.");
+            instructions.put(3,"");
+            instructions.put(4,"");
+            //need to scale images
+            List<ImageIcon> level1= new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT))));
+            images.put(1,level1);
         }
-        public String getInstructions(){
-            return instructions;
+        public String getInstructions(int level){
+            return instructions.get(level);
         }
 
-        public List<ImageIcon> getImages() {
-            return images;
+        public List<ImageIcon> getImages(int level) {
+            return images.get(level);
         }
     }
 }

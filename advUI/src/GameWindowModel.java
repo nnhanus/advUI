@@ -14,7 +14,7 @@ public class GameWindowModel {
     private final List<ChangeListener> changeListeners = new ArrayList<>();
 
     public GameWindowModel(int levelFromMenu) {
-        Height = 500;
+        Height = 600;
         Width = 1000;
         levelnum = levelFromMenu;
         level = new Level(levelnum);
