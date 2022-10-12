@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.List;
 
 public class newActionWindow extends JDialog {
+    //could make into Jpanel and add to glass frame
+    
     GameWindow parent;
     newActionWindowPresentation view;
     newActionWindowModel model;
@@ -28,43 +30,43 @@ public class newActionWindow extends JDialog {
     private class newActionWindowPresentation {
         newActionWindow control;
         JButton next;
-        JTextArea instructionLabel= new JTextArea();
+        JTextArea itemDescript = new JTextArea();
         JLabel imagePanel = new JLabel();
-        List<String> instructionText;
-        List<ImageIcon> instructionImages;
-        public newActionWindowPresentation(newActionWindow instructionWindow) {
+        List<String> descriptionText;
+        List<ImageIcon> itemImages;
+        public newActionWindowPresentation(newActionWindow newWindow) {
             //embed video or animate small pieces
-            control= instructionWindow;
+            control= newWindow;
             control.setLayout(new BorderLayout());
             control.setPreferredSize(new Dimension(500,250));
-            instructionImages = control.getImages();
+            itemImages = control.getImages();
             String instructionList=control.getInstructions();
-            instructionText= new ArrayList<>(Arrays.asList(instructionList.split("@")));
-            instructionLabel.setEditable(false);
-            instructionLabel.setLineWrap(true);
-            instructionLabel.setWrapStyleWord(true);
-            instructionLabel.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+            descriptionText = new ArrayList<>(Arrays.asList(instructionList.split("@")));
+            itemDescript.setEditable(false);
+            itemDescript.setLineWrap(true);
+            itemDescript.setWrapStyleWord(true);
+            itemDescript.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
             changeSlide();
             next = new JButton("Next");
             next.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(instructionText.isEmpty()){control.dispose();}
+                    if(descriptionText.isEmpty()){control.dispose();}
                     else {
                         changeSlide();
                     }
                 }
             });
-            control.add(instructionLabel,BorderLayout.CENTER);
+            control.add(itemDescript,BorderLayout.CENTER);
             control.add(imagePanel, BorderLayout.EAST);
             control.add(next, BorderLayout.SOUTH);
         }
 
         private void changeSlide() {
-            instructionLabel.setText(instructionText.get(0));
-            instructionText.remove(0);
-            imagePanel.setIcon(instructionImages.get(0));
-            instructionImages.remove(0);
+            itemDescript.setText(descriptionText.get(0));
+            descriptionText.remove(0);
+            imagePanel.setIcon(itemImages.get(0));
+            itemImages.remove(0);
 
         }
     }
