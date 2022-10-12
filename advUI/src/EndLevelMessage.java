@@ -62,6 +62,8 @@ public class EndLevelMessage extends JDialog {
 
         yes.addActionListener(
                 e -> {
+                    parent.setLevelUnlocked(parent.getLevelNumber()+1);
+                    parent.setLevel(parent.getLevelNumber()+1);
                     parent.changeLevel(parent.getLevelNumber());
                     dispose();
                 });

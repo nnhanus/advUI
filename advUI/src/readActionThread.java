@@ -4,76 +4,84 @@ import java.util.List;
 public class readActionThread implements Runnable{
     public AnimationPanel animation;
     public dropPanel parent;
-    public int blockIter;
-
 
     public readActionThread(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
         this.parent=parent;
-        this.blockIter = 0;
-
     }
+
     @Override
     public void run() {
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
         boolean isNextIf = false;
         boolean loopFlag = false;
-        dropPanelModel model = this.parent.getModel();
-        //int cellIter=0;
-        while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
+        int blockIter = 0;
+        //cellRectangle cellToLight = parent.getCells().get(blockIter);
+        int inForLoop = 0;
+        cellRectangle cellFor = null;
 
+        parent.mouseEvent = true;
+
+
+        while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                   // parent.notify();
-                }
-
+                System.out.println(parent.mouseEvent);
                 String actionCall = parent.getActions().get(0);
-                parent.getCells().get(blockIter).setHighlight(true);
+                parent.mouseEvent = true;
 
                 if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1).equalsIgnoreCase("If ");
+                //if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1) == "If"; //is an if the next action block
 
                 String action = actionCall.split(" ")[0];
 
-                if (action.equalsIgnoreCase("For")) {
+                if (action.equalsIgnoreCase("For")) { //is it a for loop
                     loopFlag = true;
                     loop.add(actionCall.split(" ")[1]);
                 }
 
-                if (loopFlag) {
+                if (loopFlag) { // If it is a foor loop
                     loopFlag = false;
                     loop.add(action);
+                    inForLoop = Integer.parseInt(loop.get(0)); //how many actions in the loop
                     readAction(loop);
+                    cellFor = parent.getCells().get(blockIter); //the "for block" cell keeps lighting up
+                    //cellFor.setReadHighlight(true); //
+                    blockIter++; //the next one is the cell to light
+                    parent.mouseEvent = true;
+                   // parent.getCells().get(blockIter).setReadHighlight(true);
                 } else {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {}
                     readAction(action, character, isNextIf);
+                    parent.getCells().get(blockIter).setReadHighlight(true);
                     parent.notify();
                     try {
                         parent.wait();
-                        if (!parent.getCells().isEmpty()) {
-                            parent.getCells().get(blockIter).setHighlight(false);
-                        }
-                        blockIter++;
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                    if (inForLoop > 0){
+                        cellFor.setReadHighlight(true);
+                        inForLoop--;
+                    } else {
+                        blockIter++;
+                    }
                     parent.getActions().remove(0);
-
                 }
             }
 
         }
         synchronized (parent) {
-            parent.notify();
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+            }
         }
         parent.clearAll();
-        parent.repaint();
+        parent.mouseEvent = false;
         parent.animation.endOfLevelMessage();
-
     }
 
 

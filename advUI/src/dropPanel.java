@@ -26,12 +26,10 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public dropPanel(PlayingPanel parent) {
         container = parent;
-        mouseEvent = false;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.model = new dropPanelModel(this);
         this.view = new dropPanelPresentation(this);
-
     }
 
     @Override
@@ -46,6 +44,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
 
     public void readList() {
+        mouseEvent = true;
         animation = GameWindow.getAnimation();
         Thread doActions = new Thread(new readActionThread(animation, this));
         Thread paintMove = new Thread(new paintMove(animation, this));
@@ -123,11 +122,11 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
                 // cell.highlight = true;
                 this.repaint();
             } else if (cell.contains(mouse) && container.selectedBlock != null) {
-                cell.highlight = true;
+                cell.setHighlight(true);
                 this.repaint();
             } else {
                 cell.close = false;
-                cell.highlight = false;
+                cell.setHighlight(false);
                 this.repaint();
             }
 
