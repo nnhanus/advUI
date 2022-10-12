@@ -87,15 +87,13 @@ public class dropPanelPresentation {
             BlockControl block = control.getBlocksPlayed().get(index);
             cellRectangle cell = control.getCells().get(index);
             cell.hasBlock = true;
-            if (cell.close) {
-                g2d.setPaint(new TexturePaint(getIconAsImage(closeIcon), cell));
-                g2d.fill(cell);
-            } else {
                 g2d.setPaint(new TexturePaint(block.getIconAsImage(), cell));
                 g2d.fill(cell);
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("Ariel", Font.BOLD, 14));
                 g2d.drawString(block.getType(), cell.x + cell.width / 2 - g2d.getFontMetrics().stringWidth(block.getType()) / 2, cell.y + cell.height / 2);
+            if (cell.close) {
+                g2d.drawImage(getIconAsImage(closeIcon),cell.x+3*cell.width/4,cell.y+3,cell.width/4,cell.height/4,null);
             }
         }
             for (cellRectangle cell : control.getCells()) {

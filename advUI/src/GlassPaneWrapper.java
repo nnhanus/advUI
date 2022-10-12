@@ -20,10 +20,14 @@ public class GlassPaneWrapper extends JPanel {
                 if(wrappedPanel.getBottomPanel().view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.play))){
                     wrappedPanel.getBottomPanel().view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));
                 }
-                if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
+                else if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
                 wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
-                if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
+                else if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
                 wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
+                else if(wrappedPanel.getBottomPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.getBottomPanel()))){
+                    wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
+                }
+
             }
             @Override
             public void mousePressed(MouseEvent e) {

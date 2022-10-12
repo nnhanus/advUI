@@ -56,6 +56,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     public void mouseClicked(MouseEvent e) {
+        System.out.println("in clicked");
         Point clicked = e.getPoint();
         for (cellRectangle cell : getCells()) {
             if (cell.contains(clicked)) {
