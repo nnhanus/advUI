@@ -13,21 +13,19 @@ public class BlockControl extends JLabel implements MouseListener {
     int typeNum;
     public TopPanel container;
     private BlockPresentation view;
+    boolean helper;
+
     public BlockControl (int controlNum, TopPanel parent) {
         container = parent;
         typeNum = controlNum;
+        helper=false;
         model = new BlockModel(controlNum, this);
         view = new BlockPresentation(this);
-        this.setIcon(getIcon());
-        this.setText(model.name);
-        this.setFont(new Font("Ariel", Font.BOLD, 14));
-        this.setForeground(Color.white);
-        this.setHorizontalTextPosition(JLabel.CENTER);
         this.addMouseListener(this);
 
     }
-    public int getIndex (){
-        return model.index;
+    public String getDescription(){
+      return model.getHelper();
     }
     public String getType(){return model.getType();}
     public ImageIcon getIcon(){return model.getIcon();}
@@ -59,11 +57,12 @@ public class BlockControl extends JLabel implements MouseListener {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
-
+    public void mouseExited(MouseEvent e) {
+    }
     public BufferedImage getIconAsImage() {
         return model.getIconAsImage();
     }

@@ -2,9 +2,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +12,28 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     int level;
     int colCount;
     GridBagConstraints gbc;
+    BlockControl inBlock;
+    Timer timer;
+    JLabel helper= new JLabel(" ");
     public TopPanel(PlayingPanel parent) {
         container=parent;
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-
+        gbc.insets=new Insets(2,0,30,0);
         resetBtns();
-        //could create array of all button types. for i in 0 to level-1 create button
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.insets=new Insets(2,0,0,0);
+        gbc.anchor=GridBagConstraints.WEST;
+        //gbc.fill=GridBagConstraints.HORIZONTAL;
+        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
+        helper.setHorizontalTextPosition(JLabel.RIGHT);
+        //helper.setVerticalTextPosition(JLabel.BOTTOM);
+        this.add(helper,gbc);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+
     }
 
 
@@ -33,11 +43,11 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         level=GameWindow.getLevelNumber();
         colCount= Math.min(level,5);
         for (int i = 0; i < colCount ; i++) {
-            gbc.gridx = i%colCount;
-            gbc.gridy = Math.floorDiv(i,colCount);
+            gbc.gridx = i;
+            gbc.gridy = 0;
             BlockControl controlBtn = new BlockControl(i,this);
             buttonList.add(controlBtn);
-            this.add(controlBtn);
+            this.add(controlBtn,gbc);
         }
     }
     public PlayingPanel getContainer(){
@@ -53,6 +63,9 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     public void mousePressed(MouseEvent e) {
         for (BlockControl block: buttonList){
             if ( block.contains(SwingUtilities.convertPoint(this,e.getPoint(),block))){
+                if(timer!=null){timer.stop();}
+                inBlock=null;
+                helper.setText(" ");
                 block.dispatchEvent(e);
             }
         }
@@ -83,8 +96,35 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         for (BlockControl block: buttonList){
             if (block.contains(SwingUtilities.convertPoint(this,point,block))){
                 block.setBorder(new LineBorder(Color.GREEN));
+                if(block!=inBlock){
+                    inBlock=block;
+                    addHelper(block, (TopPanel) e.getComponent());
+                }
+//                MouseEvent enterBlock= new MouseEvent(block, MouseEvent.MOUSE_ENTERED,System.currentTimeMillis()+10,MouseEvent.NOBUTTON,SwingUtilities.convertPoint(this,point,block).x,SwingUtilities.convertPoint(this,point,block).y,0,false);
+//                block.dispatchEvent(enterBlock);
             }
-            else{block.setBorder(new EmptyBorder(0,0,0,0));}
+            else {
+                block.setBorder(new EmptyBorder(0, 0, 0, 0));
+//                MouseEvent exitBlock = new MouseEvent(block, MouseEvent.MOUSE_EXITED, System.currentTimeMillis() + 10, MouseEvent.NOBUTTON, SwingUtilities.convertPoint(this, point, block).x, SwingUtilities.convertPoint(this, point, block).y, 0, false);
+//                block.dispatchEvent(exitBlock);
+                if(timer!=null){timer.stop();}
+                inBlock=null;
+                helper.setText(" ");
+
+            }
         }
+    }
+
+    private void addHelper(BlockControl block, TopPanel parent) {
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println("here");
+                helper.setText(block.getDescription());
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
     }
 }

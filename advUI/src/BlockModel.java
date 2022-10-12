@@ -10,6 +10,7 @@ public class BlockModel {
     int index;
     String name;
     public Map<Integer,String> nameMap=new HashMap();
+    public Map<Integer,String> descriptionMap=new HashMap();
     public Map<Integer,ImageIcon> iconMap=new HashMap();
     String forLoopIter="";
     public ImageIcon icon;
@@ -26,6 +27,12 @@ public class BlockModel {
         iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
+
+        descriptionMap.put(0,"Moves the character one cell in the direction it is facing");
+        descriptionMap.put(1,"Turns the character 90 degrees clockwise");
+        descriptionMap.put(2,"Repeats the next block a specified amount of times");
+        descriptionMap.put(3,"Tests whether the ice cream scoop on the square is the largest one left");
+
         setIndex(type);
         this.name=nameMap.get(type);
         this.icon= iconMap.get(type);
@@ -33,6 +40,9 @@ public class BlockModel {
 
     }
 
+    public String getHelper(){
+        return descriptionMap.get(index);
+    }
     public String checkType(int indexCheck){
         return nameMap.get(indexCheck);
     }

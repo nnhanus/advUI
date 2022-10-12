@@ -63,7 +63,7 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
-        //if(tutorialOn){ instructionWindow tutorial = new instructionWindow(this);}
+        //if(levelNumber==getUnlocked()){ newActionWindow newBlock = new newActionWindow(this);}
     }
 
     public void setLevelUnlocked(int levelUnlocked) {
