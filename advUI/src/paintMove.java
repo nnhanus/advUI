@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class paintMove implements Runnable{
 
     public AnimationPanel animation;
@@ -13,20 +11,20 @@ public class paintMove implements Runnable{
     }
     @Override
     public void run() {
-//        System.out.println("hi paint");
-        while(!parent.getModel().actionList.isEmpty() && !Thread.currentThread().isInterrupted()){
+        while(!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()){
 
             synchronized (parent) {
-                parent.getModel().cells.get(blockIter).highlight=true;
+                parent.mouseEvent = true;
                 parent.repaint();
                 animation.repaint();
                 parent.notify();
                 try {
                     parent.wait();
+                    parent.mouseEvent = false;
                 } catch (InterruptedException e) {
+                    parent.mouseEvent = false;
                     throw new RuntimeException(e);
                 }
-                blockIter++;
             }
         }
     }

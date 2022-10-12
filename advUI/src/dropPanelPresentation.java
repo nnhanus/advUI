@@ -81,27 +81,29 @@ public class dropPanelPresentation {
             g2d.fill(cell);
             g2d.setStroke(standard);
             g2d.setColor(Color.LIGHT_GRAY);
-            if (cell.highlight) {
-                g2d.setStroke(new BasicStroke(3));
-                g2d.setColor(Color.GREEN);
-            }
             g2d.draw(cell);
         }
         for (int index=0;index<control.getBlocksPlayed().size();index++) {
-            BlockControl block=control.getBlocksPlayed().get(index);
+            BlockControl block = control.getBlocksPlayed().get(index);
             cellRectangle cell = control.getCells().get(index);
-            cell.hasBlock=true;
-            if (cell.close){
-                g2d.setPaint(new TexturePaint(getIconAsImage(closeIcon),cell));
+            cell.hasBlock = true;
+            if (cell.close) {
+                g2d.setPaint(new TexturePaint(getIconAsImage(closeIcon), cell));
                 g2d.fill(cell);
-            }
-            else{
-                g2d.setPaint(new TexturePaint(block.getIconAsImage(),cell));
+            } else {
+                g2d.setPaint(new TexturePaint(block.getIconAsImage(), cell));
                 g2d.fill(cell);
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("Ariel", Font.BOLD, 14));
-                g2d.drawString(block.getType(),cell.x+cell.width/2-g2d.getFontMetrics().stringWidth(block.getType())/2,cell.y+cell.height/2);
+                g2d.drawString(block.getType(), cell.x + cell.width / 2 - g2d.getFontMetrics().stringWidth(block.getType()) / 2, cell.y + cell.height / 2);
             }
+        }
+            for (cellRectangle cell : control.getCells()) {
+                if (cell.highlight) {
+                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setColor(Color.GREEN);
+                    g2d.draw(cell);
+                }
             //make this prettier
         }
 

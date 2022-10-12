@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class cellRectangle extends Rectangle{
+public class cellRectangle extends Rectangle {
     public boolean close;
     public boolean highlight;
 
@@ -13,10 +14,12 @@ public class cellRectangle extends Rectangle{
     public cellRectangle(int x, int y, int width, int height, dropPanel control) {
         super(x,y,width,height);
         this.control=control;
-        close =false;
+        close=false;
         highlight=false;
         hasBlock=false;
     }
 
-
+    public void setHighlight(boolean bool){
+        highlight = bool;
+    }
 }

@@ -4,65 +4,58 @@ import java.util.List;
 public class readActionThread implements Runnable{
     public AnimationPanel animation;
     public dropPanel parent;
+    public int blockIter;
 
 
     public readActionThread(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
         this.parent=parent;
+        this.blockIter = 0;
 
     }
     @Override
     public void run() {
-
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
         boolean isNextIf = false;
         boolean loopFlag = false;
-        dropPanelModel model = this.parent.getModel();
-        //int cellIter=0;
-        while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
 
+        while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                   // parent.notify();
-                }
-
                 String actionCall = parent.getActions().get(0);
-                //cellRectangle cell = parent.getCells().get(cellIter);
+                parent.getCells().get(blockIter).setHighlight(true);
+
                 if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1) == "If";
+
                 String action = actionCall.split(" ")[0];
+
                 if (action.equalsIgnoreCase("For")) {
                     loopFlag = true;
                     loop.add(actionCall.split(" ")[1]);
-                } else if (loopFlag) {
+                }
+
+                if (loopFlag) {
                     loopFlag = false;
                     loop.add(action);
-                    readAction(loop, character, isNextIf);
-
-                    parent.notify();
-                    try {
-                        parent.wait();
-                    } catch (InterruptedException e) {
-
-                        //parent.notify();
-                        throw new RuntimeException(e);
-                    }
+                    readAction(loop);
                 } else {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {}
                     readAction(action, character, isNextIf);
-//                    System.out.println("Notified to repaint");
                     parent.notify();
                     try {
                         parent.wait();
+                        if (!parent.getCells().isEmpty()) {
+                            parent.getCells().get(blockIter).setHighlight(false);
+                        }
+                        blockIter++;
                     } catch (InterruptedException e) {
-                        //parent.notify();
                         throw new RuntimeException(e);
                     }
+                    parent.getActions().remove(0);
 
                 }
-                model.actionList.remove(0);
-                //cellIter++;
             }
 
         }
@@ -85,32 +78,14 @@ public class readActionThread implements Runnable{
             animation.revalidate();
             animation.repaint();
         }
-    private void readAction(List<String> loop, Character character, boolean isNextIf){
+    private void readAction(List<String> loop){
             int iter=Integer.parseInt(loop.get(0));
-            String action=loop.get(1);
-            if (action.equalsIgnoreCase("Move")) {
-                for(int i =0;i<iter;i++){
-                    character.move(isNextIf);
-                    parent.notify();
-                    try {
-                        parent.wait();
-                    } catch (InterruptedException e) {
-                        //parent.notify();
-                        throw new RuntimeException(e);
-                    }
-                }
-            } else if (action.equalsIgnoreCase("Turn")) {
-                for(int i =0;i<iter;i++){
-                    character.turn();
-                    parent.notify();
-                    try {
-                        parent.wait();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+            String action=parent.getActions().get(1);
+            parent.getActions().remove(1);
+            parent.getActions().remove(0);
+            for(int i =0;i<iter;i++) {
+                parent.getActions().add(i, action);
             }
-
     }
 
 }
