@@ -7,11 +7,11 @@ public class GameWindow  extends JFrame {
     public static GameWindowModel model;
     boolean tutorialOn;
 
-    public GameWindow(int level, boolean tutorialOn){
+    public GameWindow(int level, boolean tutorialOn, String character){
         super("Scoop Recoup");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.model = new GameWindowModel(level);
-        this.view = new GameWindowPresentation(this);
+        this.view = new GameWindowPresentation(this, character);
         this.tutorialOn=tutorialOn;
         setPreferredSize(new Dimension(model.Width, model.Height));
         setVisible(true);
@@ -59,7 +59,7 @@ public class GameWindow  extends JFrame {
             levelNumber=getLevelNumber();
         }
         setLevel(levelNumber);
-        getAnimation().changeLevel(getLevel());
+        getAnimation().changeLevel(getLevel(), getAnimation().character.getPath());
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();

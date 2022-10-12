@@ -13,9 +13,9 @@ public class GameWindowPresentation{
     public PlayingPanel playingZone;
     public GlassPaneWrapper glassPanel;
 
-    public GameWindowPresentation(GameWindow controller){
+    public GameWindowPresentation(GameWindow controller, String character){
         control=controller;
-        animation = new AnimationPanel(control);
+        animation = new AnimationPanel(control, character);
         //menuBar();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(1, 2));

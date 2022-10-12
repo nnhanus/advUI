@@ -8,20 +8,26 @@ import java.io.IOException;
 public class CharacterPresentation {
     private BufferedImage character = null;
     private BufferedImage cone = null;
+    String characterPath;
     private int currentX;
     private int currentY;
     public Character control;
 
-    public CharacterPresentation(Character controller){
+    public CharacterPresentation(Character controller, String characterPath){
         control=controller;
+        this.characterPath = characterPath;
         try {
-            character = ImageIO.read(new File("advUI/Icons/elephant.png"));
+            character = ImageIO.read(new File(characterPath));
             cone = ImageIO.read(new File("advUI/Icons/cone.png"));
         } catch (IOException ex) {
             System.out.println("Missing file");
         }
         currentX = Grid.getCellWidth()*control.getX()+Grid.getCellWidth()/4;
         currentY = Grid.getCellHeight()*control.getY()+Grid.getCellHeight()/4;
+    }
+
+    public String getCharacterPath(){
+        return characterPath;
     }
 
 

@@ -54,10 +54,10 @@ public class SRSliderUI extends BasicSliderUI {
             Image label;
             if(i>unlocked){label=labels.get(0);}
             else{label = labels.get(i);}
-            if (i == 1){
+            if (i == 1 && i==2){
                 x -=5;
-            } else if (i == 2) {
-                x -=5;
+            /*} else if (i == 2) {
+                x -=5;*/
             } else  if (i == 4) {
                 x += 5;
             } else if (i == 5){

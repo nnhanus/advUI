@@ -7,9 +7,9 @@ public class Character {
     public static CharacterModel model;
     public AnimationPanel animation;
 
-    public Character(AnimationPanel parent, CharacterModel.Direction dir, int posX, int posY){
+    public Character(AnimationPanel parent, CharacterModel.Direction dir, int posX, int posY, String character){
         model= new CharacterModel(this, dir, posX, posY);
-        presentation= new CharacterPresentation(this);
+        presentation= new CharacterPresentation(this, character);
         animation=parent;
     }
 
@@ -19,6 +19,10 @@ public class Character {
 
     public static void turn() {
         model.turn();
+    }
+
+    public String getPath(){
+        return presentation.getCharacterPath();
     }
 
 

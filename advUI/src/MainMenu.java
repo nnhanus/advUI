@@ -2,10 +2,13 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.CharArrayReader;
 
 public class MainMenu extends JDialog {
 
     MainMenuPresentation view;
+    String mode = "slider";
+    String character = "advUI/Icons/cow.png";
 
     public MainMenu(){
         super();
@@ -40,10 +43,12 @@ public class MainMenu extends JDialog {
             JPanel levelSelect = new JPanel();
             levelSelect.setLayout(new BorderLayout());
 
+            CharacterChooser choose = new CharacterChooser();
             SRSlider slider = new SRSlider(1, 1);
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JCheckBox tutorial = new JCheckBox("Tutorials On",true);
+            tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
             level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
@@ -58,21 +63,53 @@ public class MainMenu extends JDialog {
             go.setBackground(BGColor);
             go.addActionListener(
                     e -> {
-                        int selectedLevel=slider.getValue();
-                        if(selectedLevel==0){}
-                        else if (selectedLevel==6) {
-                            dispose();
-                        }else {
-                            GameWindow game = new GameWindow(slider.getValue(),tutorial.isSelected());
-                            dispose();
+                        if (mode.equalsIgnoreCase("slider")) {
+                            int selectedLevel = slider.getValue();
+                            if (selectedLevel == 0) {
+                            } else if (selectedLevel == 6) {
+                                dispose();
+                            } else {
+                                GameWindow game = new GameWindow(slider.getValue(), tutorial.isSelected(), character);
+                                dispose();
+                            }
+                        } else {
+                            character = choose.characters.get(choose.index);
                         }
                     }
             );
+
+
+            JButton character = new JButton("Character");
+            character.setFont(new Font("Bradley Hand", Font.BOLD, 24));
+            character.addActionListener( e -> {
+                if (mode.equalsIgnoreCase("slider")) {
+                    levelSelect.remove(slider);
+                    levelSelect.add(choose, BorderLayout.CENTER);
+                    character.setText("Level");
+                    mode = "chooser";
+                    level.setText("Choose your character!");
+                    revalidate();
+                    repaint();
+                } else {
+                    levelSelect.remove(choose);
+                    levelSelect.add(slider, BorderLayout.CENTER);
+                    character.setText("Character");
+                    mode = "slider";
+                    level.setText("Choose your level!");
+                    revalidate();
+                    repaint();
+                }
+            });
+            playPanel.add(character);
             playPanel.add(go);
             playPanel.add(tutorial);
+
+
+
             levelSelect.add(playPanel, BorderLayout.SOUTH);
 
             mainPane.add(levelSelect, BorderLayout.CENTER);
+           //CharacterChooser mainPane = new CharacterChooser();
 
             control.add(mainPane, BorderLayout.CENTER);
         }

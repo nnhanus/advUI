@@ -8,12 +8,11 @@ public class AnimationPanel extends JPanel {
     public boolean overplay=false;
     AnimationPanelPresentation view;
 
-    public AnimationPanel (GameWindow controller){
+    public AnimationPanel (GameWindow controller, String character){
         super ();
         parent=controller;
         view= new AnimationPanelPresentation(this);
-        changeLevel(parent.getLevel());
-
+        changeLevel(parent.getLevel(), character);
     }
 
     @Override
@@ -27,13 +26,13 @@ public class AnimationPanel extends JPanel {
         grid = new Grid(level.getNumRows(), level.getNumCols(), level.getScoops(), level.getBlockedCells(), parent);
     }
 
-    public void setCharacter(Level level){
-        character = new Character(this, level.getOrientation(), level.getPosX(), level.getPosY() );
+    public void setCharacter(Level level, String characterPath){
+        character = new Character(this, level.getOrientation(), level.getPosX(), level.getPosY(), characterPath);
     }
 
-    public void changeLevel(Level level){
+    public void changeLevel(Level level, String character){
         setGrid(level);
-        setCharacter(level);
+        setCharacter(level, character);
         parent.repaint();
     }
 
