@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterModel {
+
+
     enum Direction{
         NORTH,
         SOUTH,
@@ -57,10 +59,22 @@ public class CharacterModel {
         }
     }
 
-    public void ifStatement (boolean condition, Scoop s){
-        if (condition){
-            scoops.add(s);
-            Grid.scoops.remove(s);
+    public void ifStatement() {
+        if(grid.scoops.isEmpty()){return;}
+        grid = parent.animation.grid;
+        Scoop pickIf=null;
+        Scoop largest=grid.scoops.get(0);
+        for (Scoop s : grid.scoops){
+            if(s.size>largest.size){largest=s;}
+            if (s.x == x && s.y == y){
+                pickIf=s;
+            }
+        }
+        if(pickIf==null){return;}
+        if(pickIf==largest){
+            if (scoops.size() > 0 && scoops.get(scoops.size()-1).size <= pickIf.size){return;}
+            scoops.add(pickIf);
+            grid.scoops.remove(pickIf);
         }
     }
 

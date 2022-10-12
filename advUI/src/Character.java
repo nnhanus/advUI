@@ -48,4 +48,8 @@ public class Character {
     public Image getCharImage(){
         return presentation.getCharImage();
     }
+
+    public void ifStatement() {
+        model.ifStatement();
+    }
 }

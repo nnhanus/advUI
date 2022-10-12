@@ -33,7 +33,7 @@ public class readActionThread implements Runnable{
                 String actionCall = parent.getActions().get(0);
                 parent.getCells().get(blockIter).setHighlight(true);
 
-                if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1) == "If";
+                if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1).equalsIgnoreCase("If ");
 
                 String action = actionCall.split(" ")[0];
 
@@ -82,6 +82,8 @@ public class readActionThread implements Runnable{
                 character.move(isNextIf);
             } else if (action.equalsIgnoreCase("Turn")) {
                 character.turn();
+            }else if(action.equalsIgnoreCase("If")){
+                character.ifStatement();
             }
             animation.revalidate();
             animation.repaint();
