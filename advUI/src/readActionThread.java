@@ -19,9 +19,17 @@ public class readActionThread implements Runnable{
         List<String> loop = new ArrayList<>();
         boolean isNextIf = false;
         boolean loopFlag = false;
+        dropPanelModel model = this.parent.getModel();
+        //int cellIter=0;
+        while (!model.actionList.isEmpty() && !Thread.currentThread().isInterrupted()) {
 
-        while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                   // parent.notify();
+                }
+
                 String actionCall = parent.getActions().get(0);
                 parent.getCells().get(blockIter).setHighlight(true);
 

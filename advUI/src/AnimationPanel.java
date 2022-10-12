@@ -5,6 +5,7 @@ public class AnimationPanel extends JPanel {
     public Grid grid;
     public Character character;
     public GameWindow parent;
+    public boolean overplay=false;
     AnimationPanelPresentation view;
 
     public AnimationPanel (GameWindow controller){
@@ -44,7 +45,11 @@ public class AnimationPanel extends JPanel {
     }
 
     public boolean isFailed(){
-        if (Grid.scoops.isEmpty()){
+        if(overplay){
+            overplay=false;
+            return true;
+        }
+        else if (Grid.scoops.isEmpty()){
             return false;
         } else {
             if (character.getScoops().isEmpty()){

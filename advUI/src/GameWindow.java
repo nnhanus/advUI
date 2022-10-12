@@ -17,6 +17,7 @@ public class GameWindow  extends JFrame {
         setPreferredSize(new Dimension(model.Width, model.Height));
         setVisible(true);
         pack();
+        instructionWindow tutorial= new instructionWindow(this);
     }
 
     public GlassPaneWrapper getGlassPanel(){
@@ -70,6 +71,7 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
+        instructionWindow tutorial = new instructionWindow(this);
     }
 
     public void setLevelUnlocked(int levelUnlocked) {

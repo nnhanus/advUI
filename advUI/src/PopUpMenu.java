@@ -10,8 +10,6 @@ public class PopUpMenu extends JDialog {
         parent = owner;
         view= new PopUpMenuPresentation(this);
 
-
-
         setVisible(true);
         pack();
     }

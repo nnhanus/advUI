@@ -66,4 +66,7 @@ public class CharacterPresentation {
         currentX = currentX + Grid.getCellWidth();
     }
 
+    public Image getCharImage() {
+        return character;
+    }
 }

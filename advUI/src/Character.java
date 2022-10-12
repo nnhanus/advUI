@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.List;
 
 public class Character {
@@ -43,5 +44,8 @@ public class Character {
 
     public List<Scoop> getScoops() {
         return model.scoops;
+    }
+    public Image getCharImage(){
+        return presentation.getCharImage();
     }
 }
