@@ -26,7 +26,6 @@ public class readActionThread implements Runnable{
 
         while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
-                System.out.println(parent.mouseEvent);
                 String actionCall = parent.getActions().get(0);
                 parent.mouseEvent = true;
 
