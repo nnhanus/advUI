@@ -125,7 +125,7 @@ public class dropPanelPresentation {
         int cellWidth = width / model.columnCount;
         int cellHeight = Math.min(Math.round((float) 9*cellWidth/10 ), height / model.rowCount);
         int xOffset = 10;
-        int yOffset = (height - (model.rowCount * cellHeight)) / 2;
+        int yOffset = 10;
         model.width = width;
         model.height = height;
         model.cellWidth = cellWidth;
