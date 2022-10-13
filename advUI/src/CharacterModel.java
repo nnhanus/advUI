@@ -29,7 +29,7 @@ public class CharacterModel {
 
     //moves the character from 1 cell according to the orientation
     public void move(boolean isNextIf){
-        ArrayList<Point> blocked = grid.obstacles;
+        ArrayList<Point> blocked = grid.obstaclePos;
         if (orientation == Direction.NORTH && y > 0 && !blocked.contains(new Point(x, y-1))) {
             y--;
             parent.presentation.updateCharacterNorth();

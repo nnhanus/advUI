@@ -1,15 +1,15 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.CharArrayReader;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainMenu extends JDialog {
 
     MainMenuPresentation view;
     String mode = "slider";
-    String character = "advUI/Icons/cow.png";
-
+    String characterFile = "advUI/Icons/cow.png";
+    JLabel character;
     public MainMenu(){
         super();
         this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
@@ -69,35 +69,52 @@ public class MainMenu extends JDialog {
                             } else if (selectedLevel == 6) {
                                 dispose();
                             } else {
-                                GameWindow game = new GameWindow(slider.getValue(), tutorial.isSelected(), character);
+                                GameWindow game = new GameWindow(slider.getValue(), tutorial.isSelected(), characterFile);
                                 dispose();
                             }
                         } else {
-                            character = choose.characters.get(choose.index);
+                            characterFile = choose.characters.get(choose.index);
+                            character.setIcon(new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
+                            levelSelect.remove(choose);
+                            levelSelect.add(slider, BorderLayout.CENTER);
+                            character.setVisible(true);
+                            //character.setText("Character");
+                            mode = "slider";
+                            level.setText("Choose your level!");
+                            revalidate();
+                            repaint();
+
                         }
                     }
             );
 
 
-            JButton character = new JButton("Character");
-            character.setFont(new Font("Bradley Hand", Font.BOLD, 24));
-            character.addActionListener( e -> {
-                if (mode.equalsIgnoreCase("slider")) {
-                    levelSelect.remove(slider);
-                    levelSelect.add(choose, BorderLayout.CENTER);
-                    character.setText("Level");
-                    mode = "chooser";
-                    level.setText("Choose your character!");
-                    revalidate();
-                    repaint();
-                } else {
-                    levelSelect.remove(choose);
-                    levelSelect.add(slider, BorderLayout.CENTER);
-                    character.setText("Character");
-                    mode = "slider";
-                    level.setText("Choose your level!");
-                    revalidate();
-                    repaint();
+            character = new JLabel("Character",new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)),JLabel.CENTER);
+            character.setOpaque(false);
+            character.setVerticalTextPosition(JLabel.BOTTOM);
+            character.setFont(new Font("Bradley Hand", Font.BOLD, 20));
+            character.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (mode.equalsIgnoreCase("slider")) {
+                        levelSelect.remove(slider);
+                        levelSelect.add(choose, BorderLayout.CENTER);
+                        //character.setText("Level");
+                        character.setVisible(false);
+                        mode = "chooser";
+                        level.setText("Choose your character!");
+                        revalidate();
+                        repaint();
+                    } else {
+                        levelSelect.remove(choose);
+                        levelSelect.add(slider, BorderLayout.CENTER);
+                        character.setVisible(true);
+                        //character.setText("Character");
+                        mode = "slider";
+                        level.setText("Choose your level!");
+                        revalidate();
+                        repaint();
+                    }
                 }
             });
             playPanel.add(character);

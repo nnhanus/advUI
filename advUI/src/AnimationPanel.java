@@ -23,7 +23,7 @@ public class AnimationPanel extends JPanel {
     }
 
     public void setGrid(Level level){
-        grid = new Grid(level.getNumRows(), level.getNumCols(), level.getScoops(), level.getBlockedCells(), parent);
+        grid = new Grid(level.getNumRows(), level.getNumCols(), level.getScoops(), level.getBlockedCells(),level.getBackground(),parent);
     }
 
     public void setCharacter(Level level, String characterPath){

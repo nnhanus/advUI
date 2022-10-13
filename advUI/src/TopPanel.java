@@ -20,17 +20,8 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        gbc.insets=new Insets(2,0,30,0);
         resetBtns();
-        gbc.gridx=0;
-        gbc.gridy=1;
-        gbc.insets=new Insets(2,0,0,0);
-        gbc.anchor=GridBagConstraints.WEST;
-        //gbc.fill=GridBagConstraints.HORIZONTAL;
-        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
-        helper.setHorizontalTextPosition(JLabel.RIGHT);
-        //helper.setVerticalTextPosition(JLabel.BOTTOM);
-        this.add(helper,gbc);
+
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
 
@@ -42,6 +33,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         repaint();
         level=GameWindow.getLevelNumber();
         colCount= Math.min(level,5);
+        gbc.insets=new Insets(2,0,30,0);
         for (int i = 0; i < colCount ; i++) {
             gbc.gridx = i;
             gbc.gridy = 0;
@@ -49,6 +41,15 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
             buttonList.add(controlBtn);
             this.add(controlBtn,gbc);
         }
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.insets=new Insets(2,0,0,0);
+        gbc.anchor=GridBagConstraints.WEST;
+        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
+        helper.setHorizontalTextPosition(JLabel.RIGHT);
+        //fix alignment of helper within cell
+        //add mouse click to helper brings up all the instructions for the blocks
+        this.add(helper,gbc);
     }
     public PlayingPanel getContainer(){
         return container;
@@ -119,7 +120,6 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("here");
                 helper.setText(block.getDescription());
             }
         });
