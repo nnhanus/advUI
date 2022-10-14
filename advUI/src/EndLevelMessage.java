@@ -1,9 +1,6 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class EndLevelMessage extends JDialog {
     GameWindow parent;
@@ -80,14 +77,23 @@ public class EndLevelMessage extends JDialog {
     }
 
     private void makeWin(){
-        icon = new ImageIcon(new ImageIcon("advUI/Icons/winLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
+        makeIcon("Win");
         messageP1.setText("Congratulations!");
         messageP2.setText("Ready for the next level?");
     }
 
     private void makeFail(){
-        icon = new ImageIcon(new ImageIcon("advUI/Icons/failLevel.png").getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
+        makeIcon("Fail");
         messageP1.setText("So close!");
         messageP2.setText("Want to try again?");
+    }
+
+    private void makeIcon(String type){
+        String characterPath = parent.view.animation.character.getPath();
+        String split[] = characterPath.split("/");
+        String split2[] = split[2].split("\\.");
+        String character = split2[0];
+        String path = "advUI/Icons/" + character + type + ".png";
+        icon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
     }
 }
