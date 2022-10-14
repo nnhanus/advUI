@@ -61,9 +61,17 @@ public class MainMenu extends JDialog {
                         tutorialOn = false;
                     } else {
                         tutorial.setText("Tutorials On");
-                        tutorial.setForeground(new Color(0, 153, 0));
+                        tutorial.setForeground(new Color(0, 153, 15));
                         tutorialOn = true;
                     }
+                }
+                @Override
+                public void mouseEntered(MouseEvent e){
+                    tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+                }
+                @Override
+                public void mouseExited(MouseEvent e){
+                    tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
                 }
             });
 
@@ -96,6 +104,7 @@ public class MainMenu extends JDialog {
                             levelSelect.remove(choose);
                             levelSelect.add(slider, BorderLayout.CENTER);
                             character.setVisible(true);
+                            tutorial.setVisible(true);
                             //character.setText("Character");
                             mode = "slider";
                             level.setText("Choose your level!");
@@ -107,10 +116,8 @@ public class MainMenu extends JDialog {
             );
 
 
-            character = new JLabel("Character",new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)),JLabel.CENTER);
+            character = new JLabel(new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
             character.setOpaque(false);
-            character.setVerticalTextPosition(JLabel.BOTTOM);
-            character.setFont(new Font("Bradley Hand", Font.BOLD, 16));
             character.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -119,26 +126,26 @@ public class MainMenu extends JDialog {
                         levelSelect.add(choose, BorderLayout.CENTER);
                         //character.setText("Level");
                         character.setVisible(false);
+                        tutorial.setVisible(false);
                         mode = "chooser";
                         level.setText("Choose your character!");
                         revalidate();
                         repaint();
-                    } else {
-                        levelSelect.remove(choose);
-                        levelSelect.add(slider, BorderLayout.CENTER);
-                        character.setVisible(true);
-                        //character.setText("Character");
-                        mode = "slider";
-                        level.setText("Choose your level!");
-                        revalidate();
-                        repaint();
                     }
+                }
+                @Override
+                public void mouseEntered(MouseEvent e){
+                    character.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/exchange.png").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
+                }
+                @Override
+                public void mouseExited(MouseEvent e){
+                    character.setIcon(new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
                 }
             });
             playPanel.add(character);
-            playPanel.add(Box.createRigidArea(new Dimension(75,0)));
+            playPanel.add(Box.createRigidArea(new Dimension(140,0)));
             playPanel.add(go);
-            playPanel.add(Box.createRigidArea(new Dimension(75,0)));
+            playPanel.add(Box.createRigidArea(new Dimension(100,0)));
             playPanel.add(tutorial);
 
 
