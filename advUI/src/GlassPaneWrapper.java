@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 public class GlassPaneWrapper extends JPanel {
 
     PlayingPanel wrappedPanel;
+
+
     public GlassPaneWrapper(PlayingPanel givenPanel) {
         this.wrappedPanel=givenPanel;
         this.setOpaque(false);
@@ -74,6 +76,7 @@ public class GlassPaneWrapper extends JPanel {
 
         });
         this.setFocusable(true);
+
     }
 
 
@@ -85,5 +88,6 @@ public class GlassPaneWrapper extends JPanel {
             this.setFocusTraversalKeysEnabled(false);
         }
     }
+
 
 }

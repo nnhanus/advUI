@@ -28,10 +28,10 @@ public class BlockModel {
         iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
 
-        descriptionMap.put(0,"Moves the character one cell in the direction it is facing");
-        descriptionMap.put(1,"Turns the character 90 degrees clockwise");
-        descriptionMap.put(2,"Repeats the next block a specified amount of times");
-        descriptionMap.put(3,"Tests whether the ice cream scoop on the square is the largest one left");
+        descriptionMap.put(0,"Moves the character one cell in the current direction  ");
+        descriptionMap.put(1,"Turns the character 90 degrees clockwise  ");
+        descriptionMap.put(2,"Repeats the next block a specified amount of times  ");
+        descriptionMap.put(3,"Tests if the ice cream scoop on the current square is the largest one left ");
 
         setIndex(type);
         this.name=nameMap.get(type);

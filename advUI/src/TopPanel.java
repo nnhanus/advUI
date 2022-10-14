@@ -11,17 +11,15 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     public PlayingPanel container;
     int level;
     int colCount;
-    GridBagConstraints gbc;
     BlockControl inBlock;
     Timer timer;
-    JLabel helper= new JLabel(" ");
+
     public TopPanel(PlayingPanel parent) {
         container=parent;
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
-        this.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
+        //this.setLayout(new GridBagLayout());
+        //gbc = new GridBagConstraints();
         resetBtns();
-
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
 
@@ -33,23 +31,12 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         repaint();
         level=GameWindow.getLevelNumber();
         colCount= Math.min(level,5);
-        gbc.insets=new Insets(2,0,30,0);
         for (int i = 0; i < colCount ; i++) {
-            gbc.gridx = i;
-            gbc.gridy = 0;
             BlockControl controlBtn = new BlockControl(i,this);
             buttonList.add(controlBtn);
-            this.add(controlBtn,gbc);
+            this.add(controlBtn);
         }
-        gbc.gridx=0;
-        gbc.gridy=1;
-        gbc.insets=new Insets(2,0,0,0);
-        gbc.anchor=GridBagConstraints.WEST;
-        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
-        helper.setHorizontalTextPosition(JLabel.RIGHT);
-        //fix alignment of helper within cell
-        //add mouse click to helper brings up all the instructions for the blocks
-        this.add(helper,gbc);
+
     }
     public PlayingPanel getContainer(){
         return container;
@@ -66,7 +53,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
             if ( block.contains(SwingUtilities.convertPoint(this,e.getPoint(),block))){
                 if(timer!=null){timer.stop();}
                 inBlock=null;
-                helper.setText(" ");
+                container.getContainer().setHelperText(" ");
                 block.dispatchEvent(e);
             }
         }
@@ -99,28 +86,31 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                 block.setBorder(new LineBorder(Color.GREEN));
                 if(block!=inBlock){
                     inBlock=block;
-                    addHelper(block, (TopPanel) e.getComponent());
+                    addHelper(block);
                 }
 //                MouseEvent enterBlock= new MouseEvent(block, MouseEvent.MOUSE_ENTERED,System.currentTimeMillis()+10,MouseEvent.NOBUTTON,SwingUtilities.convertPoint(this,point,block).x,SwingUtilities.convertPoint(this,point,block).y,0,false);
 //                block.dispatchEvent(enterBlock);
             }
             else {
-                block.setBorder(new EmptyBorder(0, 0, 0, 0));
+                if(block==inBlock){
+                    block.setBorder(new EmptyBorder(0, 0, 0, 0));
+                    inBlock=null;
+                    if(timer!=null){timer.stop();}
+                    container.getContainer().setHelperText(" ");
+                }
 //                MouseEvent exitBlock = new MouseEvent(block, MouseEvent.MOUSE_EXITED, System.currentTimeMillis() + 10, MouseEvent.NOBUTTON, SwingUtilities.convertPoint(this, point, block).x, SwingUtilities.convertPoint(this, point, block).y, 0, false);
 //                block.dispatchEvent(exitBlock);
-                if(timer!=null){timer.stop();}
-                inBlock=null;
-                helper.setText(" ");
+
 
             }
         }
     }
 
-    private void addHelper(BlockControl block, TopPanel parent) {
+    private void addHelper(BlockControl block) {
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                helper.setText(block.getDescription());
+                container.getContainer().setHelperText(block.getDescription());
             }
         });
         timer.setRepeats(false);

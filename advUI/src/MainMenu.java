@@ -92,7 +92,7 @@ public class MainMenu extends JDialog {
             character = new JLabel("Character",new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)),JLabel.CENTER);
             character.setOpaque(false);
             character.setVerticalTextPosition(JLabel.BOTTOM);
-            character.setFont(new Font("Bradley Hand", Font.BOLD, 20));
+            character.setFont(new Font("Bradley Hand", Font.BOLD, 16));
             character.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -123,7 +123,7 @@ public class MainMenu extends JDialog {
 
 
 
-            levelSelect.add(playPanel, BorderLayout.SOUTH);
+            levelSelect.add(playPanel, BorderLayout.PAGE_END);
 
             mainPane.add(levelSelect, BorderLayout.CENTER);
            //CharacterChooser mainPane = new CharacterChooser();

@@ -22,6 +22,9 @@ public class GameWindow  extends JFrame {
     public GlassPaneWrapper getGlassPanel(){
         return view.glassPanel;
     }
+    public void setHelperText(String s) {
+        view.setHelperText(s);
+    }
 
     public static int getLevelNumber() {
         return model.getLevelNumber();
