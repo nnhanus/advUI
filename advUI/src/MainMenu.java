@@ -10,6 +10,7 @@ public class MainMenu extends JDialog {
     String mode = "slider";
     String characterFile = "advUI/Icons/cow.png";
     JLabel character;
+    boolean tutorialOn=true;
     public MainMenu(){
         super();
         this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
@@ -47,8 +48,24 @@ public class MainMenu extends JDialog {
             SRSlider slider = new SRSlider(1, 1);
             levelSelect.add(slider, BorderLayout.CENTER);
 
-            JCheckBox tutorial = new JCheckBox("Tutorials On",true);
+            JLabel tutorial = new JLabel("Tutorials On");
             tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+            tutorial.setForeground(new Color(0,153,0));
+            tutorial.setOpaque(false);
+            tutorial.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (tutorialOn) {
+                        tutorial.setText("Tutorials Off");
+                        tutorial.setForeground(new Color(204, 0, 0));
+                        tutorialOn = false;
+                    } else {
+                        tutorial.setText("Tutorials On");
+                        tutorial.setForeground(new Color(0, 153, 0));
+                        tutorialOn = true;
+                    }
+                }
+            });
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
             level.setFont(new Font("Bradley Hand", Font.BOLD, 30));
@@ -57,6 +74,7 @@ public class MainMenu extends JDialog {
             levelSelect.add(level, BorderLayout.NORTH);
 
             JPanel playPanel = new JPanel();
+            playPanel.setLayout(new BoxLayout(playPanel, BoxLayout.LINE_AXIS));
             playPanel.setBackground(BGColor);
             JButton go = new JButton("Go");
             go.setFont(new Font("Bradley Hand", Font.BOLD, 24));
@@ -69,7 +87,7 @@ public class MainMenu extends JDialog {
                             } else if (selectedLevel == 6) {
                                 dispose();
                             } else {
-                                GameWindow game = new GameWindow(slider.getValue(), tutorial.isSelected(), characterFile);
+                                GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile);
                                 dispose();
                             }
                         } else {
@@ -118,7 +136,9 @@ public class MainMenu extends JDialog {
                 }
             });
             playPanel.add(character);
+            playPanel.add(Box.createRigidArea(new Dimension(75,0)));
             playPanel.add(go);
+            playPanel.add(Box.createRigidArea(new Dimension(75,0)));
             playPanel.add(tutorial);
 
 
