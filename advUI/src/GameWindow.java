@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameWindow  extends JFrame {
 
@@ -16,7 +18,10 @@ public class GameWindow  extends JFrame {
         setPreferredSize(new Dimension(model.Width, model.Height));
         setVisible(true);
         pack();
-        if(tutorialOn){ instructionWindow tutorial= new instructionWindow(this);}
+        if(tutorialOn){
+            instructionWindow tutorial= new instructionWindow(this);
+        }else{makeAnnouncement();}
+
     }
 
     public GlassPaneWrapper getGlassPanel(){
@@ -66,7 +71,29 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
-        //if(levelNumber==getUnlocked()){ newActionWindow newBlock = new newActionWindow(this);}
+        if(levelNumber==getUnlocked()) {
+           makeAnnouncement();
+        }
+    }
+
+    void makeAnnouncement() {
+        newActionWindow newBlock = new newActionWindow(this);
+        GlassPaneWrapper glasspane =getGlassPanel();
+        glasspane.add(newBlock);
+        SpringLayout layout= (SpringLayout) glasspane.getLayout();
+        layout.putConstraint(SpringLayout.WEST, newBlock,150,SpringLayout.WEST, glasspane);
+        layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, glasspane);
+        layout.putConstraint(SpringLayout.EAST, newBlock,-150,SpringLayout.EAST, glasspane);
+        layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, glasspane);
+        Timer timer = new Timer(8500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                glasspane.remove(newBlock);
+                glasspane.repaint();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public void setLevelUnlocked(int levelUnlocked) {

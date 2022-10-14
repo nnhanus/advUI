@@ -25,7 +25,6 @@ public class BlockControl extends JLabel implements MouseListener {
 
     }
     public String getDescription(){
-      System.out.println(model.getHelper());
         return model.getHelper();
     }
     public String getType(){return model.getType();}

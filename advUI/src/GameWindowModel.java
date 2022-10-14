@@ -11,7 +11,6 @@ public class GameWindowModel {
     private static Level level;
     public static int Height;
     public static int Width;
-    private final List<ChangeListener> changeListeners = new ArrayList<>();
 
     public GameWindowModel(int levelFromMenu) {
         Height = 600;
@@ -21,7 +20,7 @@ public class GameWindowModel {
     }
 
     public void setLevel(int newLevel) {
-        triggerChangeListeners();
+//        triggerChangeListeners();
         levelnum = newLevel;
         unlockedLevel=Math.max(levelnum,unlockedLevel);
         level = new Level(newLevel);
@@ -35,17 +34,5 @@ public class GameWindowModel {
         return levelnum;
     }
 
-    public void addChangeListener(ChangeListener listener) {
-        changeListeners.add(listener);
-    }
-
-    public void removeChangeListener(ChangeListener listener) {
-        changeListeners.remove(listener);
-    }
-
-    public void triggerChangeListeners() {
-        for (ChangeListener listener : changeListeners) {
-            listener.stateChanged(new ChangeEvent(this));
-        }
-    }
+//
 }

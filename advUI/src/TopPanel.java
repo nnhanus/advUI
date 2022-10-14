@@ -17,8 +17,6 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     public TopPanel(PlayingPanel parent) {
         container=parent;
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
-        //this.setLayout(new GridBagLayout());
-        //gbc = new GridBagConstraints();
         resetBtns();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);

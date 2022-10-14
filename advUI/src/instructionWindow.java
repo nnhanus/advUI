@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
 
@@ -18,6 +20,12 @@ public class instructionWindow extends JDialog {
         model= new instructionWindowModel();
         view= new instructionWindowPresentation(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                owner.makeAnnouncement();
+            }
+        });
         setVisible(true);
         pack();
     }
