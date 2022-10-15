@@ -60,49 +60,9 @@ public class GameWindow  extends JFrame {
     }
 
     public void changeLevel(int levelNumber){
-        view.playingZone.getBottomPanel().mouseEvent = false;
-        Color BGColor = new Color(0xFED1FF);
-        if( levelNumber>model.unlockedLevel){
-            levelNumber=getLevelNumber();
-        }
-        setLevel(levelNumber);
-        getAnimation().changeLevel(getLevel(), getAnimation().character.getPath());
-        view.playingZone.topPanel.resetBtns();
-        view.playingZone.revalidate();
-        repaint();
-        if(levelNumber==getUnlocked()&& tutorialOn) {
-           makeAnnouncement();
-        }
+        view.changeLevel(levelNumber);
     }
 
-    void makeAnnouncement() {
-        newActionWindow newBlock = new newActionWindow(this);
-        GlassPaneWrapper glasspane =getGlassPanel();
-        glasspane.add(newBlock);
-        newBlock.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                glasspane.remove(newBlock);
-                glasspane.repaint();
-            }
-        });
-        SpringLayout layout= (SpringLayout) glasspane.getLayout();
-        layout.putConstraint(SpringLayout.WEST, newBlock,150,SpringLayout.WEST, glasspane);
-        layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, glasspane);
-        layout.putConstraint(SpringLayout.EAST, newBlock,-150,SpringLayout.EAST, glasspane);
-        layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, glasspane);
-        glasspane.revalidate();
-        glasspane.repaint();
-        Timer timer = new Timer(10000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                glasspane.remove(newBlock);
-                glasspane.repaint();
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }
 
     public void setLevelUnlocked(int levelUnlocked) {
         model.unlockedLevel=levelUnlocked;
@@ -113,4 +73,7 @@ public class GameWindow  extends JFrame {
     }
 
 
+    public void makeAnnouncement() {
+        view.makeAnnouncement();
+    }
 }
