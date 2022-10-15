@@ -43,13 +43,13 @@ public class newActionWindow extends JPanel {
         BlockControl newBlock;
         JTextArea itemDescript = new JTextArea();
         Image newStar;
-        JLabel imagePanel = new JLabel();
+        JLabel blockImage = new JLabel();
         JLabel title = new JLabel();
 
         public newActionWindowPresentation(newActionWindow newWindow) {
             //embed video or animate small pieces
             control = newWindow;
-            control.setLayout(new BorderLayout());
+            control.setLayout(new BoxLayout(control,BoxLayout.PAGE_AXIS));
             control.setPreferredSize(new Dimension(450, 500));
             newBlock=control.getNewBlock();
             try{
@@ -70,15 +70,28 @@ public class newActionWindow extends JPanel {
             itemDescript.setText(details);
             itemDescript.setBackground(BGColor);
 
-            newBlock.setSize(200,200);
-            newBlock.setLocation(parent.getWidth()/2,parent.getHeight()/3);
-            newBlock.removeMouseListener(newBlock.getMouseListeners()[0]);
+            blockImage.setIcon(new ImageIcon(newBlock.getIcon().getImage().getScaledInstance(150,125,Image.SCALE_DEFAULT)));
+            blockImage.setText(newBlock.getText());
+            blockImage.setHorizontalTextPosition(JLabel.CENTER);
+            blockImage.setFont(new Font("Ariel", Font.BOLD, 16));
+            blockImage.setForeground(Color.WHITE);
+
+
             title.setText("New Action: "+newBlock.getType()+"!");
             title.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
 
-            control.add(title, BorderLayout.NORTH);
-            control.add(itemDescript, BorderLayout.SOUTH);
-            control.add(newBlock, BorderLayout.CENTER);
+            title.setAlignmentX(Component.CENTER_ALIGNMENT);
+            blockImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+            itemDescript.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            control.add(title);
+            control.add(Box.createRigidArea(new Dimension(0,130)));
+            control.add(Box.createVerticalGlue());
+            control.add(blockImage);
+            control.add(Box.createRigidArea(new Dimension(0,100)));
+            control.add(Box.createVerticalGlue());
+            control.add(itemDescript);
+
         }
         public void paint(Graphics2D g2d){
             g2d.drawImage(newStar,0,0,control.getWidth(),control.getHeight(),null);

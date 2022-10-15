@@ -72,4 +72,7 @@ public class BlockControl extends JLabel implements MouseListener {
     }
 
 
+    public void changeSize(int width, int height) {
+        view.changeSize(width,height);
+    }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BlockModel {
-    int level = GameWindow.getLevelNumber();
     int index;
     String name;
     public Map<Integer,String> nameMap=new HashMap();

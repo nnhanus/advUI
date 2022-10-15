@@ -46,6 +46,7 @@ public class instructionWindow extends JDialog {
             control= instructionWindow;
             control.setLayout(new BorderLayout());
             control.setPreferredSize(new Dimension(500,250));
+            control.setLocation(250,200);
             instructionImages = control.getImages();
             String instructionList=control.getInstructions();
             instructionText= new ArrayList<>(Arrays.asList(instructionList.split("@")));

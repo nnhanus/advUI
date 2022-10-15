@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class BlockPresentation  {
     public BlockControl control;
+    int width=100;
+    int height =90;
 
     public BlockPresentation(BlockControl parent) {
         control=parent;
@@ -17,7 +19,12 @@ public class BlockPresentation  {
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(100,90);
+        return new Dimension(width,height);
+    }
+
+    public void changeSize(int width, int height){
+        this.width=width;
+        this.height=height;
     }
 
 
