@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseMotionListener;
 
 public class GameWindow  extends JFrame {
 
@@ -18,9 +19,9 @@ public class GameWindow  extends JFrame {
         setPreferredSize(new Dimension(model.Width, model.Height));
         setVisible(true);
         pack();
-        if(tutorialOn){
-            instructionWindow tutorial= new instructionWindow(this);
-        }else{makeAnnouncement();}
+        if(tutorialOn) {
+            instructionWindow tutorial = new instructionWindow(this);
+        }
 
     }
 
@@ -71,7 +72,7 @@ public class GameWindow  extends JFrame {
         view.playingZone.topPanel.resetBtns();
         view.playingZone.revalidate();
         repaint();
-        if(levelNumber==getUnlocked()) {
+        if(levelNumber==getUnlocked()&& tutorialOn) {
            makeAnnouncement();
         }
     }
@@ -85,6 +86,8 @@ public class GameWindow  extends JFrame {
         layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, glasspane);
         layout.putConstraint(SpringLayout.EAST, newBlock,-150,SpringLayout.EAST, glasspane);
         layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, glasspane);
+        glasspane.revalidate();
+        glasspane.repaint();
         Timer timer = new Timer(8500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

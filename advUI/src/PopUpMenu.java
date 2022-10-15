@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PopUpMenu extends JDialog {
     GameWindow parent;
@@ -81,13 +83,34 @@ public class PopUpMenu extends JDialog {
                 this.control.dispose();
             });
 
-//            JButton close = new JButton("Close");
-//            close.setFont(buttonFont);
-//            close.setBackground(BGColor);
-//            close.addActionListener( e -> dispose());
 
-            JCheckBox tutorial = new JCheckBox("Tutorials On",parent.tutorialOn);
-            tutorial.addActionListener(e->{parent.toggleTutorial();});
+            JLabel tutorial = new JLabel("Tutorials On");
+            tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+            tutorial.setForeground(new Color(0,153,0));
+            tutorial.setOpaque(false);
+            tutorial.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (parent.tutorialOn) {
+                        tutorial.setText("Tutorials Off");
+                        tutorial.setForeground(new Color(204, 0, 0));
+                        parent.toggleTutorial();
+                    } else {
+                        tutorial.setText("Tutorials On");
+                        tutorial.setForeground(new Color(0, 153, 15));
+                        parent.toggleTutorial();
+                    }
+                }
+                @Override
+                public void mouseEntered(MouseEvent e){
+                    tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+                }
+                @Override
+                public void mouseExited(MouseEvent e){
+                    tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+                }
+
+            });
 
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new FlowLayout());

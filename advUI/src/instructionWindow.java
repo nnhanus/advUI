@@ -19,13 +19,14 @@ public class instructionWindow extends JDialog {
         level=parent.getLevelNumber();
         model= new instructionWindowModel();
         view= new instructionWindowPresentation(this);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
+                System.out.println("closed");
                 owner.makeAnnouncement();
             }
         });
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         pack();
     }
