@@ -1,13 +1,16 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 
 public class CharacterPresentation {
     private BufferedImage character = null;
     private BufferedImage cone = null;
+    private BufferedImage direction = null;
     String characterPath;
     private int currentX;
     private int currentY;
@@ -45,16 +48,33 @@ public class CharacterPresentation {
 
     //draws a dot to indicate the orientation of the character
     private void drawOrientation(Graphics pen) {
+        try{
+           if (control.getOrientation() == CharacterModel.Direction.NORTH){
+               direction = ImageIO.read(new File("advUI/Icons/north.png"));
+           } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
+               direction = ImageIO.read(new File("advUI/Icons/south.png"));
+           } else if (control.getOrientation() == CharacterModel.Direction.WEST){
+               direction = ImageIO.read(new File("advUI/Icons/west.png"));
+           } else if (control.getOrientation() == CharacterModel.Direction.EAST){
+               direction = ImageIO.read(new File("advUI/Icons/east.png"));
+           }
+        } catch (Exception e){
+            System.out.println("missing file");
+        }
         if (control.getOrientation() == CharacterModel.Direction.NORTH){
-            pen.fillOval(currentX+control.getWidth()/2, currentY - 20, 10, 10);
+            pen.drawImage(direction, currentX + control.getWidth()/2 - 15, currentY - 30, 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
-            pen.fillOval(currentX+control.getWidth()/2, currentY + control.getHeight() +10, 10, 10);
+            pen.drawImage(direction, currentX + control.getWidth()/2 - 15, currentY + control.getHeight(), 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.WEST){
-            pen.fillOval(currentX - 20, currentY + control.getHeight()/2, 10, 10);
+            pen.drawImage(direction, currentX - 30 , currentY + control.getHeight()/2, 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.EAST) {
-            pen.fillOval(currentX + control.getWidth() + 10, currentY + control.getHeight() / 2, 10, 10);
+            pen.drawImage(direction, currentX + control.getWidth(), currentY + control.getHeight()/2, 30, 30, null);
         }
     }
+
+
+
+
 
     public void updateCharacterNorth(){
         currentY = currentY - Grid.getCellHeight();
