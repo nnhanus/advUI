@@ -64,6 +64,9 @@ public class readActionThread implements Runnable{
                     if (inForLoop > 0){
                         cellFor.setReadHighlight(true);
                         inForLoop--;
+                        if (inForLoop == 0){
+                            blockIter++;
+                        }
                     } else {
                         blockIter++;
                     }
