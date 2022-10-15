@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-public class newActionWindow extends JPanel {
+public class newActionWindow extends JPanel{
     //could make into Jpanel and add to glass frame
     
     GameWindow parent;
@@ -50,7 +51,7 @@ public class newActionWindow extends JPanel {
             //embed video or animate small pieces
             control = newWindow;
             control.setLayout(new BoxLayout(control,BoxLayout.PAGE_AXIS));
-            control.setPreferredSize(new Dimension(450, 500));
+            control.setPreferredSize(new Dimension(450, 580));
             newBlock=control.getNewBlock();
             try{
                 newStar = ImageIO.read(new File("advUI/Icons/newStar.png"));
@@ -85,10 +86,10 @@ public class newActionWindow extends JPanel {
             itemDescript.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             control.add(title);
-            control.add(Box.createRigidArea(new Dimension(0,130)));
+            control.add(Box.createRigidArea(new Dimension(0,110)));
             control.add(Box.createVerticalGlue());
             control.add(blockImage);
-            control.add(Box.createRigidArea(new Dimension(0,100)));
+            control.add(Box.createRigidArea(new Dimension(0,90)));
             control.add(Box.createVerticalGlue());
             control.add(itemDescript);
 
@@ -112,8 +113,7 @@ public class newActionWindow extends JPanel {
             details.put(2,"The For Block is very special. When you play a For Block, it repeats the next action for a specified number of times." +
                     "Play the For Block followed by the action you would like to repeat (Move or Turn) and select the number of times to repeat it.");
             details.put(3,"The If Block checks whether the ice cream scoop on the current cell is the biggest one available to pick up." +
-                    "This action is very helpful when there is more than one scoop on the board because you must collect scoops from largest to smallest." +
-                    "Use the If Block in combination with a Move Block to gather scoops in the correct order");
+                    "This action is very helpful when there is more than one scoop on the board because you must collect scoops from largest to smallest.");
         }
 
         public String getDetails(int level) {

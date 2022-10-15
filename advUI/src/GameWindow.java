@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 public class GameWindow  extends JFrame {
 
@@ -81,6 +79,13 @@ public class GameWindow  extends JFrame {
         newActionWindow newBlock = new newActionWindow(this);
         GlassPaneWrapper glasspane =getGlassPanel();
         glasspane.add(newBlock);
+        newBlock.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                glasspane.remove(newBlock);
+                glasspane.repaint();
+            }
+        });
         SpringLayout layout= (SpringLayout) glasspane.getLayout();
         layout.putConstraint(SpringLayout.WEST, newBlock,150,SpringLayout.WEST, glasspane);
         layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, glasspane);
@@ -88,7 +93,7 @@ public class GameWindow  extends JFrame {
         layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, glasspane);
         glasspane.revalidate();
         glasspane.repaint();
-        Timer timer = new Timer(8500, new ActionListener() {
+        Timer timer = new Timer(10000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 glasspane.remove(newBlock);

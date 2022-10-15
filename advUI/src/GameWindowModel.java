@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameWindowModel {
-    public int unlockedLevel=1;
+    public int unlockedLevel=4;
     private static int levelnum;
     //private static int level;
     private static Level level;
