@@ -11,7 +11,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     int colCount;
     BlockControl inBlock;
     Timer timer;
-    GlassPaneWrapper glassPanel;
+    Point spinnerPos;
 
     JPanel blockPanel = new JPanel();
     public TopPanel(PlayingPanel parent) {
@@ -33,6 +33,9 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
             BlockControl controlBtn = new BlockControl(i,this);
             buttonList.add(controlBtn);
             blockPanel.add(controlBtn);
+            if (i == 2){
+                spinnerPos = controlBtn.getLocation();
+            }
         }
         blockPanel.repaint();
     }
