@@ -87,7 +87,6 @@ public class GameWindowPresentation{
         playingZone.getBottomPanel().clearCells();
         playingZone.getBottomPanel().clearAll();
         Color BGColor = new Color(0xFED1FF);
-        glassPanel.removeForSpinner();
         if( levelNumber>GameWindow.getUnlocked()){
             levelNumber= GameWindow.getLevelNumber();
         }
@@ -95,6 +94,7 @@ public class GameWindowPresentation{
         animation.changeLevel(GameWindow.getLevel(), animation.character.getPath());
         playingZone.topPanel.resetBtns();
         playingZone.revalidate();
+        glassPanel.removeForSpinner();
         if(levelNumber>2){glassPanel.addNumberSpinner();}
         control.repaint();
         if(levelNumber==GameWindow.getLevelNumber()&& control.tutorialOn) {

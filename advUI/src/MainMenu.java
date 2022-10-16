@@ -94,6 +94,7 @@ public class MainMenu extends JDialog {
                             if (selectedLevel == 0) {
                             } else if (selectedLevel == 6) {
                                 dispose();
+                                System.exit(0);
                             } else {
                                 GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile);
                                 dispose();
