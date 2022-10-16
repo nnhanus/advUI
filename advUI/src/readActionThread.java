@@ -39,7 +39,7 @@ public class readActionThread implements Runnable{
                     loop.add(actionCall.split(" ")[1]);
                 }
 
-                if (loopFlag) { // If it is a foor loop
+                if (loopFlag) { // If it is a for loop
                     loopFlag = false;
                     loop.add(action);
                     inForLoop = Integer.parseInt(loop.get(0)); //how many actions in the loop

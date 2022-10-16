@@ -72,7 +72,7 @@ public class newActionWindow extends JPanel{
             itemDescript.setBackground(BGColor);
 
             blockImage.setIcon(new ImageIcon(newBlock.getIcon().getImage().getScaledInstance(150,125,Image.SCALE_DEFAULT)));
-            blockImage.setText(newBlock.getText());
+            blockImage.setText(newBlock.getType());
             blockImage.setHorizontalTextPosition(JLabel.CENTER);
             blockImage.setFont(new Font("Ariel", Font.BOLD, 16));
             blockImage.setForeground(Color.WHITE);

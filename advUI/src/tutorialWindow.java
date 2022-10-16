@@ -4,18 +4,18 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
-public class instructionWindow extends JDialog {
+public class tutorialWindow extends JDialog {
     GameWindow parent;
-    instructionWindowPresentation view;
-    instructionWindowModel model;
+    tutorialWindowPresentation view;
+    tutorialWindowModel model;
 
     int level;
-    public instructionWindow(GameWindow owner){
+    public tutorialWindow(GameWindow owner){
         super(owner);
         parent = owner;
         level=parent.getLevelNumber();
-        model= new instructionWindowModel();
-        view= new instructionWindowPresentation(this);
+        model= new tutorialWindowModel();
+        view= new tutorialWindowPresentation(this);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -31,8 +31,8 @@ public class instructionWindow extends JDialog {
         return model.getInstructions();
     }
 
-    private class instructionWindowPresentation {
-        instructionWindow control;
+    private class tutorialWindowPresentation {
+        tutorialWindow control;
         JLabel next;
         JLabel currentPage=new JLabel();
         JTextArea instructionLabel= new JTextArea();
@@ -40,9 +40,9 @@ public class instructionWindow extends JDialog {
         List<String> instructionText;
         List<ImageIcon> instructionImages;
         int page=0;
-        public instructionWindowPresentation(instructionWindow instructionWindow) {
+        public tutorialWindowPresentation(tutorialWindow tutorialWindow) {
             //embed video or animate small pieces
-            control= instructionWindow;
+            control= tutorialWindow;
             control.setLayout(new BorderLayout());
             control.setPreferredSize(new Dimension(500,250));
             control.setLocation(250,200);
@@ -94,10 +94,10 @@ public class instructionWindow extends JDialog {
     }
 
 
-    private class instructionWindowModel {
+    private class tutorialWindowModel {
         String instructions;
         List<ImageIcon> images ;
-        public instructionWindowModel(){
+        public tutorialWindowModel(){
             images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
                     new ImageIcon(new ImageIcon("advUI/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/2scoop.png").getImage().getScaledInstance(80,150,Image.SCALE_DEFAULT)),
                     new ImageIcon(new ImageIcon("advUI/Icons/playing.jpg").getImage().getScaledInstance(190,175,Image.SCALE_DEFAULT))));

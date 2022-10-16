@@ -84,7 +84,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                 block.highlightOn();
                 if(block!=inBlock){
                     inBlock=block;
-                    addHelper(block);
+                    addHelper(block); //add description of block on hover
                 }
 //                MouseEvent enterBlock= new MouseEvent(block, MouseEvent.MOUSE_ENTERED,System.currentTimeMillis()+10,MouseEvent.NOBUTTON,SwingUtilities.convertPoint(this,point,block).x,SwingUtilities.convertPoint(this,point,block).y,0,false);
 //                block.dispatchEvent(enterBlock);
@@ -104,6 +104,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     }
 
     private void addHelper(BlockControl block) {
+        //wait to make sure user is hovering on block before showing description
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

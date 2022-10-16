@@ -37,11 +37,8 @@ public class dropPanelModel {
     }
 
     public void addActionBlock(BlockControl block) {
+        //add the action type to a list to be read when user presses play
         String type=block.getType();
-//         if(type.equalsIgnoreCase("For")){
-//            Integer options[] = {  2, 3, 4 };
-//            block.setForLoopIter(2+JOptionPane.showOptionDialog(control.container,"Select how many times to repeat action:","For Loop",JOptionPane.DEFAULT_OPTION,JOptionPane.OK_CANCEL_OPTION,null,options,0));
-//       }
         int index=selectedCell.x+selectedCell.y*columnCount;
         if(index>blocksPlayed.size()-1){index=blocksPlayed.size();}
         actionList.add(index,type+" "+block.getForLoopIter());
@@ -49,6 +46,7 @@ public class dropPanelModel {
     }
 
     public void setCell(MouseEvent e, BlockControl block) {
+        //find coordinating index to the cell that the block was dropped into
         Point convertedPoint= convertPoint(e.getComponent(),e.getPoint(),control);
         int xPos= convertedPoint.x;
         int yPos=convertedPoint.y;

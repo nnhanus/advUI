@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class GameWindow  extends JFrame {
 
@@ -18,7 +17,7 @@ public class GameWindow  extends JFrame {
         setVisible(true);
         pack();
         if(tutorialOn) {
-            instructionWindow tutorial = new instructionWindow(this);
+            tutorialWindow tutorial = new tutorialWindow(this);
         }
 
     }

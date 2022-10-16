@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 // create small zones with drop listeners that know where they are and then insert in list
-public class dropPanel extends JPanel implements MouseListener, MouseMotionListener {
+public class dropPanel extends JPanel  {
 
     public static dropPanelModel model;
     public dropPanelPresentation view;
@@ -19,8 +19,6 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public dropPanel(PlayingPanel parent) {
         container = parent;
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
         this.model = new dropPanelModel(this);
         this.view = new dropPanelPresentation(this);
     }
@@ -45,85 +43,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         doActions.start();
     }
 
-    public void mouseClicked(MouseEvent e) {
-        Point clicked = e.getPoint();
-        for (cellRectangle cell : getCells()) {
-            if (cell.contains(clicked)) {
-                int toDelete = getCells().indexOf(cell);
-                cell.setHasBlock(false);
-                getActions().remove(toDelete);
-                getBlocksPlayed().remove(toDelete);
-                this.repaint();
-            }
-        }
-    }
 
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        Point point = e.getPoint();
-        for (cellRectangle cell : getCells()) {
-            if (cell.contains(point) && cell.getHasBlock()) {
-                draggedBlockIndex = getCells().indexOf(cell);
-                container.selectedBlock = getBlocksPlayed().get(draggedBlockIndex);
-                Toolkit toolkit = Toolkit.getDefaultToolkit();
-                Image image = container.selectedBlock.getIcon().getImage();
-                Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "block img");
-                container.getContainer().setCursor(c);
-            }
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        this.mouseEvent = false;
-        container.getContainer().setCursor(Cursor.getDefaultCursor());
-        if (container.selectedBlock != null) {
-            container.selectedBlock.highlightOff();
-            if (draggedBlockIndex >= 0) {
-                getBlocksPlayed().remove(draggedBlockIndex);
-                getCells().get(draggedBlockIndex).setHasBlock(false);
-                getActions().remove(draggedBlockIndex);
-                draggedBlockIndex = -1;
-            }
-            setCell(e, container.selectedBlock);
-            container.selectedBlock = null;
-            repaint();
-        }
-    }
-
-
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        mouseEvent = true;
-        Point mouse = e.getPoint();
-        for (cellRectangle cell : model.cells) {
-            if (cell.contains(mouse) && container.selectedBlock == null && cell.getHasBlock()) {
-                cell.setClose(true);
-                // cell.highlight = true;
-                this.repaint();
-            } else if (cell.contains(mouse) && container.selectedBlock != null) {
-                cell.setHighlight(true);
-                this.repaint();
-            } else {
-                cell.setClose(false);
-                cell.setHighlight(false);
-                this.repaint();
-            }
-
-        }
-    }
 
     public void clearAll() {
         model.blocksPlayed.clear();
@@ -135,7 +55,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         return model.cells;
     }
 
-    private void setCell(MouseEvent e, BlockControl selectedBlock) {
+    void setCell(MouseEvent e, BlockControl selectedBlock) {
         model.setCell(e, new BlockControl(selectedBlock));
     }
 
@@ -152,5 +72,41 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void clearCells() {
         model.cells=new ArrayList<>();
+    }
+
+    public void clearList() {
+        model.clearList();
+    }
+
+    public int getColCount() {
+        return model.columnCount;
+    }
+
+    public int getRowCount() {
+        return model.rowCount;
+    }
+
+    public void setWidth(int width) {
+        model.width=width;
+    }
+
+    public void setHeight(int height) {
+        model.height=height;
+    }
+
+    public void setCellWidth(int cellWidth) {
+        model.cellWidth=cellWidth;
+    }
+
+    public void setCellHeight(int cellHeight) {
+        model.cellHeight=cellHeight;
+    }
+
+    public void setxOffset(int xOffset) {
+        model.xOffset=xOffset;
+    }
+
+    public void setyOffset(int yOffset) {
+        model.yOffset=yOffset;
     }
 }

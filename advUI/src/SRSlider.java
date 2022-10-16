@@ -30,6 +30,7 @@ public class SRSlider extends JSlider {
         });
         this.addChangeListener(
                 ce -> {
+                    //if user tries to go to a locked level, bounce back to last unlocked level
                     if (this.getValue() > unlocked&&this.getValue()<6) {
                         this.setValue(unlocked);
                     }

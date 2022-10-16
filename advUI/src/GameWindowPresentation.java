@@ -63,7 +63,7 @@ public class GameWindowPresentation{
         layout.putConstraint(SpringLayout.EAST, menu,-2,SpringLayout.EAST, glassPanel);
         layout.putConstraint(SpringLayout.NORTH, menu,1,SpringLayout.NORTH, glassPanel);
         layout.putConstraint(SpringLayout.EAST, helper,-1,SpringLayout.EAST, glassPanel);
-        layout.putConstraint(SpringLayout.NORTH, helper,65,SpringLayout.SOUTH, menu);
+        layout.putConstraint(SpringLayout.NORTH, helper,62,SpringLayout.SOUTH, menu);
         control.add(mainPanel, BorderLayout.CENTER);
 
     }

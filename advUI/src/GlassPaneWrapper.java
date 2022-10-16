@@ -108,7 +108,7 @@ public class GlassPaneWrapper extends JPanel {
         forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
         System.out.println(blockPos.x + ", " + blockPos.y);
         layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
-        layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+40,SpringLayout.WEST,this);
+        layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+48,SpringLayout.WEST,this);
         this.repaint();
     }
     void makeAnnouncement() {
@@ -128,6 +128,7 @@ public class GlassPaneWrapper extends JPanel {
         layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, this);
         this.revalidate();
         this.repaint();
+        //show new block announcement for 10 seconds or until user clicks out
         Timer timer = new Timer(10000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

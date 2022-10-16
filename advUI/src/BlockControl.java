@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 
-public class BlockControl extends JLabel implements MouseListener {
+public class BlockControl extends JLabel {
     public BlockModel model;
     int typeNum;
     public TopPanel container;
@@ -18,7 +18,6 @@ public class BlockControl extends JLabel implements MouseListener {
         helper=false;
         model = new BlockModel(controlNum);
         view = new BlockPresentation(this);
-        this.addMouseListener(this);
     }
 
     public BlockControl (BlockControl toCopy) {
@@ -30,7 +29,6 @@ public class BlockControl extends JLabel implements MouseListener {
         if(typeNum==2){
             this.setForLoopIter(Integer.parseInt(toCopy.getForLoopIter()));
         }
-        this.addMouseListener(this);
 
     }
 
@@ -40,6 +38,9 @@ public class BlockControl extends JLabel implements MouseListener {
         view.paint((Graphics2D) g);
     }
 
+    public TopPanel getContainer(){
+        return container;
+    }
     public int getTypeNum(){
         return model.index;
     }
@@ -70,29 +71,6 @@ public class BlockControl extends JLabel implements MouseListener {
     }
 
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = this.getIcon().getImage();
-        Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "block img");
-        if (typeNum == 2) {
-            model.forLoopIter = String.valueOf((int) container.container.container.getGlassPanel().forCount.getValue());
-        }
-        container.getContainer().getContainer().setCursor (c);
-        container.getContainer().selectedBlock=this;
-    }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-       container.getContainer().getBottomPanel().dispatchEvent(e);
-    }
-
-    //Unused MouseListener methods
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-    @Override
-    public void mouseExited(MouseEvent e) {}
-    @Override
-    public void mouseClicked(MouseEvent e) {}
 
 }
