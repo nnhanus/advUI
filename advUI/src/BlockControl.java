@@ -24,6 +24,18 @@ public class BlockControl extends JLabel implements MouseListener {
         this.addMouseListener(this);
 
     }
+    public BlockControl (BlockControl toCopy) {
+        container = toCopy.container;
+        typeNum = toCopy.getTypeNum();
+        helper=false;
+        model = new BlockModel(typeNum, this);
+        view = new BlockPresentation(this);
+        if(typeNum==2){
+            this.setForLoopIter(Integer.parseInt(toCopy.getForLoopIter()));
+        }
+        this.addMouseListener(this);
+
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -31,6 +43,9 @@ public class BlockControl extends JLabel implements MouseListener {
         view.paint((Graphics2D) g);
     }
 
+    public int getTypeNum(){
+        return model.index;
+    }
     public String getDescription(){
         return model.getHelper();
     }
