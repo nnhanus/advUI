@@ -20,7 +20,7 @@ public class instructionWindow extends JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 System.out.println("closed");
-                owner.makeAnnouncement();
+                owner.getGlassPanel().makeAnnouncement();
             }
         });
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -72,8 +72,4 @@ public class GameWindow  extends JFrame {
         tutorialOn=!tutorialOn;
     }
 
-
-    public void makeAnnouncement() {
-        view.makeAnnouncement();
-    }
 }

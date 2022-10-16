@@ -33,16 +33,22 @@ public class GameWindowPresentation{
         control.setGlassPane(glassPanel);
         glassPanel.activateGlassPane(true);
 
-        JButton menu = new JButton("Menu");
-        menu.setFont(new Font("Bradley Hand", Font.BOLD, 18));
-        menu.addActionListener( e -> new PopUpMenu(control));
+        if(GameWindow.getLevelNumber()>2){glassPanel.addNumberSpinner();}
+
+        JLabel menu = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/menu.png").getImage().getScaledInstance(38,50,Image.SCALE_DEFAULT)));
+        menu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new PopUpMenu(control);
+            }
+        });
 
         helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
         helper.setHorizontalTextPosition(JLabel.LEFT);
         helper.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-              makePopUpInstructions();
+                makePopUpInstructions();
             }
         });
 
@@ -51,12 +57,11 @@ public class GameWindowPresentation{
 
         glassPanel.add(menu);
         glassPanel.add(helper);
-        SpringLayout layout = new SpringLayout();
-        glassPanel.setLayout(layout);
-        layout.putConstraint(SpringLayout.EAST, menu,0,SpringLayout.EAST, glassPanel);
-        layout.putConstraint(SpringLayout.NORTH, menu,0,SpringLayout.NORTH, glassPanel);
-        layout.putConstraint(SpringLayout.EAST, helper,0,SpringLayout.EAST, glassPanel);
-        layout.putConstraint(SpringLayout.NORTH, helper,60,SpringLayout.SOUTH, menu);
+        SpringLayout layout = (SpringLayout) glassPanel.getLayout();
+        layout.putConstraint(SpringLayout.EAST, menu,-2,SpringLayout.EAST, glassPanel);
+        layout.putConstraint(SpringLayout.NORTH, menu,1,SpringLayout.NORTH, glassPanel);
+        layout.putConstraint(SpringLayout.EAST, helper,-1,SpringLayout.EAST, glassPanel);
+        layout.putConstraint(SpringLayout.NORTH, helper,65,SpringLayout.SOUTH, menu);
         control.add(mainPanel, BorderLayout.CENTER);
 
 
@@ -75,37 +80,11 @@ public class GameWindowPresentation{
         instructions.pack();
         instructions.setVisible(true);
     }
-    void makeAnnouncement() {
-        newActionWindow newBlock = new newActionWindow(control);
-        glassPanel.add(newBlock);
-        newBlock.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                glassPanel.remove(newBlock);
-                glassPanel.repaint();
-            }
-        });
-        SpringLayout layout= (SpringLayout) glassPanel.getLayout();
-        layout.putConstraint(SpringLayout.WEST, newBlock,150,SpringLayout.WEST, glassPanel);
-        layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, glassPanel);
-        layout.putConstraint(SpringLayout.EAST, newBlock,-150,SpringLayout.EAST, glassPanel);
-        layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, glassPanel);
-        glassPanel.revalidate();
-        glassPanel.repaint();
-        Timer timer = new Timer(10000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                glassPanel.remove(newBlock);
-                glassPanel.repaint();
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }
 
     public void changeLevel(int levelNumber){
         playingZone.getBottomPanel().mouseEvent = false;
         Color BGColor = new Color(0xFED1FF);
+        glassPanel.removeForSpinner();
         if( levelNumber>GameWindow.getUnlocked()){
             levelNumber= GameWindow.getLevelNumber();
         }
@@ -113,9 +92,10 @@ public class GameWindowPresentation{
         animation.changeLevel(GameWindow.getLevel(), animation.character.getPath());
         playingZone.topPanel.resetBtns();
         playingZone.revalidate();
+        if(levelNumber>2){glassPanel.addNumberSpinner();}
         control.repaint();
         if(levelNumber==GameWindow.getLevelNumber()&& control.tutorialOn) {
-            makeAnnouncement();
+            glassPanel.makeAnnouncement();
         }
     }
 

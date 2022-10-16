@@ -24,8 +24,21 @@ public class BlockControl extends JLabel implements MouseListener {
         this.addMouseListener(this);
 
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        view.paint((Graphics2D) g);
+    }
+
     public String getDescription(){
         return model.getHelper();
+    }
+    public void highlightOn(){
+        view.highlightOn();
+    }
+    public void highlightOff(){
+        view.highlightOff();
     }
     public String getType(){return model.getType();}
     public ImageIcon getIcon(){return model.getIcon();}

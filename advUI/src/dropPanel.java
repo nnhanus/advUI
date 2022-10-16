@@ -88,6 +88,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
         this.mouseEvent = false;
         container.getContainer().setCursor(Cursor.getDefaultCursor());
         if (container.selectedBlock != null) {
+            container.selectedBlock.highlightOff();
             if (draggedBlockIndex >= 0) {
                 getBlocksPlayed().remove(draggedBlockIndex);
                 getCells().get(draggedBlockIndex).hasBlock = false;
