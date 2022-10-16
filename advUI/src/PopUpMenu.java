@@ -45,9 +45,9 @@ public class PopUpMenu extends JDialog {
             buttonPanel(slider);
 
             JLabel title = new JLabel("Menu", SwingConstants.CENTER);
-        title.setFont(new Font(fontFamily, Font.BOLD, 35));
-        title.setBackground(BGColor);
-        title.setOpaque(true);
+            title.setFont(new Font(fontFamily, Font.BOLD, 35));
+            title.setBackground(BGColor);
+            title.setOpaque(true);
 
         this.control.add(title, BorderLayout.NORTH);
         }
