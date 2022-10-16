@@ -84,6 +84,8 @@ public class GameWindowPresentation{
 
     public void changeLevel(int levelNumber){
         playingZone.getBottomPanel().mouseEvent = false;
+        playingZone.getBottomPanel().clearCells();
+        playingZone.getBottomPanel().clearAll();
         Color BGColor = new Color(0xFED1FF);
         glassPanel.removeForSpinner();
         if( levelNumber>GameWindow.getUnlocked()){

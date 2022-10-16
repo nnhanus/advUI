@@ -46,6 +46,7 @@ public class dropPanelPresentation {
                 control.getBlocksPlayed().clear();
                 clear();
                 control.getContainer().getContainer().changeLevel(control.getContainer().getContainer().getLevelNumber());
+                model.control.mouseEvent = false;
 
             }
         });

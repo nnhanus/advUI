@@ -98,7 +98,7 @@ public class instructionWindow extends JDialog {
         String instructions;
         List<ImageIcon> images ;
         public instructionWindowModel(){
-            images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
+            images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
                     new ImageIcon(new ImageIcon("advUI/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/2scoop.png").getImage().getScaledInstance(80,150,Image.SCALE_DEFAULT)),
                     new ImageIcon(new ImageIcon("advUI/Icons/playing.jpg").getImage().getScaledInstance(190,175,Image.SCALE_DEFAULT))));
             instructions="Oh no! You've dropped your ice cream. Well...5 second rule applies, right? Move your character to the scoop to add it to your cone." +
