@@ -83,10 +83,15 @@ public class PopUpMenu extends JDialog {
                 this.control.dispose();
             });
 
-
-            JLabel tutorial = new JLabel("Tutorials On");
+            JLabel tutorial;
+            if(parent.tutorialOn){
+                tutorial = new JLabel("Tutorials On");
+                tutorial.setForeground(new Color(0,153,0));
+            }else{
+                tutorial = new JLabel("Tutorials Off");
+                tutorial.setForeground(new Color(204, 0, 0));
+            }
             tutorial.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
-            tutorial.setForeground(new Color(0,153,0));
             tutorial.setOpaque(false);
             tutorial.addMouseListener(new MouseAdapter() {
                 @Override
@@ -113,10 +118,13 @@ public class PopUpMenu extends JDialog {
             });
 
             JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.LINE_AXIS));
             buttonPanel.setBackground(BGColor);
+            buttonPanel.add(Box.createRigidArea(new Dimension(5,0)));
             buttonPanel.add(tutorial);
+            buttonPanel.add(Box.createRigidArea(new Dimension(100,0)));
             buttonPanel.add(go);
+            buttonPanel.add(Box.createRigidArea(new Dimension(100,0)));
             buttonPanel.add(restart);
             //buttonPanel.add(close);
             add(buttonPanel,BorderLayout.SOUTH);

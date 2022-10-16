@@ -13,10 +13,13 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     int colCount;
     BlockControl inBlock;
     Timer timer;
-
+    JPanel blockPanel = new JPanel();
     public TopPanel(PlayingPanel parent) {
         container=parent;
         this.setMinimumSize(new Dimension(container.getWidth(),Math.round(container.getHeight()/3)));
+        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+        this.add(Box.createRigidArea(new Dimension(0,15)));
+        this.add(blockPanel);
         resetBtns();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -25,16 +28,15 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
 
 
     public void resetBtns() {
-        this.removeAll();
-        repaint();
+        blockPanel.removeAll();
         level=GameWindow.getLevelNumber();
         colCount= Math.min(level,5);
         for (int i = 0; i < colCount ; i++) {
             BlockControl controlBtn = new BlockControl(i,this);
             buttonList.add(controlBtn);
-            this.add(controlBtn);
+            blockPanel.add(controlBtn);
         }
-
+        blockPanel.repaint();
     }
     public PlayingPanel getContainer(){
         return container;
@@ -81,7 +83,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         Point point=e.getPoint();
         for (BlockControl block: buttonList){
             if (block.contains(SwingUtilities.convertPoint(this,point,block))){
-                block.setBorder(new LineBorder(Color.GREEN));
+                block.highlightOn();
                 if(block!=inBlock){
                     inBlock=block;
                     addHelper(block);
@@ -90,16 +92,15 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
 //                block.dispatchEvent(enterBlock);
             }
             else {
-                if(block==inBlock){
-                    block.setBorder(new EmptyBorder(0, 0, 0, 0));
-                    inBlock=null;
-                    if(timer!=null){timer.stop();}
-                    container.getContainer().setHelperText(" ");
+                block.highlightOff();
+                inBlock = null;
+                if (timer != null) {
+                    timer.stop();
                 }
+                container.getContainer().setHelperText(" ");
+
 //                MouseEvent exitBlock = new MouseEvent(block, MouseEvent.MOUSE_EXITED, System.currentTimeMillis() + 10, MouseEvent.NOBUTTON, SwingUtilities.convertPoint(this, point, block).x, SwingUtilities.convertPoint(this, point, block).y, 0, false);
 //                block.dispatchEvent(exitBlock);
-
-
             }
         }
     }
@@ -114,5 +115,9 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         timer.setRepeats(false);
         timer.start();
 
+    }
+
+    public List<BlockControl> getButtonList() {
+        return buttonList;
     }
 }

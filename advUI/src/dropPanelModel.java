@@ -2,14 +2,11 @@ import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
-import static javax.swing.SwingConstants.HORIZONTAL;
 import static javax.swing.SwingUtilities.convertPoint;
 
 public class dropPanelModel {
@@ -40,27 +37,11 @@ public class dropPanelModel {
     }
 
     public void addActionBlock(BlockControl block) {
-       String type=block.getType();
-       if(type.equalsIgnoreCase("For")){
-           /*control.setLayout(new GridBagLayout());
-           GridBagConstraints gc = new GridBagConstraints();
-           gc.fill = HORIZONTAL;
-           gc.gridx = selectedCell.x;
-           gc.gridy = selectedCell.y;*/
-           /* SpinnerModel value = new SpinnerNumberModel(2, 2, 4, 1);
-            JSpinner spinner = new JSpinner(value);
-            spinner.setBounds(selectedCell.x*cellWidth,selectedCell.y*cellHeight, 10, 10);
-            spinner.setSize(new Dimension(30,30));
-            spinner.addChangeListener(new ChangeListener() {
-                public void stateChanged(ChangeEvent e) {
-                    block.setForLoopIter((int) spinner.getValue());
-                }
-            });
-            panel.add(spinner);*/
-            //control.add(spinner);
-            Integer options[] = {  2, 3, 4 };
-            block.setForLoopIter(2+JOptionPane.showOptionDialog(control.container,"Select how many times to repeat action:","For Loop",JOptionPane.DEFAULT_OPTION,JOptionPane.OK_CANCEL_OPTION,null,options,0));
-           }
+        String type=block.getType();
+//         if(type.equalsIgnoreCase("For")){
+//            Integer options[] = {  2, 3, 4 };
+//            block.setForLoopIter(2+JOptionPane.showOptionDialog(control.container,"Select how many times to repeat action:","For Loop",JOptionPane.DEFAULT_OPTION,JOptionPane.OK_CANCEL_OPTION,null,options,0));
+//       }
         int index=selectedCell.x+selectedCell.y*columnCount;
         if(index>blocksPlayed.size()-1){index=blocksPlayed.size();}
         actionList.add(index,type+" "+block.getForLoopIter());

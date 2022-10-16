@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -9,12 +11,16 @@ import java.awt.event.MouseEvent;
 public class GlassPaneWrapper extends JPanel {
 
     PlayingPanel wrappedPanel;
-
-
+    SpringLayout layout = new SpringLayout();
+    JSpinner forCount;
     public GlassPaneWrapper(PlayingPanel givenPanel) {
         this.wrappedPanel=givenPanel;
+        this.setLayout(layout);
         this.setOpaque(false);
         this.setVisible(false);
+        forCount = new JSpinner();
+        forCount.setModel(new SpinnerNumberModel(2,2,4,1));
+
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e){
@@ -90,4 +96,46 @@ public class GlassPaneWrapper extends JPanel {
     }
 
 
+    public void addNumberSpinner() {
+        BlockControl forBlock=wrappedPanel.topPanel.getButtonList().get(2);
+        Point blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
+        System.out.println(blockPos);
+        this.add(forCount);
+        forBlock.setForLoopIter((int)forCount.getValue());
+        forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
+        layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
+        layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+40,SpringLayout.WEST,this);
+        this.repaint();
+    }
+    void makeAnnouncement() {
+        newActionWindow newBlock = new newActionWindow(wrappedPanel.container);
+        this.add(newBlock);
+        newBlock.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                remove(newBlock);
+                repaint();
+            }
+        });
+        SpringLayout layout= (SpringLayout) this.getLayout();
+        layout.putConstraint(SpringLayout.WEST, newBlock,150,SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, newBlock,80,SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.EAST, newBlock,-150,SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, newBlock,-20,SpringLayout.SOUTH, this);
+        this.revalidate();
+        this.repaint();
+        Timer timer = new Timer(10000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                remove(newBlock);
+                repaint();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
+
+    public void removeForSpinner() {
+        this.remove(forCount);
+    }
 }

@@ -91,7 +91,8 @@ public class dropPanelPresentation {
                 g2d.fill(cell);
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("Ariel", Font.BOLD, 14));
-                g2d.drawString(block.getType(), cell.x + cell.width / 2 - g2d.getFontMetrics().stringWidth(block.getType()) / 2, cell.y + cell.height / 2);
+                String name=block.getType()+" "+block.getForLoopIter();
+                g2d.drawString(name, cell.x + cell.width / 2 - g2d.getFontMetrics().stringWidth(name) / 2, cell.y + cell.height / 2);
             if (cell.close) {
                 g2d.drawImage(getIconAsImage(closeIcon),cell.x+3*cell.width/4,cell.y+3,cell.width/4,cell.height/4,null);
             }

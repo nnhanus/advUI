@@ -3,6 +3,8 @@
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class BlockPresentation  {
     public BlockControl control;
@@ -12,10 +14,7 @@ public class BlockPresentation  {
     public BlockPresentation(BlockControl parent) {
         control=parent;
         control.setIcon(control.getIcon());
-        control.setText(control.getType());
-        control.setFont(new Font("Ariel", Font.BOLD, 14));
-        control.setForeground(Color.white);
-        control.setHorizontalTextPosition(JLabel.CENTER);
+
     }
 
     public Dimension getPreferredSize() {
@@ -28,5 +27,18 @@ public class BlockPresentation  {
     }
 
 
+    public void highlightOn() {
+        control.setBorder(new LineBorder(Color.GREEN));
+    }
 
+    public void highlightOff() {
+        control.setBorder(new EmptyBorder(0, 0, 0, 0));
+    }
+
+    public void paint(Graphics2D g) {
+        String name= control.getType();
+        g.setFont(new Font("Ariel", Font.BOLD, 14));
+        g.setColor(Color.white);
+        g.drawString(name,(width- g.getFontMetrics().stringWidth(name))/2,height/3+10);
+    }
 }
