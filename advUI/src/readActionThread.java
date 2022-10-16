@@ -17,7 +17,6 @@ public class readActionThread implements Runnable{
         boolean isNextIf = false;
         boolean loopFlag = false;
         int blockIter = 0;
-        //cellRectangle cellToLight = parent.getCells().get(blockIter);
         int inForLoop = 0;
         cellRectangle cellFor = null;
 
@@ -30,7 +29,6 @@ public class readActionThread implements Runnable{
                 parent.mouseEvent = true;
 
                 if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1).equalsIgnoreCase("If ");
-                //if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1) == "If"; //is an if the next action block
 
                 String action = actionCall.split(" ")[0];
 
@@ -42,14 +40,12 @@ public class readActionThread implements Runnable{
                 if (loopFlag) { // If it is a for loop
                     loopFlag = false;
                     loop.add(action);
-                    inForLoop = Integer.parseInt(loop.get(0)); //how many actions in the loop
+                    inForLoop = Integer.parseInt(loop.get(0)); //number of actions in the loop
                     readAction(loop);
                     loop.clear();
-                    cellFor = parent.getCells().get(blockIter); //the "for block" cell keeps lighting up
-                    //cellFor.setReadHighlight(true); //
-                    blockIter++; //the next one is the cell to light
+                    cellFor = parent.getCells().get(blockIter); //the cell with the for block lights up
+                    blockIter++; //the next cell that contains the action in the loop also lights up
                     parent.mouseEvent = true;
-                   // parent.getCells().get(blockIter).setReadHighlight(true);
                 } else {
                     try {
                         Thread.sleep(1000);

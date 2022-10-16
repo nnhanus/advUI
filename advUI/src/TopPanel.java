@@ -60,24 +60,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
 
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
 
     @Override
     public void mouseMoved(MouseEvent e) {
@@ -89,8 +72,6 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                     inBlock=block;
                     addHelper(block); //add description of block on hover
                 }
-//                MouseEvent enterBlock= new MouseEvent(block, MouseEvent.MOUSE_ENTERED,System.currentTimeMillis()+10,MouseEvent.NOBUTTON,SwingUtilities.convertPoint(this,point,block).x,SwingUtilities.convertPoint(this,point,block).y,0,false);
-//                block.dispatchEvent(enterBlock);
             }
             else {
                 block.highlightOff();
@@ -99,9 +80,6 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                     timer.stop();
                 }
                 container.getContainer().setHelperText(" ");
-
-//                MouseEvent exitBlock = new MouseEvent(block, MouseEvent.MOUSE_EXITED, System.currentTimeMillis() + 10, MouseEvent.NOBUTTON, SwingUtilities.convertPoint(this, point, block).x, SwingUtilities.convertPoint(this, point, block).y, 0, false);
-//                block.dispatchEvent(exitBlock);
             }
         }
     }
@@ -116,10 +94,22 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         });
         timer.setRepeats(false);
         timer.start();
-
     }
 
     public List<BlockControl> getButtonList() {
         return buttonList;
     }
+
+
+    //Unused MouseListener methods
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+    @Override
+    public void mouseDragged(MouseEvent e) {}
 }

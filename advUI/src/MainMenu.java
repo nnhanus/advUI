@@ -154,7 +154,6 @@ public class MainMenu extends JDialog {
             levelSelect.add(playPanel, BorderLayout.PAGE_END);
 
             mainPane.add(levelSelect, BorderLayout.CENTER);
-           //CharacterChooser mainPane = new CharacterChooser();
 
             control.add(mainPane, BorderLayout.CENTER);
         }

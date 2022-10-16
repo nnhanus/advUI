@@ -11,7 +11,6 @@ import java.util.*;
 import java.util.List;
 
 public class newActionWindow extends JPanel{
-    //could make into Jpanel and add to glass frame
     
     GameWindow parent;
     newActionWindowPresentation view;
@@ -48,7 +47,6 @@ public class newActionWindow extends JPanel{
         JLabel title = new JLabel();
 
         public newActionWindowPresentation(newActionWindow newWindow) {
-            //embed video or animate small pieces
             control = newWindow;
             control.setLayout(new BoxLayout(control,BoxLayout.PAGE_AXIS));
             control.setPreferredSize(new Dimension(450, 580));
