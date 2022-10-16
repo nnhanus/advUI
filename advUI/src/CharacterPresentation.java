@@ -1,11 +1,8 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 
 public class CharacterPresentation {
     private BufferedImage character = null;
@@ -46,7 +43,7 @@ public class CharacterPresentation {
         drawOrientation(pen);
     }
 
-    //draws a dot to indicate the orientation of the character
+    //draws an arrow to indicate the orientation of the character
     private void drawOrientation(Graphics pen) {
         try{
            if (control.getOrientation() == CharacterModel.Direction.NORTH){
@@ -71,10 +68,6 @@ public class CharacterPresentation {
             pen.drawImage(direction, currentX + control.getWidth(), currentY + control.getHeight()/2, 30, 30, null);
         }
     }
-
-
-
-
 
     public void updateCharacterNorth(){
         currentY = currentY - Grid.getCellHeight();

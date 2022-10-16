@@ -42,15 +42,6 @@ public class GameWindow  extends JFrame {
         return model.unlockedLevel;
     }
 
-
-//    public void levelSelect() {
-//        Integer[] availableLevels = new Integer[model.unlockedLevel];
-//        Arrays.setAll(availableLevels, i -> i + 1);
-//        int choice=JOptionPane.showOptionDialog(this,"Select a level","Menu",
-//                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null,availableLevels,0);
-//        changeLevel(choice+1);
-//    }
-
     public void setLevel(int newLevel) {
         model.setLevel(newLevel);
     }
@@ -62,7 +53,6 @@ public class GameWindow  extends JFrame {
     public void changeLevel(int levelNumber){
         view.changeLevel(levelNumber);
     }
-
 
     public void setLevelUnlocked(int levelUnlocked) {
         model.unlockedLevel=levelUnlocked;

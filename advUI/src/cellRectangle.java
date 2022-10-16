@@ -1,32 +1,45 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 public class cellRectangle extends Rectangle {
-    public boolean close;
-    public boolean highlight;
-    public boolean isReadHighlight;
+    private boolean close;
+    private boolean highlight;
+    private boolean isReadHighlight;
 
-    dropPanel control;
-    boolean hasBlock;
+    private boolean hasBlock;
 
-    public cellRectangle(int x, int y, int width, int height, dropPanel control) {
+    public cellRectangle(int x, int y, int width, int height) {
         super(x,y,width,height);
-        this.control=control;
         close=false;
         highlight=false;
         hasBlock=false;
         isReadHighlight=false;
     }
 
+    public void setClose(boolean bool){
+        close = bool;
+    }
+    public boolean getClose(){
+        return close;
+    }
+
     public void setHighlight(boolean bool){
         highlight = bool;
+    }
+    public boolean getHighlight(){
+        return highlight;
     }
 
     public void setReadHighlight(boolean bool){
         isReadHighlight = bool;
+    }
+    public boolean getReadHighlight(){
+        return isReadHighlight;
+    }
+
+    public void setHasBlock(boolean bool){
+        hasBlock = bool;
+    }
+    public boolean getHasBlock(){
+        return hasBlock;
     }
 }

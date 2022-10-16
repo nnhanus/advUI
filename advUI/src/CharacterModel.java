@@ -4,22 +4,23 @@ import java.util.List;
 
 public class CharacterModel {
 
-
     enum Direction{
         NORTH,
         SOUTH,
         EAST,
         WEST
     }
-    public static Direction orientation;
-    public static int x;
-    public static int y;
-    public static int width = 70;
-    public static int height = 70;
-    public List<Scoop> scoops = new ArrayList<>();
-    public static Grid grid;
 
-    public static Character parent;
+    public int x;
+    public int y;
+    public int width = 70;
+    public int height = 70;
+    public Direction orientation;
+    public List<Scoop> scoops = new ArrayList<>();
+
+    public Character parent;
+    public Grid grid;
+
     public CharacterModel(Character control, Direction dir, int posX, int posY){
         parent=control;
         orientation = dir;
@@ -47,7 +48,7 @@ public class CharacterModel {
     }
 
     //rotates the character 90° clockwise
-    public static void turn(){
+    public void turn(){
         if (orientation == Direction.NORTH){
             orientation = Direction.EAST;
         } else if (orientation == Direction.WEST){

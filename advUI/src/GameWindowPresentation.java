@@ -27,13 +27,13 @@ public class GameWindowPresentation{
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(1, 2));
 
-
         playingZone = new PlayingPanel(control);
         glassPanel = new GlassPaneWrapper(playingZone);
         control.setGlassPane(glassPanel);
         glassPanel.activateGlassPane(true);
 
-        if(GameWindow.getLevelNumber()>2){glassPanel.addNumberSpinner();}
+
+
 
         JLabel menu = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/menu.png").getImage().getScaledInstance(38,50,Image.SCALE_DEFAULT)));
         menu.addMouseListener(new MouseAdapter() {
@@ -55,6 +55,8 @@ public class GameWindowPresentation{
         mainPanel.add(animation);
         mainPanel.add(playingZone);
 
+        if(GameWindow.getLevelNumber()>2){glassPanel.addNumberSpinner();}
+
         glassPanel.add(menu);
         glassPanel.add(helper);
         SpringLayout layout = (SpringLayout) glassPanel.getLayout();
@@ -63,7 +65,6 @@ public class GameWindowPresentation{
         layout.putConstraint(SpringLayout.EAST, helper,-1,SpringLayout.EAST, glassPanel);
         layout.putConstraint(SpringLayout.NORTH, helper,65,SpringLayout.SOUTH, menu);
         control.add(mainPanel, BorderLayout.CENTER);
-
 
     }
 

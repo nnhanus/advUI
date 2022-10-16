@@ -13,18 +13,17 @@ public class Character {
         animation=parent;
     }
 
-    public static void move(boolean isNextIf) {
+    public void move(boolean isNextIf) {
         model.move(isNextIf);
     }
 
-    public static void turn() {
+    public void turn() {
         model.turn();
     }
 
     public String getPath(){
         return presentation.getCharacterPath();
     }
-
 
     public int getWidth() {
         return model.width;
@@ -49,7 +48,7 @@ public class Character {
     public List<Scoop> getScoops() {
         return model.scoops;
     }
-    public Image getCharImage(){
+    public static Image getCharImage(){
         return presentation.getCharImage();
     }
 

@@ -1,8 +1,4 @@
-
-
 import java.awt.*;
-
-import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -14,18 +10,11 @@ public class BlockPresentation  {
     public BlockPresentation(BlockControl parent) {
         control=parent;
         control.setIcon(control.getIcon());
-
     }
 
     public Dimension getPreferredSize() {
         return new Dimension(width,height);
     }
-
-    public void changeSize(int width, int height){
-        this.width=width;
-        this.height=height;
-    }
-
 
     public void highlightOn() {
         control.setBorder(new LineBorder(Color.GREEN));

@@ -12,7 +12,7 @@ public class GlassPaneWrapper extends JPanel {
 
     PlayingPanel wrappedPanel;
     SpringLayout layout = new SpringLayout();
-    JSpinner forCount;
+    public JSpinner forCount;
     public GlassPaneWrapper(PlayingPanel givenPanel) {
         this.wrappedPanel=givenPanel;
         this.setLayout(layout);
@@ -29,11 +29,14 @@ public class GlassPaneWrapper extends JPanel {
                     wrappedPanel.getBottomPanel().view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));
                 }
                 else if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
-                wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
+                    wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
                 else if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
-                wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
+                    wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
                 else if(wrappedPanel.getBottomPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.getBottomPanel()))){
                     wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
+                } else if (wrappedPanel.getTopPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.topPanel))){
+                    wrappedPanel.getTopPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getTopPanel()));
+                    System.out.println("spinner");
                 }
 
             }
@@ -46,6 +49,7 @@ public class GlassPaneWrapper extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
+                wrappedPanel.getTopPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getTopPanel()));
 
             }
 
@@ -99,10 +103,10 @@ public class GlassPaneWrapper extends JPanel {
     public void addNumberSpinner() {
         BlockControl forBlock=wrappedPanel.topPanel.getButtonList().get(2);
         Point blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
-        System.out.println(blockPos);
         this.add(forCount);
         forBlock.setForLoopIter((int)forCount.getValue());
         forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
+        System.out.println(blockPos.x + ", " + blockPos.y);
         layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
         layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+40,SpringLayout.WEST,this);
         this.repaint();

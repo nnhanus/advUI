@@ -2,31 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BlockModel {
     int index;
     String name;
-    public Map<Integer,String> nameMap=new HashMap();
-    public Map<Integer,String> descriptionMap=new HashMap();
-    public Map<Integer,ImageIcon> iconMap=new HashMap();
+    public Map<Integer,String> nameMap;
+    public Map<Integer,String> descriptionMap;
+    public Map<Integer,ImageIcon> iconMap;
     String forLoopIter="";
     public ImageIcon icon;
-    public BlockControl control;
 
-    public BlockModel(int type, BlockControl controller){
-        control=controller;
+    public BlockModel(int type){
+        nameMap = new HashMap<>();
         nameMap.put(0,"Move");
         nameMap.put(1,"Turn");
         nameMap.put(2,"For");
         nameMap.put(3,"If");
 
+        iconMap = new HashMap<>();
         iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
         iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
 
+        descriptionMap = new HashMap<>();
         descriptionMap.put(0,"Moves the character one cell in the current direction  ");
         descriptionMap.put(1,"Turns the character 90 degrees clockwise  ");
         descriptionMap.put(2,"Repeats the next block a specified amount of times  ");
@@ -35,8 +35,6 @@ public class BlockModel {
         setIndex(type);
         this.name=nameMap.get(type);
         this.icon= iconMap.get(type);
-        //giving all blocks the last icon of the group?
-
     }
 
     public String getHelper(){

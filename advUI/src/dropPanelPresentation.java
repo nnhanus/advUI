@@ -86,24 +86,24 @@ public class dropPanelPresentation {
         for (int index=0;index<control.getBlocksPlayed().size();index++) {
             BlockControl block = control.getBlocksPlayed().get(index);
             cellRectangle cell = control.getCells().get(index);
-            cell.hasBlock = true;
+            cell.setHasBlock(true);
                 g2d.setPaint(new TexturePaint(block.getIconAsImage(), cell));
                 g2d.fill(cell);
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("Ariel", Font.BOLD, 14));
                 String name=block.getType()+" "+block.getForLoopIter();
                 g2d.drawString(name, cell.x + cell.width / 2 - g2d.getFontMetrics().stringWidth(name) / 2, cell.y + cell.height / 2);
-            if (cell.close) {
+            if (cell.getClose()) {
                 g2d.drawImage(getIconAsImage(closeIcon),cell.x+3*cell.width/4,cell.y+3,cell.width/4,cell.height/4,null);
             }
         }
         for (cellRectangle cell : control.getCells()) {
-            if (cell.highlight) {
+            if (cell.getHighlight()) {
                 g2d.setStroke(new BasicStroke(3));
                 g2d.setColor(Color.GREEN);
                 g2d.draw(cell);
             }
-            if (cell.isReadHighlight){
+            if (cell.getReadHighlight()){
                 g2d.setStroke(new BasicStroke(3));
                 g2d.setColor(Color.GREEN);
                 g2d.draw(cell);
@@ -139,8 +139,8 @@ public class dropPanelPresentation {
                         xOffset + (col * cellWidth),
                         yOffset + (row * cellHeight),
                         cellWidth,
-                        cellHeight,
-                        control);
+                        cellHeight/*,
+                        /*control*/);
                 control.getCells().add(cell);
             }
         }

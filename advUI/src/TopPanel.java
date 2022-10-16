@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -13,6 +11,8 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     int colCount;
     BlockControl inBlock;
     Timer timer;
+    GlassPaneWrapper glassPanel;
+
     JPanel blockPanel = new JPanel();
     public TopPanel(PlayingPanel parent) {
         container=parent;
@@ -23,9 +23,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         resetBtns();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-
     }
-
 
     public void resetBtns() {
         blockPanel.removeAll();
@@ -44,7 +42,6 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
@@ -57,6 +54,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                 block.dispatchEvent(e);
             }
         }
+
     }
 
     @Override
