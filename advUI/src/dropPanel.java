@@ -145,7 +145,7 @@ public class dropPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     private void setCell(MouseEvent e, BlockControl selectedBlock) {
-        model.setCell(e, selectedBlock);
+        model.setCell(e, new BlockControl(selectedBlock));
     }
 
     List<String> getActions() {

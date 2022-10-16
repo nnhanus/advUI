@@ -44,6 +44,7 @@ public class readActionThread implements Runnable{
                     loop.add(action);
                     inForLoop = Integer.parseInt(loop.get(0)); //how many actions in the loop
                     readAction(loop);
+                    loop.clear();
                     cellFor = parent.getCells().get(blockIter); //the "for block" cell keeps lighting up
                     //cellFor.setReadHighlight(true); //
                     blockIter++; //the next one is the cell to light
@@ -101,6 +102,7 @@ public class readActionThread implements Runnable{
         }
     private void readAction(List<String> loop){
             int iter=Integer.parseInt(loop.get(0));
+            System.out.println(iter);
             String action=parent.getActions().get(1);
             parent.getActions().remove(1);
             parent.getActions().remove(0);
