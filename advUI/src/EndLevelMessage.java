@@ -78,6 +78,10 @@ public class EndLevelMessage extends JDialog {
 
     private void makeWin(){
         makeIcon("Win");
+        if(parent.getLevelNumber()==5){
+            messageP1.setText("Congratulations!");
+            messageP2.setText("You did it! ");
+        }
         messageP1.setText("Congratulations!");
         messageP2.setText("Ready for the next level?");
     }
