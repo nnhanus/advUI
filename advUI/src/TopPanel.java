@@ -74,12 +74,12 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
                 }
             }
             else {
-                block.highlightOff();
-                inBlock = null;
-                if (timer != null) {
-                    timer.stop();
+                if(block==inBlock){
+                    block.highlightOff();
+                    inBlock=null;
+                    if(timer!=null){timer.stop();}
+                    container.getContainer().setHelperText(" ");
                 }
-                container.getContainer().setHelperText(" ");
             }
         }
     }

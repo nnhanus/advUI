@@ -109,9 +109,8 @@ public class GlassPaneWrapper extends JPanel {
         }
         forBlock.setForLoopIter((int)forCount.getValue());
         forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
-        System.out.println(blockPos.x + ", " + blockPos.y);
         layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
-        layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+48,SpringLayout.WEST,this);
+        layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+60,SpringLayout.WEST,this);
         this.repaint();
     }
 
