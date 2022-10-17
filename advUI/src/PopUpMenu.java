@@ -126,7 +126,6 @@ public class PopUpMenu extends JDialog {
             buttonPanel.add(go);
             buttonPanel.add(Box.createRigidArea(new Dimension(100,0)));
             buttonPanel.add(restart);
-            //buttonPanel.add(close);
             add(buttonPanel,BorderLayout.SOUTH);
         }
     }

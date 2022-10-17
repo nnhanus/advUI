@@ -55,7 +55,7 @@ public class AnimationPanel extends JPanel {
                 return false;
             }
             for (Scoop scoop : Grid.scoops){
-                if (character.getScoops().get(character.getScoops().size()-1).size < scoop.size){
+                if (character.getScoops().get(character.getScoops().size()-1).getSize() < scoop.getSize()){
                     return true;
                 }
             }

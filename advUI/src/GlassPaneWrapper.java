@@ -104,6 +104,9 @@ public class GlassPaneWrapper extends JPanel {
         BlockControl forBlock=wrappedPanel.topPanel.getButtonList().get(2);
         Point blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
         this.add(forCount);
+        if (blockPos.x < 750){
+            blockPos = new Point(750, 20);
+        }
         forBlock.setForLoopIter((int)forCount.getValue());
         forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
         System.out.println(blockPos.x + ", " + blockPos.y);
@@ -111,6 +114,7 @@ public class GlassPaneWrapper extends JPanel {
         layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+48,SpringLayout.WEST,this);
         this.repaint();
     }
+
     void makeAnnouncement() {
         newActionWindow newBlock = new newActionWindow(wrappedPanel.container);
         this.add(newBlock);
@@ -143,4 +147,5 @@ public class GlassPaneWrapper extends JPanel {
     public void removeForSpinner() {
         this.remove(forCount);
     }
+
 }

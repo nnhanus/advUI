@@ -202,10 +202,6 @@ public class Level {
         else{return umbrella;}
     }
 
-    public int getNumber(){
-        return number;
-    }
-
    public int getNumCols() {
         return numCols;
     }

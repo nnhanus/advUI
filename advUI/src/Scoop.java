@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Scoop {
-    public int x;
-    public int y;
-    public int size;
-    public BufferedImage image;
+    private int x;
+    private int y;
+    private int size;
+    private BufferedImage image;
 
     public Scoop(int x, int y, int size, BufferedImage image){
         this.image = image;

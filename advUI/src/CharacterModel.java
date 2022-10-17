@@ -66,14 +66,14 @@ public class CharacterModel {
         Scoop pickIf=null;
         Scoop largest=grid.scoops.get(0);
         for (Scoop s : grid.scoops){
-            if(s.size>largest.size){largest=s;}
-            if (s.x == x && s.y == y){
+            if(s.getSize()>largest.getSize()){largest=s;}
+            if (s.getX() == x && s.getY() == y){
                 pickIf=s;
             }
         }
         if(pickIf==null){return;}
         if(pickIf==largest){
-            if (scoops.size() > 0 && scoops.get(scoops.size()-1).size <= pickIf.size){return;}
+            if (scoops.size() > 0 && scoops.get(scoops.size()-1).getSize() <= pickIf.getSize()){return;}
             scoops.add(pickIf);
             grid.scoops.remove(pickIf);
         }
@@ -83,9 +83,9 @@ public class CharacterModel {
     public void pickScoop(){
         grid = parent.animation.grid;
         for (Scoop s : grid.scoops){
-            if (s.x == x && s.y == y){
+            if (s.getX() == x && s.getY() == y){
                 if (scoops.size() > 0){
-                    if (scoops.get(scoops.size()-1).size > s.size){
+                    if (scoops.get(scoops.size()-1).getSize() > s.getSize()){
                         scoops.add(s);
                         grid.scoops.remove(s);
                         break;

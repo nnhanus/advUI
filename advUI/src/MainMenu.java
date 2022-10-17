@@ -94,6 +94,7 @@ public class MainMenu extends JDialog {
                             if (selectedLevel == 0) {
                             } else if (selectedLevel == 6) {
                                 dispose();
+                                System.exit(0);
                             } else {
                                 GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile);
                                 dispose();
@@ -153,7 +154,6 @@ public class MainMenu extends JDialog {
             levelSelect.add(playPanel, BorderLayout.PAGE_END);
 
             mainPane.add(levelSelect, BorderLayout.CENTER);
-           //CharacterChooser mainPane = new CharacterChooser();
 
             control.add(mainPane, BorderLayout.CENTER);
         }

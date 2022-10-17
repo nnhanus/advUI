@@ -1,11 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-
-//Inspired by : https://www.youtube.com/watch?v=jH8PNTXsAC0
 
 public class SRSliderUI extends BasicSliderUI {
     Image image = null;
@@ -25,7 +22,6 @@ public class SRSliderUI extends BasicSliderUI {
     @Override
     public void paintThumb(Graphics pen){
         int x = thumbRect.x;
-//
         pen.drawImage(image, x, thumbRect.y, thumbRect.width, thumbRect.height, null);
     }
 
@@ -56,8 +52,6 @@ public class SRSliderUI extends BasicSliderUI {
             else{label = labels.get(i);}
             if (i == 1 && i==2){
                 x -=5;
-            /*} else if (i == 2) {
-                x -=5;*/
             } else  if (i == 4) {
                 x += 5;
             } else if (i == 5){
