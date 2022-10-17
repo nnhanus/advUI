@@ -82,6 +82,7 @@ public class CharacterModel {
     //Picks up a scoop if in the same position as character and smaller than the last scoop on the cone
     public void pickScoop(){
         grid = parent.animation.grid;
+        if(grid.scoops.isEmpty()){parent.animation.overplay=true;}
         for (Scoop s : grid.scoops){
             if (s.getX() == x && s.getY() == y){
                 if (scoops.size() > 0){
