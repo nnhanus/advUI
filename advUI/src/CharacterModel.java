@@ -33,16 +33,12 @@ public class CharacterModel {
         ArrayList<Point> blocked = grid.obstaclePos;
         if (orientation == Direction.NORTH && y > 0 && !blocked.contains(new Point(x, y-1))) {
             y--;
-            parent.presentation.updateCharacterNorth();
         } else if (orientation == Direction.SOUTH && y < 3 && !blocked.contains(new Point(x, y+1))){
             y++;
-            parent.presentation.updateCharacterSouth();
         } else if (orientation == Direction.EAST && x < 3 && !blocked.contains(new Point(x+1, y))){
             x++;
-            parent.presentation.updateCharacterWest();
         } else if (orientation == Direction.WEST && x > 0 && !blocked.contains(new Point(x-1, y))){
             x--;
-            parent.presentation.updateCharacterEast();
         }
         if(!isNextIf)pickScoop();
     }

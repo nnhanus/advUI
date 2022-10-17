@@ -69,22 +69,6 @@ public class CharacterPresentation {
         }
     }
 
-    public void updateCharacterNorth(){
-        currentY = currentY - Grid.getCellHeight();
-    }
-
-    public void updateCharacterSouth(){
-        currentY = currentY + Grid.getCellHeight();
-    }
-
-    public void updateCharacterEast(){
-        currentX = currentX - Grid.getCellWidth();
-    }
-
-    public void updateCharacterWest(){
-        currentX = currentX + Grid.getCellWidth();
-    }
-
     public Image getCharImage() {
         return character;
     }
