@@ -1,15 +1,16 @@
 public class GameWindowModel {
-    public int unlockedLevel=1;
+    public int unlockedLevel;
     private static int levelnum;
     private static Level level;
     public static int Height;
     public static int Width;
 
-    public GameWindowModel(int levelFromMenu) {
+    public GameWindowModel(int levelFromMenu, int unlocked) {
         Height = 600;
         Width = 1100;
         levelnum = levelFromMenu;
         level = new Level(levelnum);
+        unlockedLevel = unlocked;
     }
 
     public void setLevel(int newLevel) {

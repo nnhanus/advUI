@@ -19,7 +19,7 @@ public class tutorialWindow extends JDialog {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                System.out.println("closed");
+
                 owner.getGlassPanel().makeAnnouncement();
             }
         });

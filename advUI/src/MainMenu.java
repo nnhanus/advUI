@@ -11,10 +11,11 @@ public class MainMenu extends JDialog {
     String characterFile = "advUI/Icons/cow.png";
     JLabel character;
     boolean tutorialOn=true;
-    public MainMenu(){
+
+    public MainMenu(int levelUnlocked){
         super();
         this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
-        view=new MainMenuPresentation(this);
+        view=new MainMenuPresentation(this, levelUnlocked);
         setVisible(true);
         pack();
     }
@@ -23,12 +24,14 @@ public class MainMenu extends JDialog {
     private class MainMenuPresentation {
 
         MainMenu control;
-        public MainMenuPresentation(MainMenu control){
+        int unlocked;
+        public MainMenuPresentation(MainMenu control, int levelUnlocked){
             this.control=control;
             Color BGColor = new Color(0xFED1FF);
             this.control.setPreferredSize(new Dimension(500, 500));
             this.control.setBackground(BGColor);
             this.control.setLayout(new BorderLayout());
+            unlocked = levelUnlocked;
 
             mainTitle(BGColor);
 
@@ -45,7 +48,7 @@ public class MainMenu extends JDialog {
             levelSelect.setLayout(new BorderLayout());
 
             CharacterChooser choose = new CharacterChooser();
-            SRSlider slider = new SRSlider(1, 4);
+            SRSlider slider = new SRSlider(1, unlocked);
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JLabel tutorial = new JLabel("Tutorials On");
@@ -96,7 +99,7 @@ public class MainMenu extends JDialog {
                                 dispose();
                                 System.exit(0);
                             } else {
-                                GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile);
+                                GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile, unlocked);
                                 dispose();
                             }
                         } else {

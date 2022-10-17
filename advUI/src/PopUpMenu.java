@@ -60,7 +60,8 @@ public class PopUpMenu extends JDialog {
                     e -> {
                         int selectedLevel= slider.getValue();
                         if(selectedLevel==0){
-                            MainMenu menu=new MainMenu();
+                            System.out.println(parent.getLevelNumber());
+                            MainMenu menu=new MainMenu(parent.getLevelNumber());
                             parent.dispose();
                             this.control.dispose();
                         }

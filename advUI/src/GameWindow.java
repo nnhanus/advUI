@@ -7,10 +7,10 @@ public class GameWindow  extends JFrame {
     public static GameWindowModel model;
     boolean tutorialOn;
 
-    public GameWindow(int level, boolean tutorialOn, String character){
+    public GameWindow(int level, boolean tutorialOn, String character, int unlocked){
         super("Scoop Recoup");
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        this.model = new GameWindowModel(level);
+        this.model = new GameWindowModel(level, unlocked);
         this.view = new GameWindowPresentation(this, character);
         this.tutorialOn=tutorialOn;
         setPreferredSize(new Dimension(model.Width, model.Height));

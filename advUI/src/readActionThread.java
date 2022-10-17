@@ -98,7 +98,6 @@ public class readActionThread implements Runnable{
         }
     private void readAction(List<String> loop){
             int iter=Integer.parseInt(loop.get(0));
-            System.out.println(iter);
             String action=parent.getActions().get(1);
             parent.getActions().remove(1);
             parent.getActions().remove(0);
