@@ -7,7 +7,7 @@ public class GameWindowModel {
 
     public GameWindowModel(int levelFromMenu) {
         Height = 600;
-        Width = 1150;
+        Width = 1100;
         levelnum = levelFromMenu;
         level = new Level(levelnum);
     }

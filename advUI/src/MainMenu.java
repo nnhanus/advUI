@@ -45,7 +45,7 @@ public class MainMenu extends JDialog {
             levelSelect.setLayout(new BorderLayout());
 
             CharacterChooser choose = new CharacterChooser();
-            SRSlider slider = new SRSlider(1, 1);
+            SRSlider slider = new SRSlider(1, 4);
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JLabel tutorial = new JLabel("Tutorials On");
