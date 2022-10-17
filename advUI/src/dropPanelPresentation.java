@@ -15,13 +15,11 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     public JLabel clear = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/close.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
     ImageIcon closeIcon = new ImageIcon("advUI/Icons/cancel.png");
     public dropPanel control;
-    //private static dropPanelModel model;
 
     public dropPanelPresentation(dropPanel controller){
         control=controller;
         control.addMouseListener(this);
         control.addMouseMotionListener(this);
-        //model=control.getModel();
         createUI();
     }
 

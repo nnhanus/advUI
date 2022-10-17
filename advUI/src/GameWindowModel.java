@@ -1,13 +1,6 @@
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameWindowModel {
     public int unlockedLevel=4;
     private static int levelnum;
-    //private static int level;
     private static Level level;
     public static int Height;
     public static int Width;
