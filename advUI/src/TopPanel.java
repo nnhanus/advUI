@@ -28,7 +28,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
     public void resetBtns() {
         blockPanel.removeAll();
         level=GameWindow.getLevelNumber();
-        colCount= Math.min(level,5);
+        colCount= Math.min(level,4);
         for (int i = 0; i < colCount ; i++) {
             BlockControl controlBtn = new BlockControl(i,this);
             buttonList.add(controlBtn);
