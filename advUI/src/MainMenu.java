@@ -31,7 +31,7 @@ public class MainMenu extends JDialog {
             this.control.setPreferredSize(new Dimension(500, 500));
             this.control.setBackground(BGColor);
             this.control.setLayout(new BorderLayout());
-            unlocked = 5;//levelUnlocked;
+            unlocked = levelUnlocked;
 
             mainTitle(BGColor);
 
@@ -107,8 +107,12 @@ public class MainMenu extends JDialog {
                             character.setIcon(new ImageIcon(new ImageIcon(characterFile).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
                             levelSelect.remove(choose);
                             levelSelect.add(slider, BorderLayout.CENTER);
-                            character.setVisible(true);
-                            tutorial.setVisible(true);
+                            playPanel.removeAll();
+                            playPanel.add(character);
+                            playPanel.add(Box.createRigidArea(new Dimension(140,0)));
+                            playPanel.add(go);
+                            playPanel.add(Box.createRigidArea(new Dimension(100,0)));
+                            playPanel.add(tutorial);
                             //character.setText("Character");
                             mode = "slider";
                             level.setText("Choose your level!");
@@ -128,9 +132,10 @@ public class MainMenu extends JDialog {
                     if (mode.equalsIgnoreCase("slider")) {
                         levelSelect.remove(slider);
                         levelSelect.add(choose, BorderLayout.CENTER);
-                        //character.setText("Level");
-                        character.setVisible(false);
-                        tutorial.setVisible(false);
+                        playPanel.removeAll();
+                        playPanel.add(Box.createHorizontalGlue());
+                        playPanel.add(go);
+                        playPanel.add(Box.createHorizontalGlue());
                         mode = "chooser";
                         level.setText("Choose your character!");
                         revalidate();
