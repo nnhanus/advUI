@@ -7,60 +7,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Defines the different levels
+ */
 public class Level {
+    //obstacle images
     public BufferedImage table = null;
     public BufferedImage cart = null;
     public BufferedImage umbrella = null;
     public BufferedImage flowers = null;
     public BufferedImage ground =null;
     public BufferedImage grass = null;
-    int number;
-    int numRows = 4;
-    int numCols = 4;
+    //scoop images
+    public BufferedImage mintChoco = null;
+    public BufferedImage funfetti = null;
+    public BufferedImage strawberry = null;
+    public BufferedImage caramel = null;
+
+    int number; //level number
+
     ArrayList<Scoop> scoops = new ArrayList<>();
+
+    //initial position and orientation of the character
     int posX;
     int posY;
     CharacterModel.Direction orientation;
+
     ArrayList<BufferedImage> background = new ArrayList<>(16);
     ArrayList<Point> blockedCells = new ArrayList<>();
 
     public Level(int number){
-        BufferedImage mintChoco = null;
-        BufferedImage funfetti = null;
-        BufferedImage choco = null;
-        BufferedImage strawberry = null;
-        BufferedImage caramel = null;
-        try{
-            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
-            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
-            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
-            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
-            table = ImageIO.read(new File("advUI/Icons/table.png"));
-            cart = ImageIO.read(new File("advUI/Icons/iceCreamCart.png"));
-            umbrella = ImageIO.read(new File("advUI/Icons/umbrella.png"));
-            flowers = ImageIO.read(new File("advUI/Icons/flowers.png"));
-            ground =ImageIO.read(new File("advUI/Icons/ground.jpg"));
-            grass= ImageIO.read(new File("advUI/Icons/grass.jpg"));
-        } catch (IOException ex) {
-            System.out.println("Missing file");
-        }
+        chargeImage();
         this.number = number;
 
-        if (number==1){ //Move
-            posX = 0;
+        if (number==1){ //First level, 1 scoop, Move
+            posX = 0; //Initial position
             posY = 1;
-            orientation = CharacterModel.Direction.EAST;
-            scoops.add(new Scoop(2, 1, 40, mintChoco));
+            orientation = CharacterModel.Direction.EAST; //initial orientation
+            scoops.add(new Scoop(2, 1, 40, mintChoco)); //scoops
+            //defining blockedCells
             int[] fullRows={0,2,3};
-            for(int i=0; i<fullRows.length;i++){
-                for(int n=0; n<4;n++){
-                    blockedCells.add(new Point(n,fullRows[i]));
+            for (int fullRow : fullRows) {
+                for (int n = 0; n < 4; n++) {
+                    blockedCells.add(new Point(n, fullRow));
                 }
             }
             int extraNum=blockedCells.size()/3;
             List<Integer> extras=getObstaclePos(extraNum,new int[]{0,1,2,3,8,9,10,11,12,13,14,15});
-            
+
+            //Defining the background needed, grass if blocked, dirt else
             for(int i=0;i<16;i++){
                 if(i>3&&i<8){
                     background.add(ground);
@@ -77,15 +72,15 @@ public class Level {
 
 
         }
-        if (number==2){ //Move + Turn
+        if (number==2){ //Level 2, 1 scoop, Move + Turn
             posX = 1;
             posY = 1;
             orientation = CharacterModel.Direction.NORTH;
             scoops.add(new Scoop(2,2,40, caramel));
             int[] fullRows={0,3};
-            for(int i=0; i<fullRows.length;i++){
-                for(int n=0; n<4;n++){
-                    blockedCells.add(new Point(n,fullRows[i]));
+            for (int fullRow : fullRows) {
+                for (int n = 0; n < 4; n++) {
+                    blockedCells.add(new Point(n, fullRow));
                 }
             }
             int extraNum=blockedCells.size()/2;
@@ -104,7 +99,7 @@ public class Level {
                 }
             }
         }
-        if (number==3){ //For loop + 2nd scoop introduced
+        if (number==3){ //Level 3, 2 scoops, For + Move + Turn
             posX = 1;
             posY = 1;
             orientation = CharacterModel.Direction.SOUTH;
@@ -134,16 +129,16 @@ public class Level {
             }
         }
 
-        if (number==4){ //If loop
+        if (number==4){ //Level 4, 2 scoops, If + For + Turn + Move
             posX = 0;
             posY = 1;
             orientation = CharacterModel.Direction.EAST;
             scoops.add(new Scoop(3, 1, 40, mintChoco));
             scoops.add(new Scoop(2, 1, 30, funfetti));
             int[] fullRows={0,2,3};
-            for(int i=0; i<fullRows.length;i++){
-                for(int n=0; n<4;n++){
-                    blockedCells.add(new Point(n,fullRows[i]));
+            for (int fullRow : fullRows) {
+                for (int n = 0; n < 4; n++) {
+                    blockedCells.add(new Point(n, fullRow));
                 }
             }
 
@@ -164,7 +159,7 @@ public class Level {
                 }
             }
         }
-        if (number==5){
+        if (number==5){ //Level 5, 2 scoops, If + For + Turn + Move
            posX = 3;
            posY = 0;
            orientation = CharacterModel.Direction.NORTH;
@@ -192,6 +187,27 @@ public class Level {
         }
     }
 
+    /**
+     * Charge the different needed images
+     */
+    private void chargeImage() {
+        try{
+            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
+            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
+            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
+            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
+            table = ImageIO.read(new File("advUI/Icons/table.png"));
+            cart = ImageIO.read(new File("advUI/Icons/iceCreamCart.png"));
+            umbrella = ImageIO.read(new File("advUI/Icons/umbrella.png"));
+            flowers = ImageIO.read(new File("advUI/Icons/flowers.png"));
+            ground =ImageIO.read(new File("advUI/Icons/ground.jpg"));
+            grass= ImageIO.read(new File("advUI/Icons/grass.jpg"));
+        } catch (IOException ex) {
+            System.out.println("Missing file");
+        }
+    }
+
+
     private List<Integer> getObstaclePos(int extraNum, int[] available) {
         Random rand = new Random();
         List<Integer> extras=new ArrayList<>(extraNum);
@@ -201,19 +217,16 @@ public class Level {
         return extras;
     }
 
+    /**
+     * Get obstacle corresponding to number
+     * @param extraNum id of the obstacle
+     * @return the corresponding obstacle
+     */
     private BufferedImage getObstacle(int extraNum) {
         if(extraNum==3){return cart;}
         else if(extraNum==1|| extraNum==0||extraNum==5){return flowers;}
         else if (extraNum==2||extraNum==4) {return table;}
         else{return umbrella;}
-    }
-
-   public int getNumCols() {
-        return numCols;
-    }
-
-    public int getNumRows() {
-        return numRows;
     }
 
     public int getPosX() {

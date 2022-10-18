@@ -4,7 +4,7 @@
 public class paintMove implements Runnable{
 
     public AnimationPanel animation;
-    public dropPanel parent;
+    public final dropPanel parent;
 
     public paintMove(AnimationPanel animation, dropPanel parent){
         this.animation=animation;

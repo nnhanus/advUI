@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class readActionThread implements Runnable{
     public AnimationPanel animation;
-    public dropPanel parent;
+    public final dropPanel parent;
 
     public readActionThread(AnimationPanel animation, dropPanel parent){
         this.animation=animation;
@@ -49,6 +49,7 @@ public class readActionThread implements Runnable{
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
 
                     readAction(action, character, isNextIf);
