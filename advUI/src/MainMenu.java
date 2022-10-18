@@ -16,6 +16,7 @@ public class MainMenu extends JDialog {
         super();
         this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
         view=new MainMenuPresentation(this, levelUnlocked);
+        setResizable(false);
         setVisible(true);
         pack();
     }

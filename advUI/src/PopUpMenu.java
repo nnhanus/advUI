@@ -12,6 +12,7 @@ public class PopUpMenu extends JDialog {
         this.setVisible(false);
         parent = owner;
         view= new PopUpMenuPresentation(this);
+        setResizable(false);
 
         pack();
         this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
