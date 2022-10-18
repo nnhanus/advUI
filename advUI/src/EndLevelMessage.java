@@ -15,8 +15,7 @@ public class EndLevelMessage extends JDialog {
         parent = owner;
         setLayout(new BorderLayout());
         setVisible(true);
-
-        if (type.equalsIgnoreCase("win")){
+        if (type.equalsIgnoreCase("win")) {
             makeWin();
         } else {
             makeFail();
@@ -30,7 +29,12 @@ public class EndLevelMessage extends JDialog {
         messageP1.setFont(new Font("Bradley Hand", Font.PLAIN, 30));
         messageP2.setFont(new Font("Bradley Hand", Font.PLAIN, 24));
 
-        JPanel buttonsPanel = buttonsPanel();
+        JPanel buttonsPanel;
+        if (GameWindow.getLevelNumber() == 5){
+            buttonsPanel = makeButtonsEnd();
+        } else {
+            buttonsPanel = buttonsPanel(type);
+        }
 
         JPanel rightPanel = new JPanel();
         rightPanel.setBackground(BGColor);
@@ -44,9 +48,36 @@ public class EndLevelMessage extends JDialog {
         add(rightPanel, BorderLayout.CENTER);
 
         pack();
+
     }
 
-    private JPanel buttonsPanel() {
+    private JPanel makeButtonsEnd() {
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBackground(BGColor);
+        buttonsPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
+
+        JButton mainMenu = new JButton("Main Menu");
+        JButton quit = new JButton("Quit");
+
+        mainMenu.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+        quit.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+
+        mainMenu.addActionListener( e -> {
+            MainMenu menu = new MainMenu(5);
+            parent.dispose();
+            this.dispose();
+        });
+        quit.addActionListener( e -> System.exit(0));
+
+        buttonsPanel.add(mainMenu);
+        buttonsPanel.add(quit);
+
+        return buttonsPanel;
+
+
+    }
+
+    private JPanel buttonsPanel(String type) {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setBackground(BGColor);
         buttonsPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
@@ -59,7 +90,9 @@ public class EndLevelMessage extends JDialog {
 
         yes.addActionListener(
                 e -> {
-                    parent.setLevel(parent.getLevelNumber()+1);
+                    if (type.equalsIgnoreCase("win")){
+                        parent.setLevel(parent.getLevelNumber()+1);
+                    }
                     parent.changeLevel(parent.getLevelNumber());
                     dispose();
                 });
