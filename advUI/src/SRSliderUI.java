@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
+import java.awt.font.GlyphVector;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -57,8 +58,16 @@ public class SRSliderUI extends BasicSliderUI {
             } else if (i == 5){
                 x +=15;
             }
-            pen.setFont(new Font("Times", Font.BOLD, 16));
             pen.drawImage(label, x , y , width, height, null);
+            pen.setFont(new Font("Times", Font.BOLD, 16));
+
+            pen.setColor(Color.WHITE);
+            pen.drawString(String.valueOf(i),x + width/2-3, y + height/2+1 );
+            pen.drawString(String.valueOf(i),x + width/2-3, y + height/2-1 );
+            pen.drawString(String.valueOf(i),x + width/2-1, y + height/2+1 );
+            pen.drawString(String.valueOf(i),x + width/2-1, y + height/2-1 );
+
+            pen.setColor(Color.BLACK);
             pen.drawString(String.valueOf(i),x + width/2-2, y + height/2 );
         }
     }
