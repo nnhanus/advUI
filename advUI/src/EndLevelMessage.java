@@ -3,21 +3,29 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
+/**
+ * End of level pop up
+ */
 public class EndLevelMessage extends JDialog {
     GameWindow parent;
     ImageIcon icon = null;
     JLabel messageP1 = new JLabel();
     JLabel messageP2 = new JLabel();
-    Color BGColor = new Color(0xFED1FF);
 
 
+    /**
+     * Constructor
+     * @param owner owner
+     * @param type win or fail
+     */
     public EndLevelMessage(GameWindow owner, String type){
         super(owner);
-        setVisible(false);
         parent = owner;
+
+        setVisible(false);
         setLayout(new BorderLayout());
+
         if (type.equalsIgnoreCase("win")) {
             makeWin();
         } else {
@@ -25,22 +33,22 @@ public class EndLevelMessage extends JDialog {
         }
 
         JPanel image = new JPanel();
-        image.setBackground(BGColor);
+        image.setBackground(Main.bgColor);
         image.add(new JLabel(icon));
         image.setBorder(new EmptyBorder(new Insets(40, 10, 10, 40)));
 
-        messageP1.setFont(new Font("Bradley Hand", Font.PLAIN, 30));
-        messageP2.setFont(new Font("Bradley Hand", Font.PLAIN, 24));
+        messageP1.setFont(Main.getFontPlain(30));
+        messageP2.setFont(Main.getFontPlain(24));
 
         JPanel buttonsPanel;
-        if (GameWindow.getLevelNumber() == 5){
+        if (GameWindow.getLevelNumber() == 5 && type.equalsIgnoreCase("win")){ //final level doesn't have the same options if won
             buttonsPanel = makeButtonsEnd();
         } else {
             buttonsPanel = buttonsPanel(type);
         }
 
         JPanel rightPanel = new JPanel();
-        rightPanel.setBackground(BGColor);
+        rightPanel.setBackground(Main.bgColor);
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(messageP1, BorderLayout.NORTH);
         rightPanel.add(messageP2, BorderLayout.CENTER);
@@ -51,24 +59,28 @@ public class EndLevelMessage extends JDialog {
         add(rightPanel, BorderLayout.CENTER);
 
         pack();
-        this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
-        setVisible(true);
 
+        this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2); //puts it in the middle of the owner
+        setVisible(true);
     }
 
+    /**
+     * Creates the buttons if the last level was won
+     * @return panel with the buttons
+     */
     private JPanel makeButtonsEnd() {
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(BGColor);
+        buttonsPanel.setBackground(Main.bgColor);
         buttonsPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
 
         JButton mainMenu = new JButton("Main Menu");
         JButton quit = new JButton("Quit");
 
-        mainMenu.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
-        quit.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+        mainMenu.setFont(Main.getFontPlain(18));
+        quit.setFont(Main.getFontPlain(18));
 
         mainMenu.addActionListener( e -> {
-            MainMenu menu = new MainMenu(5, parent.view.animation.character.getPath());
+            new MainMenu(5, GameWindow.view.animation.character.getPath());
             parent.dispose();
             this.dispose();
         });
@@ -78,27 +90,30 @@ public class EndLevelMessage extends JDialog {
         buttonsPanel.add(quit);
 
         return buttonsPanel;
-
-
     }
 
+    /**
+     * Creates the buttons
+     * @param type win or fail
+     * @return panel with buttons
+     */
     private JPanel buttonsPanel(String type) {
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(BGColor);
+        buttonsPanel.setBackground(Main.bgColor);
         buttonsPanel.setBorder(new EmptyBorder(20, 0, 10, 0));
 
         JButton yes = new JButton("Yes");
         JButton no = new JButton("No");
 
-        yes.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
-        no.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
+        yes.setFont(Main.getFontPlain(18));
+        no.setFont(Main.getFontPlain(18));
 
         yes.addActionListener(
                 e -> {
                     if (type.equalsIgnoreCase("win")){
-                        parent.setLevel(parent.getLevelNumber()+1);
+                        parent.setLevel(GameWindow.getLevelNumber()+1);
                     }
-                    parent.changeLevel(parent.getLevelNumber());
+                    parent.changeLevel(GameWindow.getLevelNumber());
                     dispose();
                 });
         no.addActionListener(
@@ -117,7 +132,7 @@ public class EndLevelMessage extends JDialog {
         makeIcon("Win");
         String soundName;
 
-        if(parent.getLevelNumber()==5){
+        if(GameWindow.getLevelNumber()==5){
             //play end of game icecream jingle
             soundName = "advUI/Sounds/end_game.wav";
             messageP1.setText("Congratulations!");
@@ -125,7 +140,7 @@ public class EndLevelMessage extends JDialog {
         } else {
             //play happy sounds
             soundName = "advUI/Sounds/win_tone.wav";
-            parent.setLevelUnlocked(parent.getLevelNumber() + 1);
+            parent.setLevelUnlocked(GameWindow.getLevelNumber() + 1);
             messageP1.setText("Congratulations!");
             messageP2.setText("Ready for the next level?");
         }
@@ -155,10 +170,14 @@ public class EndLevelMessage extends JDialog {
         }
     }
 
+    /**
+     * Gets the right image and sets it as the icon
+     * @param type win or fail
+     */
     private void makeIcon(String type){
-        String characterPath = parent.view.animation.character.getPath();
-        String split[] = characterPath.split("/");
-        String split2[] = split[2].split("\\.");
+        String characterPath = GameWindow.view.animation.character.getPath();
+        String[] split = characterPath.split("/");
+        String[] split2 = split[2].split("\\.");
         String character = split2[0];
         String path = "advUI/Icons/" + character + type + ".png";
         icon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
