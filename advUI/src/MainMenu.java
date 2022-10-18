@@ -4,17 +4,34 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Main menu of the game, what appears when the game is launched
+ * Level select, character select, toggle tutorials
+ */
 public class MainMenu extends JDialog {
 
     MainMenuPresentation view;
-    String mode = "slider";
+    String mode = "slider"; //toggle between level select (=slider) and character select (=chooser)
     String characterFile = "advUI/Icons/cow.png";
     JLabel character;
     boolean tutorialOn=true;
 
-    public MainMenu(int levelUnlocked){
+    /**
+     * Constructor for game launch
+     */
+    public MainMenu(){
         super();
         this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+        view=new MainMenuPresentation(this, 1);
+        setResizable(false);
+        setVisible(true);
+        pack();
+    }
+
+    public MainMenu(int levelUnlocked, String character){
+        super();
+        this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+        characterFile = character;
         view=new MainMenuPresentation(this, levelUnlocked);
         setResizable(false);
         setVisible(true);

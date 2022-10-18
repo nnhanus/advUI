@@ -68,7 +68,7 @@ public class EndLevelMessage extends JDialog {
         quit.setFont(new Font("Bradley Hand", Font.PLAIN, 18));
 
         mainMenu.addActionListener( e -> {
-            MainMenu menu = new MainMenu(5);
+            MainMenu menu = new MainMenu(5, parent.view.animation.character.getPath());
             parent.dispose();
             this.dispose();
         });
