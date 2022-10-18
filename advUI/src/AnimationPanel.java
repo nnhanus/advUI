@@ -68,6 +68,9 @@ public class AnimationPanel extends JPanel {
         if (isFailed()){
             EndLevelMessage end = new EndLevelMessage(parent, "fail");
         }else if(isLevelComplete()){
+            if(parent.getLevelNumber()==5){
+                parent.rainScoops(character);
+            }
             EndLevelMessage end = new EndLevelMessage(parent, "win");
         }
 

@@ -1,7 +1,15 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameWindowPresentation{
 
@@ -99,5 +107,43 @@ public class GameWindowPresentation{
 
     public void setHelperText(String s) {
         helper.setText(s);
+    }
+
+    public void rainScoops(Character character) {
+        List<BufferedImage> scoops = new ArrayList<>();
+        BufferedImage mintChoco = null;
+        BufferedImage funfetti = null;
+        BufferedImage caramel=null;
+        BufferedImage choco = null;
+        BufferedImage strawberry = null;
+        Image characterImage= character.getCharImage();
+        try {
+            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
+            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
+            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
+            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
+            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
+
+        } catch (IOException ex) {
+            System.out.println("Missing file");
+        }
+        scoops.add(mintChoco);
+        scoops.add(funfetti);
+        scoops.add(caramel);
+        scoops.add(choco);
+        scoops.add(strawberry);
+        //create transparent JPanel with custom paint?
+        //use random to get scoop type
+        //use random to determine start point
+
+        //if location of scoop is passed glass pane, delete
+//        Timer timer = new Timer(10000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                //while timer move scoops 5 pts down and rotate
+//            }
+//        });
+//        timer.setRepeats(false);
+//        timer.start();
     }
 }

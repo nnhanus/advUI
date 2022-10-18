@@ -36,7 +36,6 @@ public class GlassPaneWrapper extends JPanel {
                     wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
                 } else if (wrappedPanel.getTopPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.topPanel))){
                     wrappedPanel.getTopPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getTopPanel()));
-                    System.out.println("spinner");
                 }
 
             }

@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.List;
 
 public class dropPanelPresentation implements MouseListener, MouseMotionListener {
     public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
@@ -166,10 +166,11 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     }
     public void mouseClicked(MouseEvent e) {
         //if a complete click occurs on a cell, delete any block that may be in it
-        Point clicked = e.getPoint();
-        for (cellRectangle cell : control.getCells()) {
+        Point clicked = SwingUtilities.convertPoint(e.getComponent(),e.getPoint(),control);
+        List<cellRectangle> cells=control.getCells();
+        for (cellRectangle cell : cells) {
             if (cell.contains(clicked)&&cell.getHasBlock()) {
-                int toDelete = control.getCells().indexOf(cell);
+                int toDelete = cells.indexOf(cell);
                 cell.setHasBlock(false);
                 control.getActions().remove(toDelete);
                 control.getBlocksPlayed().remove(toDelete);

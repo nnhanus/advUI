@@ -40,6 +40,7 @@ public class dropPanelModel {
         //add the action type to a list to be read when user presses play
         String type=block.getType();
         int index=selectedCell.x+selectedCell.y*columnCount;
+        cells.get(index).setHasBlock(true);
         if(index>blocksPlayed.size()-1){index=blocksPlayed.size();}
         actionList.add(index,type+" "+block.getForLoopIter());
         blocksPlayed.add(index,block);

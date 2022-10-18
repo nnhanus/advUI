@@ -61,4 +61,7 @@ public class GameWindow  extends JFrame {
         tutorialOn=!tutorialOn;
     }
 
+    public void rainScoops(Character character) {
+        view.rainScoops(character);
+    }
 }
