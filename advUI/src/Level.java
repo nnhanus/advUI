@@ -168,7 +168,7 @@ public class Level {
            posX = 3;
            posY = 0;
            orientation = CharacterModel.Direction.NORTH;
-           scoops.add(new Scoop(1, 1, 40, choco));
+           scoops.add(new Scoop(1, 1, 40, mintChoco));
            scoops.add(new Scoop(3, 3, 30, caramel));
            blockedCells.add(new Point(2, 1));
            blockedCells.add(new Point(2, 2));

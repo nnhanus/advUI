@@ -1,13 +1,10 @@
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Scoop {
-    private int x;
-    private int y;
-    private int size;
-    private BufferedImage image;
+    private final int x;
+    private final int y;
+    private final int size;
+    private final BufferedImage image;
 
     public Scoop(int x, int y, int size, BufferedImage image){
         this.image = image;

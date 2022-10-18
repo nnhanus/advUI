@@ -17,20 +17,17 @@ public class readActionThread implements Runnable{
     public void run() {
         Character character = animation.character;
         List<String> loop = new ArrayList<>();
-        boolean isNextIf = false;
-        boolean loopFlag = false;
+        boolean isNextIf = false; //checks if next action is if
+        boolean loopFlag = false; //checks if the action is a loop
         int blockIter = 0;
-        int inForLoop = 0;
-        cellRectangle cellFor = null;
-
-        //parent.mouseEvent = true;
-
+        int inForLoop = 0; //number of iterations left in the for loop
+        cellRectangle cellFor = null; //Cell being read that has to be lit up
 
         while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
-                String actionCall = parent.getActions().get(0);
-                //parent.mouseEvent = true;
+                String actionCall = parent.getActions().get(0); //Get the current action
 
+                //Checks if the next action is if
                 if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1).equalsIgnoreCase("If ");
 
                 String action = actionCall.split(" ")[0];
@@ -48,58 +45,67 @@ public class readActionThread implements Runnable{
                     loop.clear();
                     cellFor = parent.getCells().get(blockIter); //the cell with the for block lights up
                     blockIter++; //the next cell that contains the action in the loop also lights up
-                   // parent.mouseEvent = true;
                 } else {
                     try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {}
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                    }
+
                     readAction(action, character, isNextIf);
+
                     parent.getCells().get(blockIter).setReadHighlight(true);
-                    parent.notify();
+
+                    parent.notify(); //notify for the repaint
                     try {
-                        parent.wait();
+                        parent.wait(); //wait for the repaint to be done
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    if (inForLoop > 0){
+
+                    if (inForLoop > 0) { //if in a for loop
                         cellFor.setReadHighlight(true);
                         inForLoop--;
-                        if (inForLoop == 0){
+                        if (inForLoop == 0) {
                             blockIter++;
                         }
                     } else {
                         blockIter++;
                     }
-                    parent.getActions().remove(0);
+                    parent.getActions().remove(0); //remove the action read
                 }
             }
-
-        }
-        synchronized (parent) {
             try {
                 Thread.sleep(500);
             } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
-        //parent.mouseEvent = false;
-        parent.clearAll();
-        parent.buildGrid();
-        parent.repaint();
+
+        parent.clearAll(); //clears the blocks on the drop panel
+        parent.buildGrid(); //remakes the grid on the block panel
         parent.animation.endOfLevelMessage();
     }
 
-
+    /**
+     * Calls the right method for the action read
+     * @param action the action to read
+     * @param character the character that executes the action
+     * @param isNextIf if the next block is an if block
+     */
     private void readAction(String action, Character character, boolean isNextIf){
-            if (action.equalsIgnoreCase("Move")) {
-                character.move(isNextIf);
-            } else if (action.equalsIgnoreCase("Turn")) {
-                character.turn();
-            }else if(action.equalsIgnoreCase("If")){
-                character.ifStatement();
-            }
-            animation.revalidate();
-            animation.repaint();
+        if (action.equalsIgnoreCase("Move")) {
+            character.move(isNextIf);
+        } else if (action.equalsIgnoreCase("Turn")) {
+            character.turn();
+        }else if(action.equalsIgnoreCase("If")){
+            character.ifStatement();
         }
+    }
+
+    /**
+     * Reads the action in the loop
+     * @param loop for + number of iterations + action
+     */
     private void readAction(List<String> loop){
             int iter=Integer.parseInt(loop.get(0));
             String action=parent.getActions().get(1);
