@@ -145,7 +145,9 @@ public class GameWindowPresentation{
         int index=0;
         for(int i=0;i<50;i++){
             if(index==5)index=0;
+            //rotate which colour the scoop is
             scoopsToShow.add(copyImage(scoops.get(index)));
+            //get random locations along the x axis to paint the scoops for rain like appearance
             locations.add(new Point(rand.nextInt(1000),0));
             index++;
         }

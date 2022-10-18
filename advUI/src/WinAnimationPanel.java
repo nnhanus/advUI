@@ -7,6 +7,8 @@ import java.util.List;
 public class WinAnimationPanel extends JPanel {
     List<BufferedImage> scoopsWin;
     List<Point> locations;
+
+    //Transparent panel that paints falling icecream scoops at end of game
     public WinAnimationPanel(List<BufferedImage> scoopsWin,List<Point> locations,GameWindow container){
         this.setPreferredSize(container.getPreferredSize());
         this.locations=locations;
@@ -23,6 +25,7 @@ public class WinAnimationPanel extends JPanel {
         List<Integer> toRemove = new ArrayList<>();
         Graphics2D g2d = (Graphics2D) g;
         for (Point point : locations) {
+            //have the scoops fall at varying rates for visual appeal
             if (locations.indexOf(point) < 15) {
                 point.y += 5;
             } else if (locations.indexOf(point) <35) {
@@ -35,13 +38,11 @@ public class WinAnimationPanel extends JPanel {
             }
         }
         for (Integer index : toRemove) {
+            //remove scoops that fall past the screen
             locations.remove(index);
             scoopsWin.remove(index);
         }
-        int count=0;
         for (BufferedImage scoop : scoopsWin) {
-            count++;
-            System.out.println(count);
             g2d.drawImage(scoop,locations.get(scoopsWin.indexOf(scoop)).x, locations.get(scoopsWin.indexOf(scoop)).y, 30, 30, null);
         }
 

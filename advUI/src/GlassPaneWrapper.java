@@ -155,8 +155,11 @@ public class GlassPaneWrapper extends JPanel {
     }
 
     public void winAnimation(WinAnimationPanel winAnimation) {
+        //add the panel for the end of game animation
+        //clear the glass panel
         this.removeAll();
         this.setPreferredSize(wrappedPanel.getContainer().getPreferredSize());
+        //add end of game animation panel
         this.add(winAnimation);
         SpringLayout layout= (SpringLayout) this.getLayout();
         layout.putConstraint(SpringLayout.WEST, winAnimation,0,SpringLayout.WEST, this);
@@ -167,12 +170,14 @@ public class GlassPaneWrapper extends JPanel {
         Timer timer2= new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                //move scoops every 50 ms
                 winAnimation.repaint();
             }
         });
         Timer timer1 = new Timer(8000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                //let the animation run for 8 seconds and then hide it
                 winAnimation.setVisible(false);
                 timer2.setRepeats(false);
                 timer2.stop();
