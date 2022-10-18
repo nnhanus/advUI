@@ -27,9 +27,15 @@ public class Level {
     public Level(int number){
         BufferedImage mintChoco = null;
         BufferedImage funfetti = null;
+        BufferedImage choco = null;
+        BufferedImage strawberry = null;
+        BufferedImage caramel = null;
         try{
             mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
             funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
+            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
+            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
+            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
             table = ImageIO.read(new File("advUI/Icons/table.png"));
             cart = ImageIO.read(new File("advUI/Icons/iceCreamCart.png"));
             umbrella = ImageIO.read(new File("advUI/Icons/umbrella.png"));
@@ -75,7 +81,7 @@ public class Level {
             posX = 1;
             posY = 1;
             orientation = CharacterModel.Direction.NORTH;
-            scoops.add(new Scoop(2,2,40, mintChoco));
+            scoops.add(new Scoop(2,2,40, caramel));
             int[] fullRows={0,3};
             for(int i=0; i<fullRows.length;i++){
                 for(int n=0; n<4;n++){
@@ -102,7 +108,7 @@ public class Level {
             posX = 1;
             posY = 1;
             orientation = CharacterModel.Direction.SOUTH;
-            scoops.add(new Scoop(1,0,40, mintChoco));
+            scoops.add(new Scoop(1,0,40, strawberry));
             scoops.add(new Scoop(3,0, 30, funfetti));
             for(int n=0; n<4;n++){
                 blockedCells.add(new Point(0,n));
@@ -162,8 +168,8 @@ public class Level {
            posX = 3;
            posY = 0;
            orientation = CharacterModel.Direction.NORTH;
-           scoops.add(new Scoop(1, 1, 40, mintChoco));
-           scoops.add(new Scoop(3, 3, 30, funfetti));
+           scoops.add(new Scoop(1, 1, 40, choco));
+           scoops.add(new Scoop(3, 3, 30, caramel));
            blockedCells.add(new Point(2, 1));
            blockedCells.add(new Point(2, 2));
            blockedCells.add(new Point(1, 2));

@@ -77,7 +77,6 @@ public class AnimationPanel extends JPanel {
 
     }
 
-
     public static class AnimationPanelPresentation {
         AnimationPanel control;
         public AnimationPanelPresentation(AnimationPanel control){

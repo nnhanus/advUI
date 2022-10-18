@@ -9,11 +9,14 @@ public class PopUpMenu extends JDialog {
 
     public PopUpMenu(GameWindow owner){
         super(owner);
+        this.setVisible(false);
         parent = owner;
         view= new PopUpMenuPresentation(this);
 
-        setVisible(true);
         pack();
+        this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
+        setVisible(true);
+
     }
 
     private class PopUpMenuPresentation {
@@ -24,6 +27,7 @@ public class PopUpMenu extends JDialog {
 
         public PopUpMenuPresentation(PopUpMenu control) {
             this.control=control;
+
             this.control.setLayout(new BorderLayout());
 
             JPanel levelSelect = new JPanel();
@@ -49,7 +53,7 @@ public class PopUpMenu extends JDialog {
             title.setBackground(BGColor);
             title.setOpaque(true);
 
-        this.control.add(title, BorderLayout.NORTH);
+            this.control.add(title, BorderLayout.NORTH);
         }
 
         private void buttonPanel(SRSlider slider) {
