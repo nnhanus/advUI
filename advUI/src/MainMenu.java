@@ -31,7 +31,7 @@ public class MainMenu extends JDialog {
             this.control.setPreferredSize(new Dimension(500, 500));
             this.control.setBackground(BGColor);
             this.control.setLayout(new BorderLayout());
-            unlocked = levelUnlocked;
+            unlocked = 5;//levelUnlocked;
 
             mainTitle(BGColor);
 

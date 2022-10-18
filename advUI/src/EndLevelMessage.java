@@ -59,7 +59,6 @@ public class EndLevelMessage extends JDialog {
 
         yes.addActionListener(
                 e -> {
-                    parent.setLevelUnlocked(parent.getLevelNumber()+1);
                     parent.setLevel(parent.getLevelNumber()+1);
                     parent.changeLevel(parent.getLevelNumber());
                     dispose();
@@ -82,6 +81,7 @@ public class EndLevelMessage extends JDialog {
             messageP1.setText("Congratulations!");
             messageP2.setText("You did it! ");
         }
+        parent.setLevelUnlocked(parent.getLevelNumber()+1);
         messageP1.setText("Congratulations!");
         messageP2.setText("Ready for the next level?");
     }

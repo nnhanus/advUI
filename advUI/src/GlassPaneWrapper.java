@@ -104,13 +104,11 @@ public class GlassPaneWrapper extends JPanel {
         BlockControl forBlock=wrappedPanel.topPanel.getButtonList().get(2);
         Point blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
         this.add(forCount);
-        blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
         if (blockPos.x < 850 && GameWindow.getLevelNumber()==3) {
             blockPos = new Point(854, 20);
+        } else if (blockPos.x < 806 && GameWindow.getLevelNumber()==4) {
+            blockPos = new Point(810, 20);
         }
-//         else if (blockPos.x < 750 || blockPos.x > 760){
-//            blockPos = new Point(750, 20);
-//        }
         forBlock.setForLoopIter((int)forCount.getValue());
         forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
         layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
