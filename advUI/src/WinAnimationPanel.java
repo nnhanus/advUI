@@ -31,7 +31,7 @@ public class WinAnimationPanel extends JPanel {
             } else if (locations.indexOf(point) <35) {
                 point.y += 7;
             } else {
-                point.y += 9;
+                point.y += 3;
             }
             if (point.y > this.getHeight()) {
                 toRemove.add(locations.indexOf(point));

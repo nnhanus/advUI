@@ -118,10 +118,12 @@ public class EndLevelMessage extends JDialog {
         String soundName;
 
         if(parent.getLevelNumber()==5){
+            //play end of game icecream jingle
             soundName = "advUI/Sounds/end_game.wav";
             messageP1.setText("Congratulations!");
             messageP2.setText("You did it! ");
         } else {
+            //play happy sounds
             soundName = "advUI/Sounds/win_tone.wav";
             parent.setLevelUnlocked(parent.getLevelNumber() + 1);
             messageP1.setText("Congratulations!");
@@ -141,6 +143,7 @@ public class EndLevelMessage extends JDialog {
         makeIcon("Fail");
         messageP1.setText("So close!");
         messageP2.setText("Want to try again?");
+        //play sad sounds
         String soundName = "advUI/Sounds/lose_tone.wav";
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
