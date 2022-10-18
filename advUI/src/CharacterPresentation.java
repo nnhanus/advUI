@@ -7,7 +7,10 @@ import java.io.IOException;
 public class CharacterPresentation {
     private BufferedImage character = null;
     private BufferedImage cone = null;
-    private BufferedImage direction = null;
+    private BufferedImage north = null;
+    private BufferedImage south = null;
+    private BufferedImage east = null;
+    private BufferedImage west = null;
     String characterPath;
     private int currentX;
     private int currentY;
@@ -19,6 +22,11 @@ public class CharacterPresentation {
         try {
             character = ImageIO.read(new File(characterPath));
             cone = ImageIO.read(new File("advUI/Icons/cone.png"));
+            north = ImageIO.read(new File("advUI/Icons/north.png"));
+            south = ImageIO.read(new File("advUI/Icons/south.png"));
+            east =  ImageIO.read(new File("advUI/Icons/east.png"));
+            west = ImageIO.read(new File("advUI/Icons/west.png"));
+
         } catch (IOException ex) {
             System.out.println("Missing file");
         }
@@ -45,27 +53,14 @@ public class CharacterPresentation {
 
     //draws an arrow to indicate the orientation of the character
     private void drawOrientation(Graphics pen) {
-        try{
-           if (control.getOrientation() == CharacterModel.Direction.NORTH){
-               direction = ImageIO.read(new File("advUI/Icons/north.png"));
-           } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
-               direction = ImageIO.read(new File("advUI/Icons/south.png"));
-           } else if (control.getOrientation() == CharacterModel.Direction.WEST){
-               direction = ImageIO.read(new File("advUI/Icons/west.png"));
-           } else if (control.getOrientation() == CharacterModel.Direction.EAST){
-               direction = ImageIO.read(new File("advUI/Icons/east.png"));
-           }
-        } catch (Exception e){
-            System.out.println("missing file");
-        }
         if (control.getOrientation() == CharacterModel.Direction.NORTH){
-            pen.drawImage(direction, currentX + control.getWidth()/2 - 15, currentY - 30, 30, 30, null);
+            pen.drawImage(north, currentX + control.getWidth()/2 - 15, currentY - 30, 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.SOUTH){
-            pen.drawImage(direction, currentX + control.getWidth()/2 - 15, currentY + control.getHeight(), 30, 30, null);
+            pen.drawImage(south, currentX + control.getWidth()/2 - 15, currentY + control.getHeight(), 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.WEST){
-            pen.drawImage(direction, currentX - 30 , currentY + control.getHeight()/2, 30, 30, null);
+            pen.drawImage(west, currentX - 30 , currentY + control.getHeight()/2, 30, 30, null);
         } else if (control.getOrientation() == CharacterModel.Direction.EAST) {
-            pen.drawImage(direction, currentX + control.getWidth(), currentY + control.getHeight()/2, 30, 30, null);
+            pen.drawImage(east, currentX + control.getWidth(), currentY + control.getHeight()/2, 30, 30, null);
         }
     }
 

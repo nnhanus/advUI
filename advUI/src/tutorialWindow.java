@@ -24,8 +24,10 @@ public class tutorialWindow extends JDialog {
             }
         });
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
+        setVisible(false);
         pack();
+        this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
+        setVisible(true);
     }
     private String getInstructions() {
         return model.getInstructions();
@@ -45,7 +47,7 @@ public class tutorialWindow extends JDialog {
             control= tutorialWindow;
             control.setLayout(new BorderLayout());
             control.setPreferredSize(new Dimension(500,250));
-            control.setLocation(250,200);
+            //control.setLocation(250,200);
             control.setBackground(Color.WHITE);
             control.getContentPane().setBackground(Color.WHITE);
             instructionImages = control.getImages();

@@ -12,10 +12,9 @@ public class EndLevelMessage extends JDialog {
 
     public EndLevelMessage(GameWindow owner, String type){
         super(owner);
+        setVisible(false);
         parent = owner;
-        this.setLocation(parent.getWidth()/2-this.getWidth(),parent.getHeight()/2-this.getHeight());
         setLayout(new BorderLayout());
-        setVisible(true);
         if (type.equalsIgnoreCase("win")) {
             makeWin();
         } else {
@@ -49,6 +48,8 @@ public class EndLevelMessage extends JDialog {
         add(rightPanel, BorderLayout.CENTER);
 
         pack();
+        this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
+        setVisible(true);
 
     }
 
@@ -114,7 +115,8 @@ public class EndLevelMessage extends JDialog {
         if(parent.getLevelNumber()==5){
             messageP1.setText("Congratulations!");
             messageP2.setText("You did it! ");
-        }else {
+        } else {
+
             parent.setLevelUnlocked(parent.getLevelNumber() + 1);
             messageP1.setText("Congratulations!");
             messageP2.setText("Ready for the next level?");
