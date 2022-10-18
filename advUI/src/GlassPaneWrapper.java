@@ -1,11 +1,14 @@
+
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GlassPaneWrapper extends JPanel {
@@ -13,6 +16,7 @@ public class GlassPaneWrapper extends JPanel {
     PlayingPanel wrappedPanel;
     SpringLayout layout = new SpringLayout();
     public JSpinner forCount;
+
     public GlassPaneWrapper(PlayingPanel givenPanel) {
         this.wrappedPanel=givenPanel;
         this.setLayout(layout);
@@ -99,6 +103,8 @@ public class GlassPaneWrapper extends JPanel {
     }
 
 
+
+
     public void addNumberSpinner() {
         BlockControl forBlock=wrappedPanel.topPanel.getButtonList().get(2);
         Point blockPos =SwingUtilities.convertPoint(wrappedPanel.topPanel.blockPanel,forBlock.getLocation(),this);
@@ -148,4 +154,33 @@ public class GlassPaneWrapper extends JPanel {
         this.remove(forCount);
     }
 
+    public void winAnimation(WinAnimationPanel winAnimation) {
+        this.removeAll();
+        this.setPreferredSize(wrappedPanel.getContainer().getPreferredSize());
+        this.add(winAnimation);
+        SpringLayout layout= (SpringLayout) this.getLayout();
+        layout.putConstraint(SpringLayout.WEST, winAnimation,0,SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, winAnimation,0,SpringLayout.NORTH, this);
+        this.validate();
+        this.repaint();
+        //if location of scoop is passed glass pane, delete
+        Timer timer2= new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                winAnimation.repaint();
+            }
+        });
+        Timer timer1 = new Timer(8000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                winAnimation.setVisible(false);
+                timer2.setRepeats(false);
+                timer2.stop();
+            }
+        });
+        timer1.setRepeats(false);
+        timer2.setRepeats(true);
+        timer1.start();
+        timer2.start();
+    }
 }

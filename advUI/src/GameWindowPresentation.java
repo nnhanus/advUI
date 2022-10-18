@@ -1,3 +1,4 @@
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameWindowPresentation{
 
@@ -19,12 +21,20 @@ public class GameWindowPresentation{
 
     public PlayingPanel playingZone;
     public GlassPaneWrapper glassPanel;
+    public WinAnimationPanel winAnimation;
     JLabel helper= new JLabel(" ");
     String fontFamily = "Bradley Hand";
     Font buttonFont = new Font(fontFamily, Font.BOLD, 16);
+    BufferedImage mintChoco = null;
+    BufferedImage funfetti = null;
+    BufferedImage caramel=null;
+    BufferedImage choco = null;
+    BufferedImage strawberry = null;
+    List<BufferedImage> scoops = new ArrayList<>();
 
     public GameWindowPresentation(GameWindow controller, String character){
         control=controller;
+        loadImages();
         animation = new AnimationPanel(control, character);
         //menuBar();
         JPanel mainPanel = new JPanel();
@@ -71,6 +81,24 @@ public class GameWindowPresentation{
 
     }
 
+    private void loadImages() {
+        try {
+            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
+            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
+            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
+            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
+            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
+
+        } catch (IOException ex) {
+            System.out.println("Missing file");
+        }
+        scoops.add(mintChoco);
+        scoops.add(funfetti);
+        scoops.add(caramel);
+        scoops.add(choco);
+        scoops.add(strawberry);
+    }
+
     private void makePopUpInstructions() {
         JDialog instructions= new JDialog(control);
         instructions.setLayout(new BorderLayout());
@@ -110,40 +138,25 @@ public class GameWindowPresentation{
     }
 
     public void rainScoops(Character character) {
-        List<BufferedImage> scoops = new ArrayList<>();
-        BufferedImage mintChoco = null;
-        BufferedImage funfetti = null;
-        BufferedImage caramel=null;
-        BufferedImage choco = null;
-        BufferedImage strawberry = null;
-        Image characterImage= character.getCharImage();
-        try {
-            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
-            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
-            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
-            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
-
-        } catch (IOException ex) {
-            System.out.println("Missing file");
+        Random rand = new Random();
+        List<BufferedImage> scoopsToShow=new ArrayList<>(50);
+        List<Point> locations= new ArrayList<>(50);
+        int index=0;
+        for(int i=0;i<50;i++){
+            if(index==5)index=0;
+            scoopsToShow.add(copyImage(scoops.get(index)));
+            locations.add(new Point(rand.nextInt(1000),0));
+            index++;
         }
-        scoops.add(mintChoco);
-        scoops.add(funfetti);
-        scoops.add(caramel);
-        scoops.add(choco);
-        scoops.add(strawberry);
-        //create transparent JPanel with custom paint?
-        //use random to get scoop type
-        //use random to determine start point
+        winAnimation=new WinAnimationPanel(scoopsToShow,locations,control);
+        glassPanel.winAnimation(winAnimation);
 
-        //if location of scoop is passed glass pane, delete
-//        Timer timer = new Timer(10000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent evt) {
-//                //while timer move scoops 5 pts down and rotate
-//            }
-//        });
-//        timer.setRepeats(false);
-//        timer.start();
+    }
+    public static BufferedImage copyImage(BufferedImage source){
+        BufferedImage b = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
+        Graphics g = b.getGraphics();
+        g.drawImage(source, 0, 0, null);
+        g.dispose();
+        return b;
     }
 }
