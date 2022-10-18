@@ -14,8 +14,9 @@ public class dropPanel extends JPanel  {
     public dropPanelPresentation view;
     public AnimationPanel animation;
     public PlayingPanel container;
-    public boolean mouseEvent;
+   // public boolean mouseEvent;
     public int draggedBlockIndex = -1;
+    boolean firstCreated = true;
 
     public dropPanel(PlayingPanel parent) {
         container = parent;
@@ -33,9 +34,13 @@ public class dropPanel extends JPanel  {
         return model;
     }
 
+    public void buildGrid(){
+        view.buildGrid();
+    }
+
 
     public void readList() {
-        mouseEvent = true;
+        //mouseEvent = true;
         animation = GameWindow.getAnimation();
         Thread doActions = new Thread(new readActionThread(animation, this));
         Thread paintMove = new Thread(new paintMove(animation, this));

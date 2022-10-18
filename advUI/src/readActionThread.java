@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Thread to execute the actions one by one
+ */
 public class readActionThread implements Runnable{
     public AnimationPanel animation;
     public dropPanel parent;
@@ -20,13 +23,13 @@ public class readActionThread implements Runnable{
         int inForLoop = 0;
         cellRectangle cellFor = null;
 
-        parent.mouseEvent = true;
+        //parent.mouseEvent = true;
 
 
         while (!parent.getActions().isEmpty() && !Thread.currentThread().isInterrupted()) {
             synchronized (parent) {
                 String actionCall = parent.getActions().get(0);
-                parent.mouseEvent = true;
+                //parent.mouseEvent = true;
 
                 if (parent.getActions().size() != 1) isNextIf = parent.getActions().get(1).equalsIgnoreCase("If ");
 
@@ -45,7 +48,7 @@ public class readActionThread implements Runnable{
                     loop.clear();
                     cellFor = parent.getCells().get(blockIter); //the cell with the for block lights up
                     blockIter++; //the next cell that contains the action in the loop also lights up
-                    parent.mouseEvent = true;
+                   // parent.mouseEvent = true;
                 } else {
                     try {
                         Thread.sleep(1000);
@@ -78,8 +81,9 @@ public class readActionThread implements Runnable{
             } catch (Exception e) {
             }
         }
-        parent.mouseEvent = false;
+        //parent.mouseEvent = false;
         parent.clearAll();
+        parent.buildGrid();
         parent.repaint();
         parent.animation.endOfLevelMessage();
     }

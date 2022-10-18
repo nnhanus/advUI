@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * In-game menu with level select, main menu, quit, restart options
+ */
 public class PopUpMenu extends JDialog {
     GameWindow parent;
     PopUpMenuPresentation view;
@@ -12,6 +15,7 @@ public class PopUpMenu extends JDialog {
         this.setVisible(false);
         parent = owner;
         view= new PopUpMenuPresentation(this);
+        setResizable(false);
 
         pack();
         this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);

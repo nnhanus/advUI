@@ -29,6 +29,7 @@ public class tutorialWindow extends JDialog {
         this.setLocation(parent.getWidth()/2-this.getWidth()/2,parent.getHeight()/2-this.getHeight()/2);
         setVisible(true);
     }
+    
     private String getInstructions() {
         return model.getInstructions();
     }
