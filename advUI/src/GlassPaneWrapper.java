@@ -106,7 +106,7 @@ public class GlassPaneWrapper extends JPanel {
         this.add(forCount);
         if (blockPos.x < 850 && GameWindow.getLevelNumber()==3) {
             blockPos = new Point(854, 20);
-        } else if (blockPos.x < 806 && GameWindow.getLevelNumber()==4) {
+        } else if (blockPos.x < 810 && (GameWindow.getLevelNumber()==4||GameWindow.getLevelNumber()==5)) {
             blockPos = new Point(810, 20);
         }
         forBlock.setForLoopIter((int)forCount.getValue());
