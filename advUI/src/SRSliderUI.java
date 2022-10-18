@@ -22,16 +22,26 @@ public class SRSliderUI extends BasicSliderUI {
     }
 
 
+    /**
+     * Paints the thumb of the slider
+     * @param pen graphic context
+     */
     @Override
     public void paintThumb(Graphics pen){
-        int x = thumbRect.x;
-        pen.drawImage(image, x, thumbRect.y, thumbRect.width, thumbRect.height, null);
+        pen.drawImage(image, thumbRect.x, thumbRect.y, thumbRect.width, thumbRect.height, null);
     }
 
+    /**
+     * @return the thumb size
+     */
     public Dimension getThumbSize(){
         return new Dimension(45, 50);
     }
 
+    /**
+     * Paint the labels of the slider
+     * @param pen graphic context
+     */
     @Override
     public void paintLabels(Graphics pen){
         int unlocked = slider.unlocked;
@@ -40,19 +50,20 @@ public class SRSliderUI extends BasicSliderUI {
             int width = labelRect.width/7;
             int height = width - width/7;
             int y = labelRect.y - thumbRect.height*2-10 ;
-            if(i==0){
+            if(i==0){ //Main Menu
                 pen.setFont(new Font("Times", Font.BOLD, 14));
                 pen.drawString("Main",x+5, y + height/2 );
                 pen.drawString("Menu",x+5, y + (height/4)*3 );
                 continue;
-            }else if(i==6){
+            }else if(i==6){ //Quit
                 pen.setFont(new Font("Times", Font.BOLD, 14));
                 pen.drawString("Quit",x + width/2, y + height/2 );
                continue;
             }
             Image label;
-            if(i>unlocked){label=labels.get(0);}
-            else{label = labels.get(i);}
+            if(i>unlocked){label=labels.get(0);} //get lock image for locked level
+            else{label = labels.get(i);} //else get a scoop image
+            //offset for better display
             if (i == 1 && i==2){
                 x -=5;
             } else  if (i == 4) {
@@ -63,6 +74,7 @@ public class SRSliderUI extends BasicSliderUI {
             pen.drawImage(label, x , y , width, height, null);
             pen.setFont(new Font("Times", Font.BOLD, 16));
 
+            //White outline around the text
             pen.setColor(Color.WHITE);
             pen.drawString(String.valueOf(i),x + width/2-3, y + height/2+1 );
             pen.drawString(String.valueOf(i),x + width/2-3, y + height/2-1 );
@@ -74,6 +86,9 @@ public class SRSliderUI extends BasicSliderUI {
         }
     }
 
+    /**
+     * Charge all the images used
+     */
     private void chargeImage(){
         try {
             image = ImageIO.read(new File("advUI/Icons/cone.png"));

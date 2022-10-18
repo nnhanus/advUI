@@ -5,25 +5,30 @@ import java.awt.event.MouseEvent;
 
 /**
  * Scoup Recoup Slider
- * Slider for the game menus
+ * Slider for the game menu
  */
 public class SRSlider extends JSlider {
-    int level;
-    int unlocked;
+    int level; //current level
+    int unlocked; //levels unlocked
+
     public SRSlider(int level, int unlocked){
         super();
         this.level=level;
         this.unlocked=unlocked;
         setUI(new SRSliderUI(this));
+
         setMinimum(0);
         setMaximum(6);
         setValue(level);
         setMajorTickSpacing(1);
-        Color BGColor = new Color(0xFED1FF);
+
         setPaintLabels(true);
-        setBackground(BGColor);
-        setForeground(BGColor);
+
+        setBackground(Main.bgColor);
+        setForeground(Main.bgColor);
+
         setPreferredSize(new Dimension(480, 300));
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -41,6 +46,10 @@ public class SRSlider extends JSlider {
         );
     }
 
+    /**
+     * Sets the value according to the click
+     * @param point point clicked
+     */
     private void clickToLevel(Point point) {
         double percent = point.x / ((double) getWidth());
         int range = getMaximum() - getMinimum();
