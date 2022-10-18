@@ -1,6 +1,9 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class EndLevelMessage extends JDialog {
     GameWindow parent;
@@ -110,16 +113,27 @@ public class EndLevelMessage extends JDialog {
         return buttonsPanel;
     }
 
-    private void makeWin(){
+    private void makeWin() {
         makeIcon("Win");
+        String soundName;
+
         if(parent.getLevelNumber()==5){
+            soundName = "advUI/Sounds/end_game.wav";
             messageP1.setText("Congratulations!");
             messageP2.setText("You did it! ");
         } else {
-
+            soundName = "advUI/Sounds/win_tone.wav";
             parent.setLevelUnlocked(parent.getLevelNumber() + 1);
             messageP1.setText("Congratulations!");
             messageP2.setText("Ready for the next level?");
+        }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -127,6 +141,15 @@ public class EndLevelMessage extends JDialog {
         makeIcon("Fail");
         messageP1.setText("So close!");
         messageP2.setText("Want to try again?");
+        String soundName = "advUI/Sounds/lose_tone.wav";
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void makeIcon(String type){
