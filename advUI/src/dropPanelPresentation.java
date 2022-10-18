@@ -57,7 +57,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
             public void mouseClicked(MouseEvent e) {
                 control.clearList();
                 control.getBlocksPlayed().clear();
-                clear();
+                buildGrid();
                 control.repaint();
             }
         });
