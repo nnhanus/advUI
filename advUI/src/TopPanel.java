@@ -4,6 +4,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Panel with the blocks to drag
+ */
 public class TopPanel extends JPanel implements MouseListener, MouseMotionListener {
     protected static List<BlockControl> buttonList=new ArrayList<>();
     public PlayingPanel container;

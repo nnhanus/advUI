@@ -27,8 +27,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
         //when redo is clicked, clear panel and repaint, call clearList
         control.setLayout(new BorderLayout());
         control.add(createButtons(), BorderLayout.SOUTH);
-
-
+        buildGrid();
     }
 
     private JPanel createButtons() {
@@ -71,15 +70,17 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
         return  buttonPanel;
     }
 
-
     public void paint(Graphics g) {
         //need to not clear and repaint for the delete button
         Graphics2D g2d = (Graphics2D) g.create();
-        if(!control.mouseEvent) {
-            //if repainting due to level change, empty and repaint grid
-            clear();
+        if (control.firstCreated) {
             buildGrid();
+            control.firstCreated = false;
         }
+       //if(!control.mouseEvent) {
+            //if repainting due to level change, empty and repaint grid
+          //  buildGrid();
+        //}
         Stroke standard= g2d.getStroke();
         //draw cell outlines
         for (cellRectangle cell : control.getCells()) {
@@ -127,7 +128,8 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     }
 
 
-    private void buildGrid() {
+    public void buildGrid() {
+        clear();
         //build grid off current window measurements to adapt to resizing
         int width = control.getWidth()-20;
         int height = control.getHeight()-30;
@@ -151,6 +153,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
                 control.getCells().add(cell);
             }
         }
+        control.repaint();
     }
 
     //helper function for painting that turns an ImageIcon into a buffered image
@@ -199,7 +202,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        control.mouseEvent = false;
+        //control.mouseEvent = false;
         control.getContainer().getContainer().setCursor(Cursor.getDefaultCursor());
         if (control.getContainer().selectedBlock != null) {
             //if there was a block being dragged,and it was dropped into the grid, place it into the appropriate cell
@@ -230,7 +233,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        control.mouseEvent = true;
+       // control.mouseEvent = true;
         Point mouse = e.getPoint();
         for (cellRectangle cell : control.getCells()) {
             if (cell.contains(mouse) && control.getContainer().selectedBlock == null && cell.getHasBlock()) {

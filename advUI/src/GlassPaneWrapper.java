@@ -64,7 +64,7 @@ public class GlassPaneWrapper extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 //get blocks played from index that corresponds with location of cell clicked, on release add block to cell location and
                 //delete cell from previous index in blocks played and action list
-                wrappedPanel.getBottomPanel().mouseEvent=true;
+                //wrappedPanel.getBottomPanel().mouseEvent=true;
                 Point mouse = SwingUtilities.convertPoint(e.getComponent(),e.getPoint(),wrappedPanel.getBottomPanel());
                 for (cellRectangle cell : wrappedPanel.getBottomPanel().getCells()) {
                     if(cell.contains(mouse)) {

@@ -3,6 +3,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Scoup Recoup Slider
+ * Slider for the game menus
+ */
 public class SRSlider extends JSlider {
     int level;
     int unlocked;

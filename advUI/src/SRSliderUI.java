@@ -1,10 +1,12 @@
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
-import java.awt.font.GlyphVector;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * UI for the menu slider
+ */
 public class SRSliderUI extends BasicSliderUI {
     Image image = null;
     Image locked, level1,level2,level3,level4,level5;
