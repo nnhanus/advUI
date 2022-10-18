@@ -92,7 +92,7 @@ public class GameWindowPresentation{
         glassPanel.removeForSpinner();
         if(levelNumber>2){glassPanel.addNumberSpinner();}
         control.repaint();
-        if(levelNumber==GameWindow.getUnlocked()&& control.tutorialOn) {
+        if(levelNumber==GameWindow.getUnlocked()&& control.tutorialOn&&levelNumber<5) {
             glassPanel.makeAnnouncement();
         }
     }
