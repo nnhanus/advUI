@@ -192,16 +192,16 @@ public class Level {
      */
     private void chargeImage() {
         try{
-            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
-            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
-            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
-            table = ImageIO.read(new File("advUI/Icons/table.png"));
-            cart = ImageIO.read(new File("advUI/Icons/iceCreamCart.png"));
-            umbrella = ImageIO.read(new File("advUI/Icons/umbrella.png"));
-            flowers = ImageIO.read(new File("advUI/Icons/flowers.png"));
-            ground =ImageIO.read(new File("advUI/Icons/ground.jpg"));
-            grass= ImageIO.read(new File("advUI/Icons/grass.jpg"));
+            mintChoco = ImageIO.read(new File("advUI/Resources/Icons/mintChoco.png"));
+            funfetti = ImageIO.read(new File("advUI/Resources/Icons/funfetti.png"));
+            strawberry = ImageIO.read(new File("advUI/Resources/Icons/strawberry.png"));
+            caramel = ImageIO.read(new File("advUI/Resources/Icons/caramel.png"));
+            table = ImageIO.read(new File("advUI/Resources/Icons/table.png"));
+            cart = ImageIO.read(new File("advUI/Resources/Icons/iceCreamCart.png"));
+            umbrella = ImageIO.read(new File("advUI/Resources/Icons/umbrella.png"));
+            flowers = ImageIO.read(new File("advUI/Resources/Icons/flowers.png"));
+            ground =ImageIO.read(new File("advUI/Resources/Icons/ground.jpg"));
+            grass= ImageIO.read(new File("advUI/Resources/Icons/grass.jpg"));
         } catch (IOException ex) {
             System.out.println("Missing file");
         }

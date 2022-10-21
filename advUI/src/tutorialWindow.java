@@ -61,7 +61,7 @@ public class tutorialWindow extends JDialog {
 
             imagePanel.setOpaque(false);
             changeSlide();
-            next = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/next.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT)));
+            next = new JLabel(new ImageIcon(new ImageIcon("advUI/Resources/Icons/next.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT)));
             next.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -101,9 +101,9 @@ public class tutorialWindow extends JDialog {
         String instructions;
         List<ImageIcon> images ;
         public tutorialWindowModel(){
-            images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
-                    new ImageIcon(new ImageIcon("advUI/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Icons/2scoop.png").getImage().getScaledInstance(80,150,Image.SCALE_DEFAULT)),
-                    new ImageIcon(new ImageIcon("advUI/Icons/playing.jpg").getImage().getScaledInstance(190,175,Image.SCALE_DEFAULT))));
+            images = new ArrayList<>(Arrays.asList(new ImageIcon(Character.presentation.getCharImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Resources/Icons/grid.png").getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT)),
+                    new ImageIcon(new ImageIcon("advUI/Resources/Icons/buttonPanel.png").getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)),new ImageIcon(new ImageIcon("advUI/Resources/Icons/2scoop.png").getImage().getScaledInstance(80,150,Image.SCALE_DEFAULT)),
+                    new ImageIcon(new ImageIcon("advUI/Resources/Icons/playing.jpg").getImage().getScaledInstance(190,175,Image.SCALE_DEFAULT))));
             instructions="Oh no! You've dropped your ice cream. Well...5 second rule applies, right? Move your character to the scoop to add it to your cone." +
                     "@Drag and drop action blocks into the grid below to move.@When you're ready, press Play! If you want to retry the level, press the Redo button. If you want to empty the grid, but keep your current level progress, press the Clear button.@"
                     +"Collect the scoops from largest to smallest to succeed. You cannot place a large scoop on top of a small scoop.@You can complete the challenge in one go, or in a combination of smaller movements. Keep in mind, to move to the next level, your last movement must end on the smallest scoop.";

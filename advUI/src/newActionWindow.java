@@ -51,7 +51,7 @@ public class newActionWindow extends JPanel{
             control.setPreferredSize(new Dimension(450, 580));
             newBlock=control.getNewBlock();
             try{
-                newStar = ImageIO.read(new File("advUI/Icons/newStar.png"));
+                newStar = ImageIO.read(new File("advUI/Resources/Icons/newStar.png"));
             } catch (IOException ex) {
                 System.out.println("Missing file");
             }

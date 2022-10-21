@@ -21,10 +21,10 @@ public class BlockModel {
         nameMap.put(3,"If");
 
         iconMap = new HashMap<>();
-        iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Icons/puzzle teal.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
-        iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Icons/puzzle red.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
-        iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Icons/puzzle blue.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
-        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Icons/puzzle yellow.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
+        iconMap.put(0,new ImageIcon(new ImageIcon("advUI/Resources/Icons/puzzle teal.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
+        iconMap.put(1,new ImageIcon(new ImageIcon("advUI/Resources/Icons/puzzle red.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
+        iconMap.put(2,new ImageIcon(new ImageIcon("advUI/Resources/Icons/puzzle blue.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
+        iconMap.put(3,new ImageIcon(new ImageIcon("advUI/Resources/Icons/puzzle yellow.png").getImage().getScaledInstance(90, 80, Image.SCALE_DEFAULT)));
 
         descriptionMap = new HashMap<>();
         descriptionMap.put(0,"Moves the character one cell in the current direction  ");

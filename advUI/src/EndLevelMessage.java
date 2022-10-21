@@ -134,12 +134,12 @@ public class EndLevelMessage extends JDialog {
 
         if(GameWindow.getLevelNumber()==5){
             //play end of game icecream jingle
-            soundName = "advUI/Sounds/end_game.wav";
+            soundName = "advUI/Resources/Sounds/end_game.wav";
             messageP1.setText("Congratulations!");
             messageP2.setText("You did it! ");
         } else {
             //play happy sounds
-            soundName = "advUI/Sounds/win_tone.wav";
+            soundName = "advUI/Resources/Sounds/win_tone.wav";
             parent.setLevelUnlocked(GameWindow.getLevelNumber() + 1);
             messageP1.setText("Congratulations!");
             messageP2.setText("Ready for the next level?");
@@ -159,7 +159,7 @@ public class EndLevelMessage extends JDialog {
         messageP1.setText("So close!");
         messageP2.setText("Want to try again?");
         //play sad sounds
-        String soundName = "advUI/Sounds/lose_tone.wav";
+        String soundName = "advUI/Resources/Sounds/lose_tone.wav";
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
@@ -179,7 +179,7 @@ public class EndLevelMessage extends JDialog {
         String[] split = characterPath.split("/");
         String[] split2 = split[2].split("\\.");
         String character = split2[0];
-        String path = "advUI/Icons/" + character + type + ".png";
+        String path = "advUI/Resources/Icons/" + character + type + ".png";
         icon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(100, 90, Image.SCALE_SMOOTH));
     }
 }

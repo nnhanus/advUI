@@ -10,10 +10,10 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class dropPanelPresentation implements MouseListener, MouseMotionListener {
-    public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    public JLabel clear = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/close.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-    ImageIcon closeIcon = new ImageIcon("advUI/Icons/cancel.png");
+    public JLabel play = new JLabel(new ImageIcon(new ImageIcon("advUI/Resources/Icons/play.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    public JLabel redo = new JLabel(new ImageIcon(new ImageIcon("advUI/Resources/Icons/redo.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    public JLabel clear = new JLabel(new ImageIcon(new ImageIcon("advUI/Resources/Icons/close.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    ImageIcon closeIcon = new ImageIcon("advUI/Resources/Icons/cancel.png");
     public dropPanel control;
 
     public dropPanelPresentation(dropPanel controller){

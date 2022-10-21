@@ -91,13 +91,13 @@ public class SRSliderUI extends BasicSliderUI {
      */
     private void chargeImage(){
         try {
-            image = ImageIO.read(new File("advUI/Icons/cone.png"));
-            locked = ImageIO.read(new File("advUI/Icons/lock.png"));
-            level1 = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-            level2 = ImageIO.read(new File("advUI/Icons/funfetti.png"));
-            level3 = ImageIO.read(new File("advUI/Icons/choco.png"));
-            level4 = ImageIO.read(new File("advUI/Icons/strawberry.png"));
-            level5 = ImageIO.read(new File("advUI/Icons/caramel.png"));
+            image = ImageIO.read(new File("advUI/Resources/Icons/cone.png"));
+            locked = ImageIO.read(new File("advUI/Resources/Icons/lock.png"));
+            level1 = ImageIO.read(new File("advUI/Resources/Icons/mintChoco.png"));
+            level2 = ImageIO.read(new File("advUI/Resources/Icons/funfetti.png"));
+            level3 = ImageIO.read(new File("advUI/Resources/Icons/choco.png"));
+            level4 = ImageIO.read(new File("advUI/Resources/Icons/strawberry.png"));
+            level5 = ImageIO.read(new File("advUI/Resources/Icons/caramel.png"));
         } catch (Exception e){
             System.out.println("Missing File");
         }

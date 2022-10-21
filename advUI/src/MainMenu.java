@@ -12,7 +12,7 @@ public class MainMenu extends JDialog {
 
     MainMenuPresentation view;
     String mode = "slider"; //toggle between level select (=slider) and character select (=chooser)
-    String characterFile = "advUI/Icons/cow.png"; //default character
+    String characterFile = "advUI/Resources/Icons/cow.png"; //default character
     JLabel character;
     boolean tutorialOn=true;
 
@@ -137,7 +137,7 @@ public class MainMenu extends JDialog {
                 }
                 @Override
                 public void mouseEntered(MouseEvent e){
-                    character.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/exchange.png").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
+                    character.setIcon(new ImageIcon(new ImageIcon("advUI/Resources/Icons/exchange.png").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT)));
                 }
                 @Override
                 public void mouseExited(MouseEvent e){

@@ -45,7 +45,7 @@ public class GameWindowPresentation{
 
 
 
-        JLabel menu = new JLabel(new ImageIcon(new ImageIcon("advUI/Icons/menu.png").getImage().getScaledInstance(38,50,Image.SCALE_DEFAULT)));
+        JLabel menu = new JLabel(new ImageIcon(new ImageIcon("advUI/Resources/Icons/menu.png").getImage().getScaledInstance(38,50,Image.SCALE_DEFAULT)));
         menu.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -53,7 +53,7 @@ public class GameWindowPresentation{
             }
         });
 
-        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
+        helper.setIcon(new ImageIcon(new ImageIcon("advUI/Resources/Icons/info.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
         helper.setHorizontalTextPosition(JLabel.LEFT);
         helper.addMouseListener(new MouseAdapter() {
             @Override
@@ -80,11 +80,11 @@ public class GameWindowPresentation{
 
     private void loadImages() {
         try {
-            mintChoco = ImageIO.read(new File("advUI/Icons/mintChoco.png"));
-            funfetti = ImageIO.read(new File("advUI/Icons/funfetti.png"));
-            caramel = ImageIO.read(new File("advUI/Icons/caramel.png"));
-            choco = ImageIO.read(new File("advUI/Icons/choco.png"));
-            strawberry = ImageIO.read(new File("advUI/Icons/strawberry.png"));
+            mintChoco = ImageIO.read(new File("advUI/Resources/Icons/mintChoco.png"));
+            funfetti = ImageIO.read(new File("advUI/Resources/Icons/funfetti.png"));
+            caramel = ImageIO.read(new File("advUI/Resources/Icons/caramel.png"));
+            choco = ImageIO.read(new File("advUI/Resources/Icons/choco.png"));
+            strawberry = ImageIO.read(new File("advUI/Resources/Icons/strawberry.png"));
 
         } catch (IOException ex) {
             System.out.println("Missing file");

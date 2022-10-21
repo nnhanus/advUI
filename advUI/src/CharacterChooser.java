@@ -20,18 +20,18 @@ public class CharacterChooser extends JPanel {
     }
 
     public void makeCharacter(){
-        characters.add("advUI/Icons/cow.png");
-        characters.add("advUI/Icons/dino.png");
-        characters.add("advUI/Icons/dog.png");
-        characters.add("advUI/Icons/elephant.png");
-        characters.add("advUI/Icons/lion.png");
+        characters.add("advUI/Resources/Icons/cow.png");
+        characters.add("advUI/Resources/Icons/dino.png");
+        characters.add("advUI/Resources/Icons/dog.png");
+        characters.add("advUI/Resources/Icons/elephant.png");
+        characters.add("advUI/Resources/Icons/lion.png");
     }
 
     public void mainPane(){
         JLabel imageLabel = new JLabel(new ImageIcon(new ImageIcon(characters.get(index)).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
 
 
-        JLabel right = new JLabel(new ImageIcon((new ImageIcon("advUI/Icons/next.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        JLabel right = new JLabel(new ImageIcon((new ImageIcon("advUI/Resources/Icons/next.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
         right.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -45,7 +45,7 @@ public class CharacterChooser extends JPanel {
             }
         });
 
-        JLabel left = new JLabel(new ImageIcon((new ImageIcon("advUI/Icons/previous.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        JLabel left = new JLabel(new ImageIcon((new ImageIcon("advUI/Resources/Icons/previous.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
         left.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
