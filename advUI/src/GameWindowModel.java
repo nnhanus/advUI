@@ -14,7 +14,6 @@ public class GameWindowModel {
     }
 
     public void setLevel(int newLevel) {
-//        triggerChangeListeners();
         levelnum = newLevel;
         unlockedLevel=Math.max(levelnum,unlockedLevel);
         level = new Level(newLevel);

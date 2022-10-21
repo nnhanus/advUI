@@ -20,7 +20,7 @@ public class instructionPopUp extends JPanel {
     }
 
 
-    private class instructionPopUpPresentation {
+    private static class instructionPopUpPresentation {
         instructionPopUp control;
         BufferedImage instructions;
         public instructionPopUpPresentation(instructionPopUp control) {

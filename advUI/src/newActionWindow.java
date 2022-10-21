@@ -1,14 +1,9 @@
 import javax.imageio.ImageIO;
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 public class newActionWindow extends JPanel{
     
@@ -19,7 +14,7 @@ public class newActionWindow extends JPanel{
     int level;
     public newActionWindow(GameWindow owner){
         parent = owner;
-        level=parent.getLevelNumber();
+        level= GameWindow.getLevelNumber();
         model= new newActionWindowModel(level);
         view= new newActionWindowPresentation(this);
     }
@@ -37,7 +32,7 @@ public class newActionWindow extends JPanel{
     }
 
 
-    private class newActionWindowPresentation {
+    private static class newActionWindowPresentation {
         newActionWindow control;
         BlockControl newBlock;
         JTextArea itemDescript = new JTextArea();
@@ -98,7 +93,7 @@ public class newActionWindow extends JPanel{
 
 
 
-    private class newActionWindowModel {
+    private static class newActionWindowModel {
        int level;
        Map<Integer,String> details=new HashMap<>();
         public newActionWindowModel(int level){
