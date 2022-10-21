@@ -188,12 +188,11 @@ public class MainMenu extends JDialog {
         private void goButtonListener(JPanel levelSelect, CharacterChooser choose, SRSlider slider, JLabel tutorial, JLabel level, JPanel playPanel, JButton go) {
             if (mode.equalsIgnoreCase("slider")) { //start the game
                 int selectedLevel = slider.getValue();
-                if (selectedLevel == 0) {
-                } else if (selectedLevel == 6) {
+                if (selectedLevel == 6) {
                     dispose();
                     System.exit(0);
-                } else {
-                    GameWindow game = new GameWindow(slider.getValue(), tutorialOn, characterFile, unlocked);
+                } else if (selectedLevel != 0){
+                    new GameWindow(slider.getValue(), tutorialOn, characterFile, unlocked);
                     dispose();
                 }
             } else { //goes back to level select

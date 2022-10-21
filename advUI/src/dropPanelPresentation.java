@@ -1,4 +1,3 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -24,7 +23,6 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     }
 
     public void createUI(){
-        //when redo is clicked, clear panel and repaint, call clearList
         control.setLayout(new BorderLayout());
         control.add(createButtons(), BorderLayout.SOUTH);
         buildGrid();
@@ -46,7 +44,7 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
                 control.clearList();
                 control.getBlocksPlayed().clear();
                 clear();
-                control.getContainer().getContainer().changeLevel(control.getContainer().getContainer().getLevelNumber());
+                control.getContainer().getContainer().changeLevel(GameWindow.getLevelNumber());
                 control.repaint();
 
             }
@@ -71,16 +69,11 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     }
 
     public void paint(Graphics g) {
-        //need to not clear and repaint for the delete button
         Graphics2D g2d = (Graphics2D) g.create();
         if (control.firstCreated) {
             buildGrid();
             control.firstCreated = false;
         }
-       //if(!control.mouseEvent) {
-            //if repainting due to level change, empty and repaint grid
-          //  buildGrid();
-        //}
         Stroke standard= g2d.getStroke();
         //draw cell outlines
         for (cellRectangle cell : control.getCells()) {
@@ -120,7 +113,6 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
         }
 
         g2d.dispose();
-        //control.mouseEvent=false;
     }
 
     private void clear() {
@@ -202,7 +194,6 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //control.mouseEvent = false;
         control.getContainer().getContainer().setCursor(Cursor.getDefaultCursor());
         if (control.getContainer().selectedBlock != null) {
             //if there was a block being dragged,and it was dropped into the grid, place it into the appropriate cell
@@ -220,20 +211,8 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
     }
 
 
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
     @Override
     public void mouseMoved(MouseEvent e) {
-       // control.mouseEvent = true;
         Point mouse = e.getPoint();
         for (cellRectangle cell : control.getCells()) {
             if (cell.contains(mouse) && control.getContainer().selectedBlock == null && cell.getHasBlock()) {
@@ -253,5 +232,15 @@ public class dropPanelPresentation implements MouseListener, MouseMotionListener
 
         }
     }
+
+    //Unused MouseListener methods
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) {}
 }
 

@@ -101,7 +101,7 @@ public class GameWindowPresentation{
         instructions.setLayout(new BorderLayout());
         JPanel buttonPanel= new JPanel(new BorderLayout());
         JButton close=new JButton("Close");
-        close.addActionListener(e -> {instructions.dispose();});
+        close.addActionListener(e -> instructions.dispose());
         close.setFont(buttonFont);
         buttonPanel.add(close, BorderLayout.EAST);
         instructions.add(new instructionPopUp(), BorderLayout.CENTER);
@@ -134,7 +134,7 @@ public class GameWindowPresentation{
         helper.setText(s);
     }
 
-    public void rainScoops(Character character) {
+    public void rainScoops() {
         Random rand = new Random();
         List<BufferedImage> scoopsToShow=new ArrayList<>(50);
         List<Point> locations= new ArrayList<>(50);

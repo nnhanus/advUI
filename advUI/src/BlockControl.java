@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 
@@ -9,7 +7,7 @@ public class BlockControl extends JLabel {
     public BlockModel model;
     int typeNum;
     public TopPanel container;
-    private BlockPresentation view;
+    private final BlockPresentation view;
     boolean helper;
 
     public BlockControl (int controlNum, TopPanel parent) {

@@ -2,13 +2,8 @@
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class GlassPaneWrapper extends JPanel {
@@ -29,13 +24,12 @@ public class GlassPaneWrapper extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e){
                 Point point = e.getPoint();
-                if(wrappedPanel.getBottomPanel().view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.play))){
-                    wrappedPanel.getBottomPanel().view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.play));
-                }
-                else if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.clear))){
-                    wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.clear));}
-                else if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.bottomPanel.view.redo))){
-                    wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.bottomPanel.view.redo));}
+                if(wrappedPanel.getBottomPanel().view.play.contains(SwingUtilities.convertPoint(e.getComponent(),point, PlayingPanel.bottomPanel.view.play)))
+                    wrappedPanel.getBottomPanel().view.play.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(), e, PlayingPanel.bottomPanel.view.play));
+                else if(wrappedPanel.getBottomPanel().view.clear.contains(SwingUtilities.convertPoint(e.getComponent(),point, PlayingPanel.bottomPanel.view.clear))){
+                    wrappedPanel.getBottomPanel().view.clear.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e, PlayingPanel.bottomPanel.view.clear));}
+                else if(wrappedPanel.getBottomPanel().view.redo.contains(SwingUtilities.convertPoint(e.getComponent(),point, PlayingPanel.bottomPanel.view.redo))){
+                    wrappedPanel.getBottomPanel().view.redo.dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e, PlayingPanel.bottomPanel.view.redo));}
                 else if(wrappedPanel.getBottomPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.getBottomPanel()))){
                     wrappedPanel.getBottomPanel().dispatchEvent(SwingUtilities.convertMouseEvent(e.getComponent(),e,wrappedPanel.getBottomPanel()));
                 } else if (wrappedPanel.getTopPanel().contains(SwingUtilities.convertPoint(e.getComponent(),point,wrappedPanel.topPanel))){
@@ -115,7 +109,7 @@ public class GlassPaneWrapper extends JPanel {
             blockPos = new Point(810, 20);
         }
         forBlock.setForLoopIter((int)forCount.getValue());
-        forCount.addChangeListener(c->{forBlock.setForLoopIter((int)forCount.getValue());});
+        forCount.addChangeListener(c-> forBlock.setForLoopIter((int)forCount.getValue()));
         layout.putConstraint(SpringLayout.NORTH,forCount,blockPos.y+45,SpringLayout.NORTH,this);
         layout.putConstraint(SpringLayout.WEST,forCount,blockPos.x+48,SpringLayout.WEST,this);
         this.repaint();
@@ -139,12 +133,9 @@ public class GlassPaneWrapper extends JPanel {
         this.revalidate();
         this.repaint();
         //show new block announcement for 10 seconds or until user clicks out
-        Timer timer = new Timer(10000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                remove(newBlock);
-                repaint();
-            }
+        Timer timer = new Timer(10000, e -> {
+            remove(newBlock);
+            repaint();
         });
         timer.setRepeats(false);
         timer.start();
@@ -167,21 +158,15 @@ public class GlassPaneWrapper extends JPanel {
         this.validate();
         this.repaint();
         //if location of scoop is passed glass pane, delete
-        Timer timer2= new Timer(50, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                //move scoops every 50 ms
-                winAnimation.repaint();
-            }
+        Timer timer2= new Timer(50, e -> {
+            //move scoops every 50 ms
+            winAnimation.repaint();
         });
-        Timer timer1 = new Timer(8000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                //let the animation run for 8 seconds and then hide it
-                winAnimation.setVisible(false);
-                timer2.setRepeats(false);
-                timer2.stop();
-            }
+        Timer timer1 = new Timer(8000, e -> {
+            //let the animation run for 8 seconds and then hide it
+            winAnimation.setVisible(false);
+            timer2.setRepeats(false);
+            timer2.stop();
         });
         timer1.setRepeats(false);
         timer2.setRepeats(true);

@@ -93,12 +93,7 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
      */
     private void addHelper(BlockControl block) {
         //wait to make sure user is hovering on block before showing description
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                container.getContainer().setHelperText(block.getDescription());
-            }
-        });
+        timer = new Timer(1000, e -> container.getContainer().setHelperText(block.getDescription()));
         timer.setRepeats(false);
         timer.start();
     }

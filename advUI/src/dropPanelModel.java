@@ -1,7 +1,3 @@
-import org.w3c.dom.css.Rect;
-
-import javax.swing.*;
-import javax.swing.SwingUtilities;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -12,14 +8,17 @@ import static javax.swing.SwingUtilities.convertPoint;
 public class dropPanelModel {
     public List<String> actionList;
     public List<BlockControl> blocksPlayed ;
+
     public int width;
     public int height;
     public int cellWidth;
     public int cellHeight;
     final int columnCount = 4;
     final int rowCount = 3;
+
     int xOffset;
     int yOffset;
+
     public List<cellRectangle> cells;
     public Point selectedCell;
 
@@ -33,7 +32,7 @@ public class dropPanelModel {
     }
 
     public void clearList (){
-        actionList=new ArrayList<String>();
+        actionList= new ArrayList<>();
     }
 
     public void addActionBlock(BlockControl block) {

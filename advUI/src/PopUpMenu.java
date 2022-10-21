@@ -41,7 +41,7 @@ public class PopUpMenu extends JDialog {
             levelSelect.setMinimumSize(new Dimension(500, 250));
             levelSelect.setMaximumSize(new Dimension(500, 250));
 
-            SRSlider slider = new SRSlider(parent.getLevelNumber(), parent.getUnlocked());
+            SRSlider slider = new SRSlider(GameWindow.getLevelNumber(), GameWindow.getUnlocked());
             levelSelect.add(slider, BorderLayout.CENTER);
 
             JLabel level = new JLabel("Choose your level!", SwingConstants.CENTER);
@@ -75,7 +75,7 @@ public class PopUpMenu extends JDialog {
             restart.setFont(buttonFont);
             restart.setBackground(Main.bgColor);
             restart.addActionListener( e -> {
-                parent.changeLevel(parent.getLevelNumber());
+                parent.changeLevel(GameWindow.getLevelNumber());
                 this.control.dispose();
             });
 
@@ -146,7 +146,7 @@ public class PopUpMenu extends JDialog {
         private void handleGoListener(SRSlider slider) {
             int selectedLevel= slider.getValue();
             if(selectedLevel==0){ //go to main menu, close the game window
-                new MainMenu(parent.getLevelNumber(), parent.view.animation.character.getPath());
+                new MainMenu(GameWindow.getLevelNumber(), GameWindow.view.animation.character.getPath());
                 parent.dispose();
                 this.control.dispose();
             }

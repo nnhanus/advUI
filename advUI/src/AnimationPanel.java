@@ -12,14 +12,14 @@ public class AnimationPanel extends JPanel {
         super ();
         parent=controller;
         view= new AnimationPanelPresentation(this);
-        changeLevel(parent.getLevel(), character);
+        changeLevel(GameWindow.getLevel(), character);
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         grid.paintGrid(g);
-        character.presentation.paintCharacter(g);
+        Character.presentation.paintCharacter(g);
     }
 
     public void setGrid(Level level){
@@ -37,10 +37,7 @@ public class AnimationPanel extends JPanel {
     }
 
     public boolean isLevelComplete(){
-        if (grid.scoops.size() == 0){
-            return true;
-        }
-        return false;
+        return Grid.scoops.size() == 0;
     }
 
     public boolean isFailed(){
@@ -64,14 +61,13 @@ public class AnimationPanel extends JPanel {
     }
 
     public void endOfLevelMessage() {
-        //need to reset character and scoops at end "repaint" from beginning of level
         if (isFailed()){
-            EndLevelMessage end = new EndLevelMessage(parent, "fail");
+            new EndLevelMessage(parent, "fail");
         }else if(isLevelComplete()){
-            if(parent.getLevelNumber()==5){
-                parent.rainScoops(character);
+            if(GameWindow.getLevelNumber()==5){
+                parent.rainScoops();
             }
-            EndLevelMessage end = new EndLevelMessage(parent, "win");
+            new EndLevelMessage(parent, "win");
         }
 
 

@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 import java.awt.event.MouseEvent;
@@ -14,14 +12,13 @@ public class dropPanel extends JPanel  {
     public dropPanelPresentation view;
     public AnimationPanel animation;
     public PlayingPanel container;
-   // public boolean mouseEvent;
     public int draggedBlockIndex = -1;
     boolean firstCreated = true;
 
     public dropPanel(PlayingPanel parent) {
         container = parent;
-        this.model = new dropPanelModel(this);
-        this.view = new dropPanelPresentation(this);
+        model = new dropPanelModel(this);
+        view = new dropPanelPresentation(this);
     }
 
     @Override
@@ -30,25 +27,18 @@ public class dropPanel extends JPanel  {
         view.paint(g);
     }
 
-    public dropPanelModel getModel() {
-        return model;
-    }
-
     public void buildGrid(){
         view.buildGrid();
     }
 
 
     public void readList() {
-        //mouseEvent = true;
         animation = GameWindow.getAnimation();
         Thread doActions = new Thread(new readActionThread(animation, this));
         Thread paintMove = new Thread(new paintMove(animation, this));
         paintMove.start();
         doActions.start();
     }
-
-
 
     public void clearAll() {
         model.blocksPlayed.clear();
