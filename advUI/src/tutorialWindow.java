@@ -13,7 +13,7 @@ public class tutorialWindow extends JDialog {
     public tutorialWindow(GameWindow owner){
         super(owner);
         parent = owner;
-        level=parent.getLevelNumber();
+        level= GameWindow.getLevelNumber();
         model= new tutorialWindowModel();
         view= new tutorialWindowPresentation(this);
         this.addWindowListener(new WindowAdapter() {
@@ -34,7 +34,7 @@ public class tutorialWindow extends JDialog {
         return model.getInstructions();
     }
 
-    private class tutorialWindowPresentation {
+    private static class tutorialWindowPresentation {
         tutorialWindow control;
         JLabel next;
         JLabel currentPage=new JLabel();
@@ -57,7 +57,7 @@ public class tutorialWindow extends JDialog {
             instructionLabel.setEditable(false);
             instructionLabel.setLineWrap(true);
             instructionLabel.setWrapStyleWord(true);
-            instructionLabel.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+            instructionLabel.setFont(Main.getFontPlain(20));
 
             imagePanel.setOpaque(false);
             changeSlide();
@@ -97,7 +97,7 @@ public class tutorialWindow extends JDialog {
     }
 
 
-    private class tutorialWindowModel {
+    private static class tutorialWindowModel {
         String instructions;
         List<ImageIcon> images ;
         public tutorialWindowModel(){

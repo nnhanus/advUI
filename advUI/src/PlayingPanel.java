@@ -13,8 +13,7 @@ public class PlayingPanel extends JPanel {
     public PlayingPanel(GameWindow parent) {
         super();
         container=parent;
-        Color bgColor = new Color(0xD6EAF8);
-        setBackground(bgColor);
+        setBackground(Main.bgColor);
         setLayout(new BorderLayout());
         topPanel=new TopPanel(this);
         bottomPanel= new dropPanel(this);

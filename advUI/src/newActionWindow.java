@@ -39,7 +39,6 @@ public class newActionWindow extends JPanel{
 
     private class newActionWindowPresentation {
         newActionWindow control;
-        Color BGColor = new Color(0xFED1FF);
         BlockControl newBlock;
         JTextArea itemDescript = new JTextArea();
         Image newStar;
@@ -60,14 +59,14 @@ public class newActionWindow extends JPanel{
         }
 
         private void setUI() {
-            control.setBackground(BGColor);
+            control.setBackground(Main.bgColor);
             String details = control.getDetails();
             itemDescript.setEditable(false);
             itemDescript.setLineWrap(true);
             itemDescript.setWrapStyleWord(true);
-            itemDescript.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+            itemDescript.setFont(Main.getFontPlain(20));
             itemDescript.setText(details);
-            itemDescript.setBackground(BGColor);
+            itemDescript.setBackground(Main.bgColor);
 
             blockImage.setIcon(new ImageIcon(newBlock.getIcon().getImage().getScaledInstance(150,125,Image.SCALE_DEFAULT)));
             blockImage.setText(newBlock.getType());
@@ -77,7 +76,7 @@ public class newActionWindow extends JPanel{
 
 
             title.setText("New Action: "+newBlock.getType()+"!");
-            title.setFont(new Font("Bradley Hand", Font.PLAIN, 20));
+            title.setFont(Main.getFontPlain(20));
 
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
             blockImage.setAlignmentX(Component.CENTER_ALIGNMENT);

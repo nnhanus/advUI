@@ -2,8 +2,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -23,8 +21,7 @@ public class GameWindowPresentation{
     public GlassPaneWrapper glassPanel;
     public WinAnimationPanel winAnimation;
     JLabel helper= new JLabel(" ");
-    String fontFamily = "Bradley Hand";
-    Font buttonFont = new Font(fontFamily, Font.BOLD, 16);
+    Font buttonFont = Main.getFontBold(16);
     BufferedImage mintChoco = null;
     BufferedImage funfetti = null;
     BufferedImage caramel=null;
@@ -118,7 +115,6 @@ public class GameWindowPresentation{
         playingZone.getBottomPanel().clearCells();
         playingZone.getBottomPanel().clearAll();
         playingZone.getBottomPanel().buildGrid();
-        Color BGColor = new Color(0xFED1FF);
         if( levelNumber>GameWindow.getUnlocked()){
             levelNumber= GameWindow.getLevelNumber();
         }

@@ -87,6 +87,10 @@ public class TopPanel extends JPanel implements MouseListener, MouseMotionListen
         }
     }
 
+    /**
+     * On hover on a block, display a short description of the block
+     * @param block the block to describe
+     */
     private void addHelper(BlockControl block) {
         //wait to make sure user is hovering on block before showing description
         timer = new Timer(1000, new ActionListener() {

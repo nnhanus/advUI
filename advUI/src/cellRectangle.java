@@ -1,11 +1,14 @@
 import java.awt.*;
 
+/**
+ * Cell of the dropPanel grid
+ */
 public class cellRectangle extends Rectangle {
-    private boolean close;
-    private boolean highlight;
-    private boolean isReadHighlight;
+    private boolean close; //Do we need to draw the close icon on this cell?
+    private boolean highlight; //Do we need to highlight this cell? When dragging into the dropPanel
+    private boolean isReadHighlight; //Do we need to highlight this cell? When reading the actions
 
-    private boolean hasBlock;
+    private boolean hasBlock; //If the cell contains a block
 
     public cellRectangle(int x, int y, int width, int height) {
         super(x,y,width,height);

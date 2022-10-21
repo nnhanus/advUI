@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CharacterChooser extends JPanel {
-    Color BGColor = new Color(0xFED1FF);
     ArrayList<String> characters = new ArrayList<>();
     int index = 0;
     int width = 200;
@@ -14,7 +13,7 @@ public class CharacterChooser extends JPanel {
 
     public CharacterChooser(){
         this.setVisible(true);
-        setBackground(BGColor);
+        setBackground(Main.bgColor);
         setLayout(new BorderLayout());
         makeCharacter();
         mainPane();
@@ -61,17 +60,17 @@ public class CharacterChooser extends JPanel {
         });
 
         JPanel rightPanel = new JPanel();
-        rightPanel.setBackground(BGColor);
+        rightPanel.setBackground(Main.bgColor);
         rightPanel.setBorder(new EmptyBorder(new Insets(70, 0, 0, 0)));
         rightPanel.add(right);
 
         JPanel leftPanel = new JPanel();
-        leftPanel.setBackground(BGColor);
+        leftPanel.setBackground(Main.bgColor);
         leftPanel.setBorder(new EmptyBorder(new Insets(70, 0, 0, 0)));
         leftPanel.add(left);
 
         JPanel mainPane = new JPanel();
-        mainPane.setBackground(BGColor);
+        mainPane.setBackground(Main.bgColor);
         mainPane.setLayout(new BorderLayout());
         mainPane.add(imageLabel, BorderLayout.CENTER);
         mainPane.add(leftPanel, BorderLayout.WEST);

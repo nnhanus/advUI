@@ -81,8 +81,7 @@ public class AnimationPanel extends JPanel {
         AnimationPanel control;
         public AnimationPanelPresentation(AnimationPanel control){
             this.control=control;
-            Color bgColor = new Color(0xFED1FF);
-            this.control.setBackground(bgColor);
+            this.control.setBackground(Main.bgColor);
         }
     }
 }
